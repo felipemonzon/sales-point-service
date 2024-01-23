@@ -1,0 +1,144 @@
+# ===================================================================
+# GENERAL PROPERTIES
+# ===================================================================
+server:
+  port: 8080
+  tomcat:
+    max-http-form-post-size: 20MB
+    max-swallow-size: 20MB
+spring:
+  application:
+    name: sales-point-service
+  main.banner-mode: off
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+  http:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/salesPoint
+    username: ENC(ku7ULo35PR0vtzrDInm9YZe0l3cz6Z2rp2ON6YD2lKdNOmj2rzmdwlyr6PdRj5gg)
+    password: ENC(17Atuv7t31S12Oz8kBXTfyTTVt6GYNDr6ousctZdQ2TK/5TcRbpUoo5pEBdvb4J5)
+  jpa:
+    naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    hibernate.ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: false
+      org:
+        hibernate:
+          envers:
+            default_schema: salesPoint
+            audit_table_suffix: _AUD
+            revision_field_name: REV_ID
+            revision_type_field_name: REV_TYPE
+            store_data_at_delete: true
+  flyway:
+    enabled: true
+    locations: classpath:/db/migration
+    baseline-on-migrate: true
+    baseline: 0
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+# ===================================================================
+# SECURITY PROPERTIES
+# ===================================================================
+security:
+  jwt:
+    key: ENC(CuAcl76ySK/o/H4V03L9ruNaAcPfvTzvQsZkDNQjutdM6MnwaaWqwrq4mHDJc9shwCsVvlFlSPLXobk1+XarnMKwR9+NxOkzQBiphxzkrYchA+gz++yQtGzkwqLDxpxzO+XfYWHOBAJLbTdQMJrgwA==)
+    lifeTime: 10000
+
+# ===================================================================
+# LOG PROPERTIES
+# ===================================================================
+logging:
+  pattern:
+    file: '[%X{data}%thread] [%X{X-B3-TraceId:-}] - %5p'
+    console: "%p [${spring.application.name:}, %d{'yyyy-MM-dd HH:mm:ss,SSS',America/Mexico_City}, %C{1}:%M:%L, %X{mdc.uuid}, %m%n%ex{3}"
+  level:
+    com.moontech: DEBUG
+    org:
+      springframework.data: DEBUG
+      hibernate:
+        SQL: DEBUG
+        type.descriptor.sql.BasicBinder: TRACE
+
+# ===================================================================
+# URL ENDPOINTS
+# ===================================================================
+api:
+  uri:
+    basePath: /api
+    domain:
+      users: /users
+      offices: /enterprises
+      supplier: /suppliers
+      profiles: /profiles
+      customers: /customers
+      methodPayment: /method/payment
+      pointSale: /pointSales
+      debts: /debts
+      products: /products
+      payments: /payments
+      shops: /shops
+      sells: /sells
+    data:
+      modified: /{id}
+      search: /{search}
+      authentication: ${api.uri.domain.users}/authentication
+      confirm: ${api.uri.domain.users}/confirm
+      userConfirm: /confirm
+      reset: /password/reset
+      passwordForgot: ${api.uri.domain.users}/password/reset
+      debtsCustomer: /customer
+      debtCustomerId: ${api.uri.data.debtsCustomer}/{idCustomer}
+      debtCustomerStatus: ${api.uri.data.debtCustomerId}/{status}
+      openPointSale: /open
+      closePointSale: /close
+      withdrawalPointSale: /withdrawal
+      withdrawalPointSaleUpdate: /withdrawal/{id}
+      productType: ${api.uri.domain.products}/type
+      productStock: ${api.uri.domain.products}/stock
+  interceptorPath: "/**"
+
+  token:
+    expiration: 1 # one day
+# ===================================================================
+# SWAGGER PROPERTIES
+# ===================================================================
+swagger:
+  basePackage: com.moontech
+  title: SERV-sales-point-service
+  descriptionApi: Punto de venta
+  version: 1.0.0
+  nameDeveloper: Felipe Monzón
+  contactUrl: https://felipemonzon.github.io/
+  emailDeveloper: felipemonzon2705@gmail.com
+  licenceType: MIT LICENCE
+  licenceUrl: https://github.com/felipemonzon/spring-template/blob/main/LICENSE

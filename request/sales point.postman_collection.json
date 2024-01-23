@@ -1,0 +1,5599 @@
+{
+	"info": {
+		"_postman_id": "379a6a58-6d7d-4ebd-ae99-a7cdeef241fa",
+		"name": "sales point",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8384281"
+	},
+	"item": [
+		{
+			"name": "security",
+			"item": [
+				{
+					"name": "authentication success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Have a token\", function () {",
+									"    var jsonData = pm.response.headers.get(\"Authorization\");",
+									"    pm.globals.set(\"token\", jsonData);",
+									"});",
+									"",
+									"pm.test(\"Authorization is present\", function () {",
+									"    pm.response.to.have.header(\"Authorization\");",
+									"});",
+									"",
+									"pm.test(\"Header required is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json;charset=ISO-8859-1');",
+									"});",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Autentication schema is valid', function() {",
+									"    const authentication = pm.response.json();",
+									"    pm.expect(authentication.username).to.be.a(\"string\");",
+									"    pm.expect(authentication.email).to.be.a(\"string\");",
+									"    pm.expect(authentication.first_name).to.be.a(\"string\");",
+									"    pm.expect(authentication.last_name).to.be.a(\"string\");",
+									"    pm.expect(authentication.cel).to.be.a(\"string\");",
+									"    pm.expect(authentication.genre).to.be.a(\"string\");",
+									"    pm.expect(authentication.display_name).to.be.a(\"string\");",
+									"    pm.expect(authentication.status).to.be.a(\"string\");",
+									"});",
+									"",
+									"pm.test('Authentication response not empty dataº', function() {",
+									"    const authentication = pm.response.json();",
+									"    pm.expect(authentication).not.be.empty;",
+									"    pm.expect(authentication.username).not.be.empty;",
+									"    pm.expect(authentication.email).not.be.empty;",
+									"    pm.expect(authentication.cel).not.be.empty;",
+									"    pm.expect(authentication.first_name).not.be.empty;",
+									"    pm.expect(authentication.last_name).not.be.empty;",
+									"    pm.expect(authentication.genre).not.be.empty;",
+									"    pm.expect(authentication.display_name).not.be.empty;",
+									"    pm.expect(authentication.status).eql('ACTIVE');",
+									"});",
+									"",
+									"tests[\"Body has username\"] = responseBody.has(\"username\");",
+									"tests[\"Body has email\"] = responseBody.has(\"email\");",
+									"tests[\"Body has firstName\"] = responseBody.has(\"first_name\");",
+									"tests[\"Body has lastName\"] = responseBody.has(\"last_name\");",
+									"tests[\"Body has cel\"] = responseBody.has(\"cel\");",
+									"tests[\"Body has genre\"] = responseBody.has(\"genre\");",
+									"tests[\"Body has displayName\"] = responseBody.has(\"display_name\");",
+									"tests[\"Body has status\"] = responseBody.has(\"status\");",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"felipemonzon2705\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/authentication",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"authentication"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "authentication success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "uuid",
+										"value": "{{$randomUUID}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"felipemonzon2705\",\n    \"password\": \"123456\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/users/authentication",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"authentication"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Authorization",
+									"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmZWxpcGVtb256b24yNzA1IiwiQ0xBSU1fVE9LRU4iOiJST0xFX0FETUlOIiwiaWF0IjoxNjk0NjQ3Mjk1LCJpc3MiOiJJU1NVRVIiLCJleHAiOjE2OTQ2NTcyOTV9.-L5zaAnspRmaDW9BLc5coeAqhF_Y5PoTvaawSd-_4hk"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=ISO-8859-1"
+								},
+								{
+									"key": "Content-Length",
+									"value": "198"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 13 Sep 2023 23:21:35 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"username\": \"felipemonzon2705\",\n    \"email\": \"felipemonzon2705@gmail.com\",\n    \"firstName\": \"Felipe\",\n    \"lastName\": \"Monzon\",\n    \"cel\": \"6671568899\",\n    \"genre\": \"MALE\",\n    \"displayName\": \"Felipe Monzon\",\n    \"status\": \"ACTIVE\"\n}"
+						}
+					]
+				},
+				{
+					"name": "authentication fail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									"pm.test(\"Return correct details for 'error' response\", () => {",
+									"    const data = getData();",
+									"    pm.expect(data.code).to.equal(9000);",
+									"    pm.expect(data.message).to.equal(\"Usuario/contraseña inválida\");",
+									"});",
+									"",
+									"tests[\"Body has code\"] = responseBody.has(\"code\");",
+									"tests[\"Body has message\"] = responseBody.has(\"message\");",
+									"tests[\"Body has uuid\"] = responseBody.has(\"uuid\");",
+									"tests[\"Body has moreInfo\"] = responseBody.has(\"moreInfo\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"felipemonzon\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/authentication",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"authentication"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "authentication fail",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "uuid",
+										"value": "{{$randomUUID}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"felipemonzon\",\n    \"password\": \"123456\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/users/authentication",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"authentication"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Authorization",
+									"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmZWxpcGVtb256b24yNzA1IiwiQ0xBSU1fVE9LRU4iOiJST0xFX0FETUlOIiwiaWF0IjoxNjk0NjQ3Mjk1LCJpc3MiOiJJU1NVRVIiLCJleHAiOjE2OTQ2NTcyOTV9.-L5zaAnspRmaDW9BLc5coeAqhF_Y5PoTvaawSd-_4hk"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=ISO-8859-1"
+								},
+								{
+									"key": "Content-Length",
+									"value": "198"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 13 Sep 2023 23:21:35 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"username\": \"felipemonzon2705\",\n    \"email\": \"felipemonzon2705@gmail.com\",\n    \"firstName\": \"Felipe\",\n    \"lastName\": \"Monzon\",\n    \"cel\": \"6671568899\",\n    \"genre\": \"MALE\",\n    \"displayName\": \"Felipe Monzon\",\n    \"status\": \"ACTIVE\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "users retrieve success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('user schema is valid', function() {",
+									"    const payment = pm.response.json();",
+									"    pm.expect(payment[0].id_user).to.be.a(\"string\");",
+									"    pm.expect(payment[0].username).to.be.a(\"string\");",
+									"    pm.expect(payment[0].email).to.be.a(\"string\");",
+									"    pm.expect(payment[0].first_name).to.be.a(\"string\");",
+									"    pm.expect(payment[0].last_name).to.be.a(\"string\");",
+									"    pm.expect(payment[0].cel).to.be.a(\"string\");",
+									"    pm.expect(payment[0].genre).to.be.a(\"string\");",
+									"    pm.expect(payment[0].display_name).to.be.a(\"string\");",
+									"    pm.expect(payment[0].enterprise_name).to.be.a(\"string\");",
+									"    pm.expect(payment[0].enterprise_id).to.be.a(\"number\");",
+									"    pm.expect(payment[0].status).to.be.a(\"string\");",
+									"    pm.expect(payment[0].profiles).to.be.a(\"array\");",
+									"});",
+									"",
+									"pm.test('users response not empty dataº', function() {",
+									"    const payment = pm.response.json();",
+									"    pm.expect(payment).not.be.empty;",
+									"    pm.expect(payment[0].id_user).not.be.empty;",
+									"    pm.expect(payment[0].username).not.be.empty;",
+									"    pm.expect(payment[0].email).not.be.empty;",
+									"    pm.expect(payment[0].first_name).not.be.empty;",
+									"    pm.expect(payment[0].last_name).not.be.empty;",
+									"    pm.expect(payment[0].cel).not.be.empty;",
+									"    pm.expect(payment[0].genre).not.be.empty;",
+									"    pm.expect(payment[0].display_name).not.be.empty;",
+									"    pm.expect(payment[0].enterprise_name).not.be.empty;",
+									"    pm.expect(payment[0].enterprise_id).not.be.null;",
+									"    pm.expect(payment[0].status).not.be.empty;",
+									"    pm.expect(payment[0].profiles).not.be.empty;",
+									"});",
+									"",
+									"tests[\"Body has id_user\"] = responseBody.has(\"id_user\");",
+									"tests[\"Body has username\"] = responseBody.has(\"username\");",
+									"tests[\"Body has email\"] = responseBody.has(\"email\");",
+									"tests[\"Body has first_name\"] = responseBody.has(\"first_name\");",
+									"tests[\"Body has last_name\"] = responseBody.has(\"last_name\");",
+									"tests[\"Body has cel\"] = responseBody.has(\"cel\");",
+									"tests[\"Body has genre\"] = responseBody.has(\"genre\");",
+									"tests[\"Body has display_name\"] = responseBody.has(\"display_name\");",
+									"tests[\"Body has enterprise_name\"] = responseBody.has(\"enterprise_name\");",
+									"tests[\"Body has enterprise_id\"] = responseBody.has(\"enterprise_id\");",
+									"tests[\"Body has status\"] = responseBody.has(\"status\");",
+									"tests[\"Body has profiles\"] = responseBody.has(\"profiles\");",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users save success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test('user schema is valid', function() {",
+									"    const user = getData();",
+									"    pm.expect(user.id_user).to.be.a(\"string\");",
+									"    pm.expect(user.username).to.be.a(\"string\");",
+									"    pm.expect(user.email).to.be.a(\"string\");",
+									"    pm.expect(user.first_name).to.be.a(\"string\");",
+									"    pm.expect(user.last_name).to.be.a(\"string\");",
+									"    pm.expect(user.cel).to.be.a(\"string\");",
+									"    pm.expect(user.genre).to.be.a(\"string\");",
+									"    pm.expect(user.display_name).to.be.a(\"string\");",
+									"    pm.expect(user.enterprise_id).to.be.a(\"number\");",
+									"    pm.expect(user.status).to.be.a(\"string\");",
+									"    pm.expect(user.profiles).to.be.a(\"array\");",
+									"});",
+									"",
+									"pm.test('users response not empty dataº', function() {",
+									"    const user = getData();",
+									"    pm.expect(user).not.be.null;",
+									"    pm.expect(user.id_user).not.be.empty;",
+									"    pm.expect(user.username).not.be.empty;",
+									"    pm.expect(user.email).not.be.empty;",
+									"    pm.expect(user.first_name).not.be.empty;",
+									"    pm.expect(user.last_name).not.be.empty;",
+									"    pm.expect(user.cel).not.be.empty;",
+									"    pm.expect(user.genre).not.be.empty;",
+									"    pm.expect(user.display_name).not.be.empty;",
+									"    pm.expect(user.enterprise_id).not.be.null;",
+									"    pm.expect(user.status).not.be.empty;",
+									"    pm.expect(user.profiles).not.be.null;",
+									"});",
+									"",
+									"tests[\"Body has id_user\"] = responseBody.has(\"id_user\");",
+									"tests[\"Body has username\"] = responseBody.has(\"username\");",
+									"tests[\"Body has email\"] = responseBody.has(\"email\");",
+									"tests[\"Body has first_name\"] = responseBody.has(\"first_name\");",
+									"tests[\"Body has last_name\"] = responseBody.has(\"last_name\");",
+									"tests[\"Body has cel\"] = responseBody.has(\"cel\");",
+									"tests[\"Body has genre\"] = responseBody.has(\"genre\");",
+									"tests[\"Body has display_name\"] = responseBody.has(\"display_name\");",
+									"tests[\"Body has enterprise_name\"] = responseBody.has(\"enterprise_name\");",
+									"tests[\"Body has enterprise_id\"] = responseBody.has(\"enterprise_id\");",
+									"tests[\"Body has status\"] = responseBody.has(\"status\");",
+									"tests[\"Body has profiles\"] = responseBody.has(\"profiles\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let randomMobile = \"667\" + Math.random().toString().slice(3, 10);",
+									"pm.environment.set(\"phone\", randomMobile);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"{{$randomUserName}}\",\n  \"email\": \"juana_arco@gmail.com\",\n  \"password\": \"1234\",\n  \"first_name\": \"{{$randomFirstName}}\",\n  \"last_name\": \"{{$randomLastName}}\",\n  \"cel\": \"{{phone}}\",\n  \"genre\": \"1\",\n  \"enterprise_id\": 1,\n  \"profiles\": [\n    2\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users update success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let randomMobile = \"667\" + Math.random().toString().slice(3, 10);",
+									"pm.environment.set(\"phone\", randomMobile);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"{{$randomUserName}}\",\n  \"email\": \"{{$randomEmail}}\",\n  \"password\": \"1234\",\n  \"first_name\": \"{{$randomFirstName}}\",\n  \"last_name\": \"{{$randomLastName}}\",\n  \"cel\": \"{{phone}}\",\n  \"genre\": \"1\",\n  \"enterprise_id\": 1,\n  \"profiles\": [\n    2\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/USRScRxIgmINwH4es3pQ",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"USRScRxIgmINwH4es3pQ"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save users exists",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Return correct details for 'error' response\", () => {",
+									"    const data = getData();",
+									"    pm.expect(data.code).to.equal(9007);",
+									"    pm.expect(data.message).to.equal(\"El usuario ya esta registrado\");",
+									"});",
+									"",
+									"tests[\"Body has code\"] = responseBody.has(\"code\");",
+									"tests[\"Body has message\"] = responseBody.has(\"message\");",
+									"tests[\"Body has uuid\"] = responseBody.has(\"uuid\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"felipemonzon2705\",\n  \"email\": \"juana_arco@gmail.com\",\n  \"password\": \"1234\",\n  \"first_name\": \"juana\",\n  \"last_name\": \"de arco\",\n  \"cel\": \"3325678800\",\n  \"genre\": \"1\",\n  \"enterprise_id\": 1,\n  \"profiles\": [\n    2\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users retrieve active succes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('user schema is valid', function() {",
+									"    const users = pm.response.json();",
+									"    pm.expect(users[0].id_user).to.be.a(\"string\");",
+									"    pm.expect(users[0].username).to.be.a(\"string\");",
+									"    pm.expect(users[0].email).to.be.a(\"string\");",
+									"    pm.expect(users[0].first_name).to.be.a(\"string\");",
+									"    pm.expect(users[0].last_name).to.be.a(\"string\");",
+									"    pm.expect(users[0].cel).to.be.a(\"string\");",
+									"    pm.expect(users[0].genre).to.be.a(\"string\");",
+									"    pm.expect(users[0].display_name).to.be.a(\"string\");",
+									"    pm.expect(users[0].enterprise_name).to.be.a(\"string\");",
+									"    pm.expect(users[0].enterprise_id).to.be.a(\"number\");",
+									"    pm.expect(users[0].status).to.be.a(\"string\");",
+									"    pm.expect(users[0].profiles).to.be.a(\"array\");",
+									"});",
+									"",
+									"pm.test('users response not empty dataº', function() {",
+									"    const users = pm.response.json();",
+									"    pm.expect(users).not.be.empty;",
+									"    pm.expect(users[0].id_user).not.be.empty;",
+									"    pm.expect(users[0].username).not.be.empty;",
+									"    pm.expect(users[0].email).not.be.empty;",
+									"    pm.expect(users[0].first_name).not.be.empty;",
+									"    pm.expect(users[0].last_name).not.be.empty;",
+									"    pm.expect(users[0].cel).not.be.empty;",
+									"    pm.expect(users[0].genre).not.be.empty;",
+									"    pm.expect(users[0].display_name).not.be.empty;",
+									"    pm.expect(users[0].enterprise_name).not.be.empty;",
+									"    pm.expect(users[0].enterprise_id).not.be.null;",
+									"    pm.expect(users[0].status).not.be.empty;",
+									"    pm.expect(users[0].status).to.equal(\"ACTIVE\");",
+									"    pm.expect(users[0].profiles).not.be.empty;",
+									"});",
+									"",
+									"tests[\"Body has id_user\"] = responseBody.has(\"id_user\");",
+									"tests[\"Body has username\"] = responseBody.has(\"username\");",
+									"tests[\"Body has email\"] = responseBody.has(\"email\");",
+									"tests[\"Body has first_name\"] = responseBody.has(\"first_name\");",
+									"tests[\"Body has last_name\"] = responseBody.has(\"last_name\");",
+									"tests[\"Body has cel\"] = responseBody.has(\"cel\");",
+									"tests[\"Body has genre\"] = responseBody.has(\"genre\");",
+									"tests[\"Body has display_name\"] = responseBody.has(\"display_name\");",
+									"tests[\"Body has enterprise_name\"] = responseBody.has(\"enterprise_name\");",
+									"tests[\"Body has enterprise_id\"] = responseBody.has(\"enterprise_id\");",
+									"tests[\"Body has status\"] = responseBody.has(\"status\");",
+									"tests[\"Body has profiles\"] = responseBody.has(\"profiles\");",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/users/active",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"active"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "enterprise",
+			"item": [
+				{
+					"name": "enterprise delete success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/enterprises/ENTearfMBDrVabSCAb7u",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"enterprises",
+								"ENTearfMBDrVabSCAb7u"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "enterprise delete not exists",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Return correct details for 'error' response\", () => {",
+									"    const data = getData();",
+									"    pm.expect(data.code).to.equal(9008);",
+									"    pm.expect(data.message).to.equal(\"La empresa no existe\");",
+									"});",
+									"",
+									"tests[\"Body has code\"] = responseBody.has(\"code\");",
+									"tests[\"Body has message\"] = responseBody.has(\"message\");",
+									"tests[\"Body has uuid\"] = responseBody.has(\"uuid\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/enterprises/ENTearfMBDrVabSCAb7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"enterprises",
+								"ENTearfMBDrVabSCAb7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "enterprise update success",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let randomMobile = \"667\" + Math.random().toString().slice(3, 10);",
+									"pm.environment.set(\"phone\", randomMobile);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"del sol 2\",\n    \"address\": \"{{$randomStreetAddress}}\",\n    \"phone\": \"{{phone}}\",\n    \"manager\": \"{{$randomFullName}}\",\n    \"rfc\": \"COP920428Q20\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/enterprises/ENT6734htdge362xnhd3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"enterprises",
+								"ENT6734htdge362xnhd3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "enterprise save success",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let randomMobile = \"667\" + Math.random().toString().slice(3, 10);",
+									"pm.environment.set(\"phone\", randomMobile);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test('enterprise schema is valid', function() {",
+									"    const enterprise = pm.response.json();",
+									"    pm.expect(enterprise.id_enterprise).to.be.a(\"string\");",
+									"    pm.expect(enterprise.name).to.be.a(\"string\");",
+									"    pm.expect(enterprise.address).to.be.a(\"string\");",
+									"    pm.expect(enterprise.phone).to.be.a(\"string\");",
+									"    pm.expect(enterprise.active).to.be.a(\"boolean\");",
+									"    pm.expect(enterprise.manager).to.be.a(\"string\");",
+									"    pm.expect(enterprise.rfc).to.be.a(\"string\");",
+									"});",
+									"",
+									"pm.test('enterprise response not empty dataº', function() {",
+									"    const enterprise = pm.response.json();",
+									"    pm.expect(enterprise).not.be.null;",
+									"    pm.expect(enterprise.id_enterprise).not.be.empty;",
+									"    pm.expect(enterprise.name).not.be.empty;",
+									"    pm.expect(enterprise.address).not.be.empty;;",
+									"    pm.expect(enterprise.phone).not.be.empty;",
+									"    pm.expect(enterprise.active).not.be.null;;",
+									"    pm.expect(enterprise.manager).not.be.empty;",
+									"    pm.expect(enterprise.rfc).not.be.empty;;",
+									"});",
+									"",
+									"tests[\"Body has id_enterprise\"] = responseBody.has(\"id_enterprise\");",
+									"tests[\"Body has name\"] = responseBody.has(\"name\");",
+									"tests[\"Body has address\"] = responseBody.has(\"address\");",
+									"tests[\"Body has phone\"] = responseBody.has(\"phone\");",
+									"tests[\"Body has active\"] = responseBody.has(\"active\");",
+									"tests[\"Body has manager\"] = responseBody.has(\"manager\");",
+									"tests[\"Body has rfc\"] = responseBody.has(\"rfc\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"del sol {{$timestamp}}\",\n    \"address\": \"{{$randomStreetAddress}}\",\n    \"phone\": \"{{phone}}\",\n    \"manager\": \"{{$randomFullName}}\",\n    \"rfc\": \"COP920428Q20\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/enterprises",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"enterprises"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "enterprise retrieve success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('enterprise schema is valid', function() {",
+									"    const enterprise = pm.response.json();",
+									"    pm.expect(enterprise[0].id_enterprise).to.be.a(\"string\");",
+									"    pm.expect(enterprise[0].name).to.be.a(\"string\");",
+									"    pm.expect(enterprise[0].address).to.be.a(\"string\");",
+									"    pm.expect(enterprise[0].phone).to.be.a(\"string\");",
+									"    pm.expect(enterprise[1].active).to.be.a(\"boolean\");",
+									"    pm.expect(enterprise[0].manager).to.be.a(\"string\");",
+									"    pm.expect(enterprise[0].rfc).to.be.a(\"string\");",
+									"});",
+									"",
+									"pm.test('enterprise response not empty dataº', function() {",
+									"    const enterprise = pm.response.json();",
+									"    pm.expect(enterprise).not.be.null;",
+									"    pm.expect(enterprise[0].id_enterprise).not.be.empty;",
+									"    pm.expect(enterprise[0].name).not.be.empty;",
+									"    pm.expect(enterprise[0].address).not.be.empty;;",
+									"    pm.expect(enterprise[0].phone).not.be.empty;",
+									"    pm.expect(enterprise[0].active).not.be.null;;",
+									"    pm.expect(enterprise[0].manager).not.be.empty;",
+									"    pm.expect(enterprise[0].rfc).not.be.empty;;",
+									"});",
+									"",
+									"tests[\"Body has id_enterprise\"] = responseBody.has(\"id_enterprise\");",
+									"tests[\"Body has name\"] = responseBody.has(\"name\");",
+									"tests[\"Body has address\"] = responseBody.has(\"address\");",
+									"tests[\"Body has phone\"] = responseBody.has(\"phone\");",
+									"tests[\"Body has active\"] = responseBody.has(\"active\");",
+									"tests[\"Body has manager\"] = responseBody.has(\"manager\");",
+									"tests[\"Body has rfc\"] = responseBody.has(\"rfc\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/enterprises",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"enterprises"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "enterprise collections"
+		},
+		{
+			"name": "methos payment",
+			"item": [
+				{
+					"name": "method payment retrieve success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Method payment schema is valid', function() {",
+									"    const payment = pm.response.json();",
+									"    pm.expect(payment[0].id).to.be.a(\"number\");",
+									"    pm.expect(payment[0].description).to.be.a(\"string\");",
+									"});",
+									"",
+									"pm.test('method payment response not empty dataº', function() {",
+									"    const payment = pm.response.json();",
+									"    pm.expect(payment).not.be.empty;",
+									"    pm.expect(payment[0].id).not.be.null;",
+									"    pm.expect(payment[0].description).not.be.empty;",
+									"});",
+									"",
+									"tests[\"Body has description\"] = responseBody.has(\"description\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/method/payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"method",
+								"payment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "method payment save success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test('Method payment schema is valid', function() {",
+									"    const payment = pm.response.json();",
+									"    pm.expect(payment.id).to.be.a(\"number\");",
+									"    pm.expect(payment.description).to.be.a(\"string\");",
+									"});",
+									"",
+									"pm.test('method payment response not empty dataº', function() {",
+									"    const payment = pm.response.json();",
+									"    pm.expect(payment.id).not.be.null;",
+									"    pm.expect(payment.description).not.be.empty;",
+									"});",
+									"",
+									"tests[\"Body has description\"] = responseBody.has(\"description\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"{{$randomProduct}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/method/payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"method",
+								"payment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "method payment save empty description",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Return correct details for 'error' response\", () => {",
+									"    const data = getData();",
+									"",
+									"    pm.expect(data.code).to.equal(9002);",
+									"    pm.expect(data.message).to.equal(\"{no debe estar vacío=[description]}\");",
+									"    pm.expect(data.moreInfo).to.equal(\"[description]\");",
+									"});",
+									"",
+									"tests[\"Body has code\"] = responseBody.has(\"code\");",
+									"tests[\"Body has message\"] = responseBody.has(\"message\");",
+									"tests[\"Body has uuid\"] = responseBody.has(\"uuid\");",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/method/payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"method",
+								"payment"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Colección para los métodos de pago"
+		},
+		{
+			"name": "point sales",
+			"item": [
+				{
+					"name": "point sales retrieve success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Point sales schema is valid', function() {",
+									"    const pos = pm.response.json();",
+									"    pm.expect(pos[0].id_point_sale).to.be.a(\"string\");",
+									"    pm.expect(pos[0].name).to.be.a(\"string\");",
+									"    pm.expect(pos[0].enterprise).to.be.a(\"object\");",
+									"});",
+									"",
+									"pm.test('point sales response not empty dataº', function() {",
+									"    const pos = pm.response.json();",
+									"    pm.expect(pos).not.be.empty;",
+									"    pm.expect(pos[0].id_point_sale).not.be.null;",
+									"    pm.expect(pos[0].name).not.be.empty;",
+									"    pm.expect(pos[0].enterprise).not.be.null;;",
+									"});",
+									"",
+									"tests[\"Body has id_point_sale\"] = responseBody.has(\"id_point_sale\");",
+									"tests[\"Body has name\"] = responseBody.has(\"name\");",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/pointSales",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pointSales"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "points sales save success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test('Point sales schema is valid', function() {",
+									"    const pos = pm.response.json();",
+									"    pm.expect(pos.id_point_sale).to.be.a(\"string\");",
+									"    pm.expect(pos.name).to.be.a(\"string\");",
+									"    pm.expect(pos.enterprise).to.be.a(\"object\");",
+									"});",
+									"",
+									"pm.test('point sales response not empty dataº', function() {",
+									"    const pos = pm.response.json();",
+									"    pm.expect(pos).not.be.null;",
+									"    pm.expect(pos.id_point_sale).not.be.null;",
+									"    pm.expect(pos.name).not.be.empty;",
+									"    pm.expect(pos.enterprise).not.be.null;;",
+									"});",
+									"",
+									"tests[\"Body has id_point_sale\"] = responseBody.has(\"id_point_sale\");",
+									"tests[\"Body has name\"] = responseBody.has(\"name\");",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Caja {{$timestamp}}\",\n    \"enterprise_id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/pointSales",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pointSales"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "withdrawal not open point sale",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Return correct details for 'error' response\", () => {",
+									"    const data = getData();",
+									"    pm.expect(data.code).to.equal(9007);",
+									"    pm.expect(data.message).to.equal(\"La caja aún no ha iniciado operaciones\");",
+									"});",
+									"",
+									"tests[\"Body has code\"] = responseBody.has(\"code\");",
+									"tests[\"Body has message\"] = responseBody.has(\"message\");",
+									"tests[\"Body has uuid\"] = responseBody.has(\"uuid\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": \"{{$randomPrice}}\",\n    \"point_sale_id\": \"POSLCwJDF7Uq2wY9HbI1\",\n    \"description\": \"Pago comida\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/pointSales/withdrawal",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pointSales",
+								"withdrawal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "close points sales without open",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Return correct details for 'error' response\", () => {",
+									"    const data = getData();",
+									"    pm.expect(data.code).to.equal(9007);",
+									"    pm.expect(data.message).to.equal(\"La caja ya cerró operaciones\");",
+									"});",
+									"",
+									"tests[\"Body has code\"] = responseBody.has(\"code\");",
+									"tests[\"Body has message\"] = responseBody.has(\"message\");",
+									"tests[\"Body has uuid\"] = responseBody.has(\"uuid\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"point_sale\": \"POSLCwJDF7Uq2wY9HbI1\",\n    \"close_user\": \"USU324htgd243yt567jh\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/pointSales/close",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pointSales",
+								"close"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "open points sales success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Open Point sales schema is valid', function() {",
+									"    const pos = pm.response.json();",
+									"    pm.expect(pos.open_amount).to.be.a(\"number\");",
+									"    pm.expect(pos.open_point_sale_date).to.be.a(\"string\");",
+									"    pm.expect(pos.point_sale).to.be.a(\"object\");",
+									"    pm.expect(pos.open_user).to.be.a(\"object\");",
+									"    pm.expect(pos.status).to.be.a(\"string\");",
+									"});",
+									"",
+									"pm.test('open point sales response not empty dataº', function() {",
+									"    const pos = pm.response.json();",
+									"    pm.expect(pos).not.be.null;",
+									"    pm.expect(pos.open_amount).not.be.null;",
+									"    pm.expect(pos.point_sale).not.be.null;",
+									"    pm.expect(pos.open_point_sale_date).not.be.empty;;",
+									"    pm.expect(pos.open_user).not.be.null;;",
+									"    pm.expect(pos.status).not.be.empty;;",
+									"});",
+									"",
+									"tests[\"Body has open_amount\"] = responseBody.has(\"open_amount\");",
+									"tests[\"Body has point_sale\"] = responseBody.has(\"point_sale\");",
+									"tests[\"Body has open_point_sale_date\"] = responseBody.has(\"open_point_sale_date\");",
+									"tests[\"Body has open_user\"] = responseBody.has(\"open_user\");",
+									"tests[\"Body has status\"] = responseBody.has(\"status\");",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"open_amount\": \"{{$randomPrice}}\",\n    \"point_sale\": \"POSLCwJDF7Uq2wY9HbI1\",\n    \"open_user\": \"USU324htgd243yt567jh\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/pointSales/open",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pointSales",
+								"open"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "open points sales started",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Return correct details for 'error' response\", () => {",
+									"    const data = getData();",
+									"    pm.expect(data.code).to.equal(9007);",
+									"    pm.expect(data.message).to.equal(\"La caja ya inicio operaciones\");",
+									"});",
+									"",
+									"tests[\"Body has code\"] = responseBody.has(\"code\");",
+									"tests[\"Body has message\"] = responseBody.has(\"message\");",
+									"tests[\"Body has uuid\"] = responseBody.has(\"uuid\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"open_amount\": \"{{$randomPrice}}\",\n    \"point_sale\": \"POSLCwJDF7Uq2wY9HbI1\",\n    \"open_user\": \"USU324htgd243yt567jh\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/pointSales/open",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pointSales",
+								"open"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "close points sales success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Close Point sales schema is valid', function() {",
+									"    const pos = pm.response.json();",
+									"    pm.expect(pos.open_amount).to.be.a(\"number\");",
+									"    pm.expect(pos.open_point_sale_date).to.be.a(\"string\");",
+									"    pm.expect(pos.point_sale).to.be.a(\"object\");",
+									"    pm.expect(pos.open_user).to.be.a(\"object\");",
+									"    pm.expect(pos.status).to.be.a(\"string\");",
+									"});",
+									"",
+									"pm.test('close point sales response not empty dataº', function() {",
+									"    const pos = pm.response.json();",
+									"    pm.expect(pos).not.be.null;",
+									"    pm.expect(pos.open_amount).not.be.null;",
+									"    pm.expect(pos.point_sale).not.be.null;",
+									"    pm.expect(pos.open_point_sale_date).not.be.empty;;",
+									"    pm.expect(pos.open_user).not.be.null;;",
+									"    pm.expect(pos.status).not.be.empty;;",
+									"});",
+									"",
+									"tests[\"Body has open_amount\"] = responseBody.has(\"open_amount\");",
+									"tests[\"Body has point_sale\"] = responseBody.has(\"point_sale\");",
+									"tests[\"Body has open_point_sale_date\"] = responseBody.has(\"open_point_sale_date\");",
+									"tests[\"Body has open_user\"] = responseBody.has(\"open_user\");",
+									"tests[\"Body has close_point_sale_date\"] = responseBody.has(\"close_point_sale_date\");",
+									"tests[\"Body has close_user\"] = responseBody.has(\"close_user\");",
+									"tests[\"Body has status\"] = responseBody.has(\"status\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"point_sale\": \"POSLCwJDF7Uq2wY9HbI1\",\n    \"close_user\": \"USU324htgd243yt567jh\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/pointSales/close",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pointSales",
+								"close"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "points sales update success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Caja {{$timestamp}}\",\n    \"enterprise_id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/pointSales/POSUeyeXxp4KG7qBWcLG",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pointSales",
+								"POSUeyeXxp4KG7qBWcLG"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "points sales delete success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/pointSales/POSUeyeXxp4KG7qBWcLG",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pointSales",
+								"POSUeyeXxp4KG7qBWcLG"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "points sales exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Return correct details for 'error' response\", () => {",
+									"    const data = getData();",
+									"    pm.expect(data.code).to.equal(9007);",
+									"    pm.expect(data.message).to.equal(\"El Punto de venta ya se encuentra registrado\");",
+									"});",
+									"",
+									"tests[\"Body has code\"] = responseBody.has(\"code\");",
+									"tests[\"Body has message\"] = responseBody.has(\"message\");",
+									"tests[\"Body has uuid\"] = responseBody.has(\"uuid\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Caja 1\",\n    \"enterprise_id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/pointSales",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pointSales"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "withdrawal success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('withdrawal| Point sales schema is valid', function() {",
+									"    const pos = pm.response.json();",
+									"    pm.expect(pos.id_withdrawal).to.be.a(\"string\");",
+									"    pm.expect(pos.amount).to.be.a(\"number\");",
+									"    pm.expect(pos.point_sale).to.be.a(\"object\");",
+									"    pm.expect(pos.withdrawals_date).to.be.a(\"string\");",
+									"    pm.expect(pos.description).to.be.a(\"string\");",
+									"});",
+									"",
+									"pm.test('withdrawal point sales response not empty dataº', function() {",
+									"    const pos = pm.response.json();",
+									"    pm.expect(pos).not.be.null;",
+									"    pm.expect(pos.id_withdrawal).not.be.null;",
+									"    pm.expect(pos.amount).not.be.null;",
+									"    pm.expect(pos.point_sale).not.be.null;;",
+									"    pm.expect(pos.withdrawals_date).not.be.null;;",
+									"    pm.expect(pos.description).not.be.empty;;",
+									"});",
+									"",
+									"tests[\"Body has id_withdrawal\"] = responseBody.has(\"id_withdrawal\");",
+									"tests[\"Body has amount\"] = responseBody.has(\"amount\");",
+									"tests[\"Body has point_sale\"] = responseBody.has(\"point_sale\");",
+									"tests[\"Body has withdrawals_date\"] = responseBody.has(\"withdrawals_date\");",
+									"tests[\"Body has description\"] = responseBody.has(\"description\");",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": \"{{$randomPrice}}\",\n    \"point_sale_id\": \"POSLCwJDF7Uq2wY9HbI1\",\n    \"description\": \"Pago comida\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/pointSales/withdrawal",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pointSales",
+								"withdrawal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "withdrawal update success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('withdrawal| Point sales schema is valid', function() {",
+									"    const pos = pm.response.json();",
+									"    pm.expect(pos.id_withdrawal).to.be.a(\"string\");",
+									"    pm.expect(pos.amount).to.be.a(\"number\");",
+									"    pm.expect(pos.point_sale).to.be.a(\"object\");",
+									"    pm.expect(pos.withdrawals_date).to.be.a(\"string\");",
+									"    pm.expect(pos.description).to.be.a(\"string\");",
+									"});",
+									"",
+									"pm.test('withdrawal point sales response not empty dataº', function() {",
+									"    const pos = pm.response.json();",
+									"    pm.expect(pos).not.be.null;",
+									"    pm.expect(pos.id_withdrawal).not.be.null;",
+									"    pm.expect(pos.amount).not.be.null;",
+									"    pm.expect(pos.point_sale).not.be.null;;",
+									"    pm.expect(pos.withdrawals_date).not.be.null;;",
+									"    pm.expect(pos.description).not.be.empty;;",
+									"});",
+									"",
+									"tests[\"Body has id_withdrawal\"] = responseBody.has(\"id_withdrawal\");",
+									"tests[\"Body has amount\"] = responseBody.has(\"amount\");",
+									"tests[\"Body has point_sale\"] = responseBody.has(\"point_sale\");",
+									"tests[\"Body has withdrawals_date\"] = responseBody.has(\"withdrawals_date\");",
+									"tests[\"Body has description\"] = responseBody.has(\"description\");",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": \"{{$randomPrice}}\",\n    \"point_sale_id\": \"POSLCwJDF7Uq2wY9HbI1\",\n    \"description\": \"Pago desayuno\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/pointSales/withdrawal/WIDPW5igOEKWT1LXK1Ml",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pointSales",
+								"withdrawal",
+								"WIDPW5igOEKWT1LXK1Ml"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Puntos de venta"
+		},
+		{
+			"name": "profiles",
+			"item": [
+				{
+					"name": "profiles retrieve success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Profile schema is valid', function() {",
+									"    const profile = getData();",
+									"    pm.expect(profile[0].id).to.be.a(\"number\");",
+									"    pm.expect(profile[0].name).to.be.a(\"string\");",
+									"    pm.expect(profile[0].value).to.be.a(\"string\");",
+									"});",
+									"",
+									"pm.test('profile response not empty dataº', function() {",
+									"    const profile = getData();",
+									"    pm.expect(profile).not.be.empty;",
+									"    pm.expect(profile[0].id).not.be.null;",
+									"    pm.expect(profile[0].name).not.be.empty;",
+									"    pm.expect(profile[0].enterprise).not.be.null;;",
+									"});",
+									"",
+									"tests[\"Body has id\"] = responseBody.has(\"id\");",
+									"tests[\"Body has name\"] = responseBody.has(\"name\");",
+									"tests[\"Body has value\"] = responseBody.has(\"value\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uuid|",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profiles search success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Profile schema is valid', function() {",
+									"    const profile = getData();",
+									"    pm.expect(profile[0].id).to.be.a(\"number\");",
+									"    pm.expect(profile[0].name).to.be.a(\"string\");",
+									"    pm.expect(profile[0].value).to.be.a(\"string\");",
+									"});",
+									"",
+									"pm.test('profile response not empty dataº', function() {",
+									"    const profile = getData();",
+									"    pm.expect(profile).not.be.empty;",
+									"    pm.expect(profile[0].name).not.be.empty;",
+									"    pm.expect(profile[0].value).not.be.empty;;",
+									"    pm.expect(profile[0].name).to.equal(\"ROLE_ADMIN\");",
+									"    pm.expect(profile[0].value).to.equal(\"ADMIN\");",
+									"});",
+									"",
+									"tests[\"Body has id\"] = responseBody.has(\"id\");",
+									"tests[\"Body has name\"] = responseBody.has(\"name\");",
+									"tests[\"Body has value\"] = responseBody.has(\"value\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uuid|",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/profiles/ADMIN",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profiles",
+								"ADMIN"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test('Profile schema is valid', function() {",
+									"    const profile = getData();",
+									"    pm.expect(profile.id).to.be.a(\"number\");",
+									"    pm.expect(profile.name).to.be.a(\"string\");",
+									"    pm.expect(profile.value).to.be.a(\"string\");",
+									"});",
+									"",
+									"pm.test('profile response not empty dataº', function() {",
+									"    const profile = getData();",
+									"    pm.expect(profile).not.be.null;",
+									"    pm.expect(profile.id).not.be.null;",
+									"    pm.expect(profile.name).not.be.empty;",
+									"    pm.expect(profile.enterprise).not.be.null;;",
+									"});",
+									"",
+									"tests[\"Body has id\"] = responseBody.has(\"id\");",
+									"tests[\"Body has name\"] = responseBody.has(\"name\");",
+									"tests[\"Body has value\"] = responseBody.has(\"value\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uuid|",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"{{$randomNamePrefix}}\",\n    \"value\": \"{{$randomProduct}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profile update success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"{{$randomNamePrefix}}\",\n    \"value\": \"{{$randomProduct}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/profiles/52",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profiles",
+								"52"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "profile collections"
+		},
+		{
+			"name": "customers",
+			"item": [
+				{
+					"name": "customer exists",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Return correct details for 'error' response\", () => {",
+									"    const data = getData();",
+									"    pm.expect(data.code).to.equal(9007);",
+									"    pm.expect(data.message).to.equal(\"El Cliente ya se encuentra registrado\");",
+									"});",
+									"",
+									"tests[\"Body has code\"] = responseBody.has(\"code\");",
+									"tests[\"Body has message\"] = responseBody.has(\"message\");",
+									"tests[\"Body has uuid\"] = responseBody.has(\"uuid\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"first_name\": \"Felipe\",\n  \"last_name\": \"monzon\",\n  \"email\": \"felipemonzon2705@gmail.com\",\n  \"cel\": \"1234567890\",\n  \"genre\": \"MALE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "customer save success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test('Customer schema is valid', function() {",
+									"    const customer = getData();",
+									"    pm.expect(customer.id_customer).to.be.a(\"string\");",
+									"    pm.expect(customer.first_name).to.be.a(\"string\");",
+									"    pm.expect(customer.last_name).to.be.a(\"string\");",
+									"    pm.expect(customer.email).to.be.a(\"string\");",
+									"    pm.expect(customer.cel).to.be.a(\"string\");",
+									"    pm.expect(customer.genre).to.be.a(\"string\");",
+									"});",
+									"",
+									"pm.test('Customer response not empty dataº', function() {",
+									"    const customer = getData();",
+									"    pm.expect(customer).not.be.null;",
+									"    pm.expect(customer.id_customer).not.be.empty;",
+									"    pm.expect(customer.first_name).not.be.empty;",
+									"    pm.expect(customer.last_name).not.be.empty;;",
+									"    pm.expect(customer.email).not.be.empty;",
+									"    pm.expect(customer.cel).not.be.empty;",
+									"    pm.expect(customer.genre).not.be.empty;;",
+									"});",
+									"",
+									"tests[\"Body has id_customer\"] = responseBody.has(\"id_customer\");",
+									"tests[\"Body has first_name\"] = responseBody.has(\"first_name\");",
+									"tests[\"Body has last_name\"] = responseBody.has(\"last_name\");",
+									"tests[\"Body has email\"] = responseBody.has(\"email\");",
+									"tests[\"Body has cel\"] = responseBody.has(\"cel\");",
+									"tests[\"Body has genre\"] = responseBody.has(\"genre\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"first_name\": \"{{$randomFirstName}}\",\n  \"last_name\": \"{{$randomLastName}}\",\n  \"email\": \"{{$randomEmail}}\",\n  \"cel\": \"1234567890\",\n  \"genre\": \"MALE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "customer update success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"first_name\": \"{{$randomFirstName}}\",\n  \"last_name\": \"{{$randomLastName}}\",\n  \"email\": \"{{$randomEmail}}\",\n  \"cel\": \"1234567890\",\n  \"genre\": \"MALE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/customers/CUShhYdaTwUbZAK2kWDQ",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								"CUShhYdaTwUbZAK2kWDQ"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "customer update not exists",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Return correct details for 'error' response\", () => {",
+									"    const data = getData();",
+									"    pm.expect(data.code).to.equal(9008);",
+									"    pm.expect(data.message).to.equal(\"El cliente no existe\");",
+									"});",
+									"",
+									"tests[\"Body has code\"] = responseBody.has(\"code\");",
+									"tests[\"Body has message\"] = responseBody.has(\"message\");",
+									"tests[\"Body has uuid\"] = responseBody.has(\"uuid\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"first_name\": \"{{$randomFirstName}}\",\n  \"last_name\": \"{{$randomLastName}}\",\n  \"email\": \"{{$randomEmail}}\",\n  \"cel\": \"1234567890\",\n  \"genre\": \"MALE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/customers/CUShhYdaTwUbZAK2kWD",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								"CUShhYdaTwUbZAK2kWD"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "customer retrieve success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Customer schema is valid', function() {",
+									"    const customer = getData();",
+									"    pm.expect(customer[0].id_customer).to.be.a(\"string\");",
+									"    pm.expect(customer[0].first_name).to.be.a(\"string\");",
+									"    pm.expect(customer[0].last_name).to.be.a(\"string\");",
+									"    pm.expect(customer[0].email).to.be.a(\"string\");",
+									"    pm.expect(customer[0].cel).to.be.a(\"string\");",
+									"    pm.expect(customer[0].genre).to.be.a(\"string\");",
+									"});",
+									"",
+									"pm.test('Customer response not empty dataº', function() {",
+									"    const customer = getData();",
+									"    pm.expect(customer).not.be.empty;",
+									"    pm.expect(customer[0].id_customer).not.be.empty;",
+									"    pm.expect(customer[0].first_name).not.be.empty;",
+									"    pm.expect(customer[0].last_name).not.be.empty;;",
+									"    pm.expect(customer[0].email).not.be.empty;",
+									"    pm.expect(customer[0].cel).not.be.empty;",
+									"    pm.expect(customer[0].genre).not.be.empty;;",
+									"});",
+									"",
+									"tests[\"Body has id_customer\"] = responseBody.has(\"id_customer\");",
+									"tests[\"Body has first_name\"] = responseBody.has(\"first_name\");",
+									"tests[\"Body has last_name\"] = responseBody.has(\"last_name\");",
+									"tests[\"Body has email\"] = responseBody.has(\"email\");",
+									"tests[\"Body has cel\"] = responseBody.has(\"cel\");",
+									"tests[\"Body has genre\"] = responseBody.has(\"genre\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "customer collections"
+		},
+		{
+			"name": "suppliers",
+			"item": [
+				{
+					"name": "supplier retrieve success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('supplier schema is valid', function() {",
+									"    const supplier = getData();",
+									"    pm.expect(supplier[0].id_supplier).to.be.a(\"string\");",
+									"    pm.expect(supplier[0].name).to.be.a(\"string\");",
+									"    pm.expect(supplier[0].enterprise).to.be.a(\"string\");",
+									"    pm.expect(supplier[0].rfc).to.be.a(\"string\");",
+									"    pm.expect(supplier[0].address).to.be.a(\"string\");",
+									"    pm.expect(supplier[0].phone).to.be.a(\"string\");",
+									"    pm.expect(supplier[0].comments).to.be.a(\"string\");",
+									"    pm.expect(supplier[0].status).to.be.a(\"string\");",
+									"});",
+									"",
+									"pm.test('supplier response not empty dataº', function() {",
+									"    const supplier = getData();",
+									"    pm.expect(supplier).not.be.empty;",
+									"    pm.expect(supplier[0].id_supplier).not.be.empty;",
+									"    pm.expect(supplier[0].name).not.be.empty;",
+									"    pm.expect(supplier[0].enterprise).not.be.empty;;",
+									"    pm.expect(supplier[0].rfc).not.be.empty;",
+									"    pm.expect(supplier[0].address).not.be.empty;",
+									"    pm.expect(supplier[0].phone).not.be.empty;;",
+									"    pm.expect(supplier[0].comments).not.be.empty;;",
+									"    pm.expect(supplier[0].status).not.be.empty;;",
+									"});",
+									"",
+									"tests[\"Body has id_supplier\"] = responseBody.has(\"id_supplier\");",
+									"tests[\"Body has name\"] = responseBody.has(\"name\");",
+									"tests[\"Body has enterprise\"] = responseBody.has(\"enterprise\");",
+									"tests[\"Body has rfc\"] = responseBody.has(\"rfc\");",
+									"tests[\"Body has address\"] = responseBody.has(\"address\");",
+									"tests[\"Body has phone\"] = responseBody.has(\"phone\");",
+									"tests[\"Body has comments\"] = responseBody.has(\"comments\");",
+									"tests[\"Body has status\"] = responseBody.has(\"status\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/suppliers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"suppliers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "supplier save success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test('supplier schema is valid', function() {",
+									"    const supplier = getData();",
+									"    pm.expect(supplier.id_supplier).to.be.a(\"string\");",
+									"    pm.expect(supplier.manager).to.be.a(\"string\");",
+									"    pm.expect(supplier.enterprise).to.be.a(\"string\");",
+									"    pm.expect(supplier.rfc).to.be.a(\"string\");",
+									"    pm.expect(supplier.address).to.be.a(\"string\");",
+									"    pm.expect(supplier.phone).to.be.a(\"string\");",
+									"    pm.expect(supplier.comments).to.be.a(\"string\");",
+									"    pm.expect(supplier.status).to.be.a(\"string\");",
+									"});",
+									"",
+									"pm.test('supplier response not empty dataº', function() {",
+									"    const supplier = getData();",
+									"    pm.expect(supplier).not.be.null;",
+									"    pm.expect(supplier.id_supplier).not.be.empty;",
+									"    pm.expect(supplier.manager).not.be.empty;",
+									"    pm.expect(supplier.enterprise).not.be.empty;",
+									"    pm.expect(supplier.rfc).not.be.empty;",
+									"    pm.expect(supplier.address).not.be.empty;",
+									"    pm.expect(supplier.phone).not.be.empty;",
+									"    pm.expect(supplier.comments).not.be.empty;",
+									"    pm.expect(supplier.status).not.be.empty;",
+									"    pm.expect(supplier.status).eqls(\"ACTIVE\")",
+									"});",
+									"",
+									"tests[\"Body has id_supplier\"] = responseBody.has(\"id_supplier\");",
+									"tests[\"Body has manager\"] = responseBody.has(\"manager\");",
+									"tests[\"Body has enterprise\"] = responseBody.has(\"enterprise\");",
+									"tests[\"Body has rfc\"] = responseBody.has(\"rfc\");",
+									"tests[\"Body has address\"] = responseBody.has(\"address\");",
+									"tests[\"Body has phone\"] = responseBody.has(\"phone\");",
+									"tests[\"Body has comments\"] = responseBody.has(\"comments\");",
+									"tests[\"Body has status\"] = responseBody.has(\"status\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let randomMobile = \"667\" + Math.random().toString().slice(3, 10);",
+									"pm.environment.set(\"phone\", randomMobile);",
+									"",
+									"let randomRfc = \"COP\" + Math.random().toString().slice(3, 9);",
+									"randomRfc = randomRfc + \"Q\" + Math.random().toString().slice(2, 4);",
+									"pm.environment.set(\"rfc\", randomRfc);",
+									"",
+									"//COP920428Q20"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"manager\": \"{{$randomFullName}}\",\n    \"enterprise\": \"papeleria\",\n    \"rfc\": \"{{rfc}}\",\n    \"address\": \"{{$randomStreetAddress}}\",\n    \"phone\": \"{{phone}}\",\n    \"comments\": \"Entrega a tiempo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/suppliers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"suppliers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "supplier update success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let randomMobile = \"667\" + Math.random().toString().slice(3, 10);",
+									"pm.environment.set(\"phone\", randomMobile);",
+									"",
+									"let randomRfc = \"COP\" + Math.random().toString().slice(3, 9);",
+									"randomRfc = randomRfc + \"Q\" + Math.random().toString().slice(2, 4);",
+									"pm.environment.set(\"rfc\", randomRfc);",
+									"",
+									"//COP920428Q20"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"manager\": \"{{$randomFullName}}\",\n    \"enterprise\": \"papeleria\",\n    \"rfc\": \"{{rfc}}\",\n    \"address\": \"{{$randomStreetAddress}}\",\n    \"phone\": \"{{phone}}\",\n    \"comments\": \"Entrega a tiempo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/suppliers/SUP12345678902134578",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"suppliers",
+								"SUP12345678902134578"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "supplier delete success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let randomMobile = \"667\" + Math.random().toString().slice(3, 10);",
+									"pm.environment.set(\"phone\", randomMobile);",
+									"",
+									"let randomRfc = \"COP\" + Math.random().toString().slice(3, 9);",
+									"randomRfc = randomRfc + \"Q\" + Math.random().toString().slice(2, 4);",
+									"pm.environment.set(\"rfc\", randomRfc);",
+									"",
+									"//COP920428Q20"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/suppliers/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"suppliers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "supplier delete fail not exists",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Return correct details for 'error' response\", () => {",
+									"    const data = getData();",
+									"    pm.expect(data.code).to.equal(9003);",
+									"    pm.expect(data.message).to.equal(\"No se encontró el registro\");",
+									"    pm.expect(data.moreInfo).to.equal(\"El proveedor no existe\");",
+									"});",
+									"",
+									"tests[\"Body has code\"] = responseBody.has(\"code\");",
+									"tests[\"Body has message\"] = responseBody.has(\"message\");",
+									"tests[\"Body has uuid\"] = responseBody.has(\"uuid\");",
+									"tests[\"Body has moreInfo\"] = responseBody.has(\"moreInfo\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let randomMobile = \"667\" + Math.random().toString().slice(3, 10);",
+									"pm.environment.set(\"phone\", randomMobile);",
+									"",
+									"let randomRfc = \"COP\" + Math.random().toString().slice(3, 9);",
+									"randomRfc = randomRfc + \"Q\" + Math.random().toString().slice(2, 4);",
+									"pm.environment.set(\"rfc\", randomRfc);",
+									"",
+									"//COP920428Q20"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/suppliers/0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"suppliers",
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "supplier update not exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Return correct details for 'error' response\", () => {",
+									"    const data = getData();",
+									"    pm.expect(data.code).to.equal(9003);",
+									"    pm.expect(data.message).to.equal(\"No se encontró el registro\");",
+									"    pm.expect(data.moreInfo).to.equal(\"El proveedor no existe\");",
+									"});",
+									"",
+									"tests[\"Body has code\"] = responseBody.has(\"code\");",
+									"tests[\"Body has message\"] = responseBody.has(\"message\");",
+									"tests[\"Body has uuid\"] = responseBody.has(\"uuid\");",
+									"tests[\"Body has moreInfo\"] = responseBody.has(\"moreInfo\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let randomMobile = \"667\" + Math.random().toString().slice(3, 10);",
+									"pm.environment.set(\"phone\", randomMobile);",
+									"",
+									"let randomRfc = \"COP\" + Math.random().toString().slice(3, 9);",
+									"randomRfc = randomRfc + \"Q\" + Math.random().toString().slice(2, 4);",
+									"pm.environment.set(\"rfc\", randomRfc);",
+									"",
+									"//COP920428Q20"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"manager\": \"{{$randomFullName}}\",\n    \"enterprise\": \"papeleria\",\n    \"rfc\": \"{{rfc}}\",\n    \"address\": \"{{$randomStreetAddress}}\",\n    \"phone\": \"{{phone}}\",\n    \"comments\": \"Entrega a tiempo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/suppliers/SUP1234567890213457",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"suppliers",
+								"SUP1234567890213457"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "supplier save rfc exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Return correct details for 'error' response\", () => {",
+									"    const data = getData();",
+									"    pm.expect(data.code).to.equal(9007);",
+									"    pm.expect(data.message).to.equal(\"El RFC del proveedor ya se encuentra registrado\");",
+									"});",
+									"",
+									"tests[\"Body has code\"] = responseBody.has(\"code\");",
+									"tests[\"Body has message\"] = responseBody.has(\"message\");",
+									"tests[\"Body has uuid\"] = responseBody.has(\"uuid\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let randomMobile = \"667\" + Math.random().toString().slice(3, 10);",
+									"pm.environment.set(\"phone\", randomMobile);",
+									"",
+									"let randomRfc = \"COP\" + Math.random().toString().slice(3, 9);",
+									"randomRfc = randomRfc + \"Q\" + Math.random().toString().slice(2, 4);",
+									"pm.environment.set(\"rfc\", randomRfc);",
+									"",
+									"//COP920428Q20"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"manager\": \"{{$randomFullName}}\",\n    \"enterprise\": \"papeleria\",\n    \"rfc\": \"unrfc20202028\",\n    \"address\": \"{{$randomStreetAddress}}\",\n    \"phone\": \"{{phone}}\",\n    \"comments\": \"Entrega a tiempo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/suppliers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"suppliers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "supplier save parameter not send",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Return correct details for 'error' response\", () => {",
+									"    const data = getData();",
+									"    pm.expect(data.code).to.equal(9002);",
+									"    pm.expect(data.message).to.equal(\"{no debe estar vacío=[rfc]}\");",
+									"});",
+									"",
+									"tests[\"Body has code\"] = responseBody.has(\"code\");",
+									"tests[\"Body has message\"] = responseBody.has(\"message\");",
+									"tests[\"Body has uuid\"] = responseBody.has(\"uuid\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let randomMobile = \"667\" + Math.random().toString().slice(3, 10);",
+									"pm.environment.set(\"phone\", randomMobile);",
+									"",
+									"let randomRfc = \"COP\" + Math.random().toString().slice(3, 9);",
+									"randomRfc = randomRfc + \"Q\" + Math.random().toString().slice(2, 4);",
+									"pm.environment.set(\"rfc\", randomRfc);",
+									"",
+									"//COP920428Q20"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"manager\": \"{{$randomFullName}}\",\n    \"enterprise\": \"papeleria\",\n    \"address\": \"{{$randomStreetAddress}}\",\n    \"phone\": \"{{phone}}\",\n    \"comments\": \"Entrega a tiempo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/suppliers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"suppliers"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "suppliers collections"
+		},
+		{
+			"name": "debts",
+			"item": [
+				{
+					"name": "debts save success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test('debt schema is valid', function() {",
+									"    const debt = getData();",
+									"    pm.expect(debt.id_debt).to.be.a(\"string\");",
+									"    pm.expect(debt.debt_date).to.be.a(\"string\");",
+									"    pm.expect(debt.total).to.be.a(\"number\");",
+									"    pm.expect(debt.status).to.be.a(\"string\");",
+									"    pm.expect(debt.customer).to.be.a(\"object\");",
+									"});",
+									"",
+									"pm.test('debt response not empty dataº', function() {",
+									"    const debt = getData();",
+									"    pm.expect(debt).not.be.null;",
+									"    pm.expect(debt.id_debt).not.be.empty;",
+									"    pm.expect(debt.debt_date).not.be.empty;",
+									"    pm.expect(debt.total).not.be.null;",
+									"    pm.expect(debt.status).not.be.empty;",
+									"    pm.expect(debt.customer).not.be.null;",
+									"});",
+									"",
+									"tests[\"Body has id_debt\"] = responseBody.has(\"id_debt\");",
+									"tests[\"Body has debt_date\"] = responseBody.has(\"debt_date\");",
+									"tests[\"Body has total\"] = responseBody.has(\"total\");",
+									"tests[\"Body has status\"] = responseBody.has(\"status\");",
+									"tests[\"Body has customer\"] = responseBody.has(\"customer\");",
+									"tests[\"Body has payments\"] = responseBody.has(\"payments\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');",
+									"",
+									"pm.environment.set('currentdate', moment().format((\"yyyy-MM-DD HH:mm\")));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"debt_date\": \"{{currentdate}}\",\n  \"total\": \"{{$randomPrice}}\",\n  \"customer_id\": \"CUSXXXXXXXXXXXXXXXX1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/debts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"debts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "debts canceled success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/debts/DEBLRAHdYd2chxGAFMRX",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"debts",
+								"DEBLRAHdYd2chxGAFMRX"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "debts update success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test('debt schema is valid', function() {",
+									"    const debt = getData();",
+									"    pm.expect(debt.id_debt).to.be.a(\"string\");",
+									"    pm.expect(debt.debt_date).to.be.a(\"string\");",
+									"    pm.expect(debt.total).to.be.a(\"number\");",
+									"    pm.expect(debt.status).to.be.a(\"string\");",
+									"    pm.expect(debt.customer).to.be.a(\"object\");",
+									"});",
+									"",
+									"pm.test('debt response not empty dataº', function() {",
+									"    const debt = getData();",
+									"    pm.expect(debt).not.be.null;",
+									"    pm.expect(debt.id_debt).not.be.empty;",
+									"    pm.expect(debt.debt_date).not.be.empty;",
+									"    pm.expect(debt.total).not.be.null;",
+									"    pm.expect(debt.status).not.be.empty;",
+									"    pm.expect(debt.customer).not.be.null;",
+									"});",
+									"",
+									"tests[\"Body has id_debt\"] = responseBody.has(\"id_debt\");",
+									"tests[\"Body has debt_date\"] = responseBody.has(\"debt_date\");",
+									"tests[\"Body has total\"] = responseBody.has(\"total\");",
+									"tests[\"Body has status\"] = responseBody.has(\"status\");",
+									"tests[\"Body has customer\"] = responseBody.has(\"customer\");",
+									"tests[\"Body has payments\"] = responseBody.has(\"payments\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');",
+									"",
+									"pm.environment.set('currentdate', moment().format((\"yyyy-MM-DD HH:mm\")));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"debt_date\": \"{{currentdate}}\",\n  \"total\": \"{{$randomPrice}}\",\n  \"customer_id\": \"CUSXXXXXXXXXXXXXXXX1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/debts/DEBLsKVpkafz97V3jBno",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"debts",
+								"DEBLsKVpkafz97V3jBno"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "debts retrieve success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Debts schema is valid', function() {",
+									"    const debt = getData();",
+									"    pm.expect(debt[0].id_debt).to.be.a(\"string\");",
+									"    pm.expect(debt[0].debt_date).to.be.a(\"string\");",
+									"    pm.expect(debt[0].total).to.be.a(\"number\");",
+									"    pm.expect(debt[0].status).to.be.a(\"string\");",
+									"    pm.expect(debt[0].customer).to.be.a(\"object\");",
+									"    pm.expect(debt[0].payments).to.be.a(\"array\");",
+									"});",
+									"",
+									"pm.test('Debts response not empty dataº', function() {",
+									"    const debt = getData();",
+									"    pm.expect(debt).not.be.empty;",
+									"    pm.expect(debt[0].id_debt).not.be.empty;",
+									"    pm.expect(debt[0].debt_date).not.be.empty;",
+									"    pm.expect(debt[0].total).not.be.null;;",
+									"    pm.expect(debt[0].status).not.be.empty;",
+									"    pm.expect(debt[0].customer).not.be.null;",
+									"    pm.expect(debt[0].payments).not.be.null;;",
+									"});",
+									"",
+									"tests[\"Body has id_debt\"] = responseBody.has(\"id_debt\");",
+									"tests[\"Body has debt_date\"] = responseBody.has(\"debt_date\");",
+									"tests[\"Body has total\"] = responseBody.has(\"total\");",
+									"tests[\"Body has status\"] = responseBody.has(\"status\");",
+									"tests[\"Body has customer\"] = responseBody.has(\"customer\");",
+									"tests[\"Body has payments\"] = responseBody.has(\"payments\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/debts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"debts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "debts retrieve customer success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Debts customer schema is valid', function() {",
+									"    const debt = getData();",
+									"    pm.expect(debt[0].id_debt).to.be.a(\"string\");",
+									"    pm.expect(debt[0].debt_date).to.be.a(\"string\");",
+									"    pm.expect(debt[0].total).to.be.a(\"number\");",
+									"    pm.expect(debt[0].status).to.be.a(\"string\");",
+									"    pm.expect(debt[0].customer).to.be.a(\"object\");",
+									"    pm.expect(debt[0].payments).to.be.a(\"array\");",
+									"});",
+									"",
+									"pm.test('debts customer response not empty dataº', function() {",
+									"    const debt = getData();",
+									"    pm.expect(debt).not.be.empty;",
+									"    pm.expect(debt[0].id_debt).not.be.empty;",
+									"    pm.expect(debt[0].debt_date).not.be.empty;",
+									"    pm.expect(debt[0].total).not.be.null;;",
+									"    pm.expect(debt[0].status).not.be.empty;",
+									"    pm.expect(debt[0].customer).not.be.null;",
+									"    pm.expect(debt[0].payments).not.be.null;;",
+									"});",
+									"",
+									"tests[\"Body has id_debt\"] = responseBody.has(\"id_debt\");",
+									"tests[\"Body has debt_date\"] = responseBody.has(\"debt_date\");",
+									"tests[\"Body has total\"] = responseBody.has(\"total\");",
+									"tests[\"Body has status\"] = responseBody.has(\"status\");",
+									"tests[\"Body has customer\"] = responseBody.has(\"customer\");",
+									"tests[\"Body has payments\"] = responseBody.has(\"payments\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/debts/customer/CUSXXXXXXXXXXXXXXXX1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"debts",
+								"customer",
+								"CUSXXXXXXXXXXXXXXXX1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "debts payment retrieve success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Debts customer schema is valid', function() {",
+									"    const debt = getData();",
+									"    pm.expect(debt[0].id_debt).to.be.a(\"string\");",
+									"    pm.expect(debt[0].debt_date).to.be.a(\"string\");",
+									"    pm.expect(debt[0].total).to.be.a(\"number\");",
+									"    pm.expect(debt[0].status).to.be.a(\"string\");",
+									"    pm.expect(debt[0].customer).to.be.a(\"object\");",
+									"    pm.expect(debt[0].payments).to.be.a(\"array\");",
+									"});",
+									"",
+									"pm.test('debts customer response not empty dataº', function() {",
+									"    const debt = getData();",
+									"    pm.expect(debt).not.be.empty;",
+									"    pm.expect(debt[0].id_debt).not.be.empty;",
+									"    pm.expect(debt[0].debt_date).not.be.empty;",
+									"    pm.expect(debt[0].total).not.be.null;;",
+									"    pm.expect(debt[0].status).not.be.empty;",
+									"    pm.expect(debt[0].customer).not.be.null;",
+									"    pm.expect(debt[0].payments).not.be.null;;",
+									"});",
+									"",
+									"tests[\"Body has id_debt\"] = responseBody.has(\"id_debt\");",
+									"tests[\"Body has debt_date\"] = responseBody.has(\"debt_date\");",
+									"tests[\"Body has total\"] = responseBody.has(\"total\");",
+									"tests[\"Body has status\"] = responseBody.has(\"status\");",
+									"tests[\"Body has customer\"] = responseBody.has(\"customer\");",
+									"tests[\"Body has payments\"] = responseBody.has(\"payments\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/debts/DEBQWiNdC4iQX4P6jj2K/payments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"debts",
+								"DEBQWiNdC4iQX4P6jj2K",
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "debts retrieve customer ACTIVE success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Debts customer schema is valid', function() {",
+									"    const debt = getData();",
+									"    pm.expect(debt[0].id_debt).to.be.a(\"string\");",
+									"    pm.expect(debt[0].debt_date).to.be.a(\"string\");",
+									"    pm.expect(debt[0].total).to.be.a(\"number\");",
+									"    pm.expect(debt[0].status).to.be.a(\"string\");",
+									"    pm.expect(debt[0].customer).to.be.a(\"object\");",
+									"    pm.expect(debt[0].payments).to.be.a(\"array\");",
+									"});",
+									"",
+									"pm.test('debts customer response not empty dataº', function() {",
+									"    const debt = getData();",
+									"    pm.expect(debt).not.be.empty;",
+									"    pm.expect(debt[0].id_debt).not.be.empty;",
+									"    pm.expect(debt[0].debt_date).not.be.empty;",
+									"    pm.expect(debt[0].total).not.be.null;;",
+									"    pm.expect(debt[0].status).not.be.empty;",
+									"    pm.expect(debt[0].customer).not.be.null;",
+									"    pm.expect(debt[0].payments).not.be.null;;",
+									"});",
+									"",
+									"tests[\"Body has id_debt\"] = responseBody.has(\"id_debt\");",
+									"tests[\"Body has debt_date\"] = responseBody.has(\"debt_date\");",
+									"tests[\"Body has total\"] = responseBody.has(\"total\");",
+									"tests[\"Body has status\"] = responseBody.has(\"status\");",
+									"tests[\"Body has customer\"] = responseBody.has(\"customer\");",
+									"tests[\"Body has payments\"] = responseBody.has(\"payments\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/debts/customer/CUSXXXXXXXXXXXXXXXX1/ACTIVE",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"debts",
+								"customer",
+								"CUSXXXXXXXXXXXXXXXX1",
+								"ACTIVE"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "debts retrieve customer CANCELEDsuccess",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Debts customer schema is valid', function() {",
+									"    const debt = getData();",
+									"    pm.expect(debt[0].id_debt).to.be.a(\"string\");",
+									"    pm.expect(debt[0].debt_date).to.be.a(\"string\");",
+									"    pm.expect(debt[0].total).to.be.a(\"number\");",
+									"    pm.expect(debt[0].status).to.be.a(\"string\");",
+									"    pm.expect(debt[0].customer).to.be.a(\"object\");",
+									"    pm.expect(debt[0].payments).to.be.a(\"array\");",
+									"});",
+									"",
+									"pm.test('debts customer response not empty dataº', function() {",
+									"    const debt = getData();",
+									"    pm.expect(debt).not.be.empty;",
+									"    pm.expect(debt[0].id_debt).not.be.empty;",
+									"    pm.expect(debt[0].debt_date).not.be.empty;",
+									"    pm.expect(debt[0].total).not.be.null;;",
+									"    pm.expect(debt[0].status).not.be.empty;",
+									"    pm.expect(debt[0].customer).not.be.null;",
+									"    pm.expect(debt[0].payments).not.be.null;;",
+									"});",
+									"",
+									"tests[\"Body has id_debt\"] = responseBody.has(\"id_debt\");",
+									"tests[\"Body has debt_date\"] = responseBody.has(\"debt_date\");",
+									"tests[\"Body has total\"] = responseBody.has(\"total\");",
+									"tests[\"Body has status\"] = responseBody.has(\"status\");",
+									"tests[\"Body has customer\"] = responseBody.has(\"customer\");",
+									"tests[\"Body has payments\"] = responseBody.has(\"payments\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/debts/customer/CUSXXXXXXXXXXXXXXXX1/CANCELED",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"debts",
+								"customer",
+								"CUSXXXXXXXXXXXXXXXX1",
+								"CANCELED"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "debts save customer active debt",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Return correct details for 'error' response\", () => {",
+									"    const data = getData();",
+									"    pm.expect(data.code).to.equal(9003);",
+									"    pm.expect(data.message).to.equal(\"El Cliente ya tienen una deuda activa\");",
+									"});",
+									"",
+									"tests[\"Body has code\"] = responseBody.has(\"code\");",
+									"tests[\"Body has message\"] = responseBody.has(\"message\");",
+									"tests[\"Body has uuid\"] = responseBody.has(\"uuid\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');",
+									"",
+									"pm.environment.set('currentdate', moment().format((\"yyyy-MM-DD HH:mm\")));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"debt_date\": \"{{currentdate}}\",\n  \"total\": \"{{$randomPrice}}\",\n  \"customer_id\": \"CUSXXXXXXXXXXXXXXXX1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/debts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"debts"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "colección de deudas de clientes"
+		},
+		{
+			"name": "products",
+			"item": [
+				{
+					"name": "type retrieve success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('product type schema is valid', function() {",
+									"    const pt = getData();",
+									"    pm.expect(pt[0].id).to.be.a(\"number\");",
+									"    pm.expect(pt[0].name).to.be.a(\"string\");",
+									"});",
+									"",
+									"pm.test('product type response not empty dataº', function() {",
+									"    const pt = getData();",
+									"    pm.expect(pt).not.be.empty;",
+									"    pm.expect(pt[0].id).not.be.null;",
+									"    pm.expect(pt[0].name).not.be.empty;",
+									"});",
+									"",
+									"tests[\"Body has id\"] = responseBody.has(\"id\");",
+									"tests[\"Body has name\"] = responseBody.has(\"name\");",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uuid|",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/products/type",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"type"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "type update success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uuid|",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Libros\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/type/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"type",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "products retrieve success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('product schema is valid', function() {",
+									"    const pt = getData();",
+									"    pm.expect(pt[0].id_product).to.be.a(\"string\");",
+									"    pm.expect(pt[0].name).to.be.a(\"string\");",
+									"    pm.expect(pt[0].unit_price).to.be.a(\"number\");",
+									"    pm.expect(pt[0].sell_price).to.be.a(\"number\");",
+									"    pm.expect(pt[0].supplier).to.be.a(\"object\");",
+									"    pm.expect(pt[0].product_type).to.be.a(\"object\");",
+									"",
+									"});",
+									"",
+									"pm.test('product response not empty dataº', function() {",
+									"    const pt = getData();",
+									"    pm.expect(pt).not.be.empty;",
+									"    pm.expect(pt[0].id_product).not.be.empty;",
+									"    pm.expect(pt[0].name).not.be.empty;",
+									"    pm.expect(pt[0].unit_price).not.be.null;",
+									"    pm.expect(pt[0].sell_price).not.be.null;",
+									"    pm.expect(pt[0].supplier).not.be.null;",
+									"    pm.expect(pt[0].product_type).not.be.null;",
+									"});",
+									"",
+									"tests[\"Body has id_product\"] = responseBody.has(\"id_product\");",
+									"tests[\"Body has name\"] = responseBody.has(\"name\");",
+									"tests[\"Body has unit_price\"] = responseBody.has(\"unit_price\");",
+									"tests[\"Body has sell_price\"] = responseBody.has(\"sell_price\");",
+									"tests[\"Body has supplier\"] = responseBody.has(\"supplier\");",
+									"tests[\"Body has product_type\"] = responseBody.has(\"product_type\");",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uuid|",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "products save success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('product schema is valid', function() {",
+									"    const pt = getData();",
+									"    pm.expect(pt.id_product).to.be.a(\"string\");",
+									"    pm.expect(pt.name).to.be.a(\"string\");",
+									"    pm.expect(pt.unit_price).to.be.a(\"number\");",
+									"    pm.expect(pt.sell_price).to.be.a(\"number\");",
+									"    pm.expect(pt.supplier).to.be.a(\"object\");",
+									"    pm.expect(pt.product_type).to.be.a(\"object\");",
+									"",
+									"});",
+									"",
+									"pm.test('product response not empty dataº', function() {",
+									"    const pt = getData();",
+									"    pm.expect(pt).not.be.empty;",
+									"    pm.expect(pt.id_product).not.be.empty;",
+									"    pm.expect(pt.name).not.be.empty;",
+									"    pm.expect(pt.unit_price).not.be.null;",
+									"    pm.expect(pt.sell_price).not.be.null;",
+									"    pm.expect(pt.supplier).not.be.null;",
+									"    pm.expect(pt.product_type).not.be.null;",
+									"});",
+									"",
+									"tests[\"Body has id_product\"] = responseBody.has(\"id_product\");",
+									"tests[\"Body has name\"] = responseBody.has(\"name\");",
+									"tests[\"Body has unit_price\"] = responseBody.has(\"unit_price\");",
+									"tests[\"Body has sell_price\"] = responseBody.has(\"sell_price\");",
+									"tests[\"Body has supplier\"] = responseBody.has(\"supplier\");",
+									"tests[\"Body has product_type\"] = responseBody.has(\"product_type\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/felipemonzon/Pictures/walppapers/149386.jpeg"
+								},
+								{
+									"key": "name",
+									"value": "{{$randomProductName}}",
+									"type": "text"
+								},
+								{
+									"key": "unitPrice",
+									"value": "{{$randomPrice}}",
+									"type": "text"
+								},
+								{
+									"key": "sellPrice",
+									"value": "{{$randomPrice}}",
+									"type": "text"
+								},
+								{
+									"key": "supplierId",
+									"value": "SUPu4Rth7wWQT3CI07HJ",
+									"type": "text"
+								},
+								{
+									"key": "productTypeId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "products save success Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/felipemonzon/Pictures/walppapers/149386.jpeg"
+								},
+								{
+									"key": "name",
+									"value": "{{$randomProductName}}",
+									"type": "text"
+								},
+								{
+									"key": "unitPrice",
+									"value": "{{$randomPrice}}",
+									"type": "text"
+								},
+								{
+									"key": "sellPrice",
+									"value": "{{$randomPrice}}",
+									"type": "text"
+								},
+								{
+									"key": "supplierId",
+									"value": "SUPu4Rth7wWQT3CI07HJ",
+									"type": "text"
+								},
+								{
+									"key": "productTypeId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/PROqNlEDgGtXyiSkbRTi",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"PROqNlEDgGtXyiSkbRTi"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "collection for products"
+		},
+		{
+			"name": "stock",
+			"item": [
+				{
+					"name": "stock retrieve success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('stock schema is valid', function() {",
+									"    const pt = getData();",
+									"    pm.expect(pt[0].id).to.be.a(\"number\");",
+									"    pm.expect(pt[0].stock_max).to.be.a(\"number\");",
+									"    pm.expect(pt[0].stock_min).to.be.a(\"number\");",
+									"    pm.expect(pt[0].stock).to.be.a(\"number\");",
+									"    pm.expect(pt[0].status).to.be.a(\"string\");",
+									"    pm.expect(pt[0].product).to.be.a(\"object\");",
+									"",
+									"});",
+									"",
+									"pm.test('stock response not empty dataº', function() {",
+									"    const pt = getData();",
+									"    pm.expect(pt).not.be.empty;",
+									"    pm.expect(pt[0].id).not.be.empty;",
+									"    pm.expect(pt[0].stock_max).not.be.null;",
+									"    pm.expect(pt[0].stock_min).not.be.null;",
+									"    pm.expect(pt[0].stock).not.be.null;",
+									"    pm.expect(pt[0].status).not.be.empty;",
+									"    pm.expect(pt[0].product).not.be.null;",
+									"});",
+									"",
+									"tests[\"Body has id\"] = responseBody.has(\"id\");",
+									"tests[\"Body has stock_max\"] = responseBody.has(\"stock_max\");",
+									"tests[\"Body has stock_min\"] = responseBody.has(\"stock_min\");",
+									"tests[\"Body has stock\"] = responseBody.has(\"stock\");",
+									"tests[\"Body has status\"] = responseBody.has(\"status\");",
+									"tests[\"Body has product\"] = responseBody.has(\"product\");",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/products/stock",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"stock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "stock save success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('stock schema is valid', function() {",
+									"    const pt = getData();",
+									"    pm.expect(pt.id).to.be.a(\"number\");",
+									"    pm.expect(pt.stock_max).to.be.a(\"number\");",
+									"    pm.expect(pt.stock_min).to.be.a(\"number\");",
+									"    pm.expect(pt.stock).to.be.a(\"number\");",
+									"    pm.expect(pt.status).to.be.a(\"string\");",
+									"    pm.expect(pt.product).to.be.a(\"object\");",
+									"",
+									"});",
+									"",
+									"pm.test('stock response not empty dataº', function() {",
+									"    const pt = getData();",
+									"    pm.expect(pt).not.be.empty;",
+									"    pm.expect(pt.id).not.be.empty;",
+									"    pm.expect(pt.stock_max).not.be.null;",
+									"    pm.expect(pt.stock_min).not.be.null;",
+									"    pm.expect(pt.stock).not.be.null;",
+									"    pm.expect(pt.status).not.be.empty;",
+									"    pm.expect(pt.product).not.be.null;",
+									"});",
+									"",
+									"tests[\"Body has id\"] = responseBody.has(\"id\");",
+									"tests[\"Body has stock_max\"] = responseBody.has(\"stock_max\");",
+									"tests[\"Body has stock_min\"] = responseBody.has(\"stock_min\");",
+									"tests[\"Body has stock\"] = responseBody.has(\"stock\");",
+									"tests[\"Body has status\"] = responseBody.has(\"status\");",
+									"tests[\"Body has product\"] = responseBody.has(\"product\");",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"stock\": 2,\n    \"stock_min\": 1,\n    \"stock_max\": 100,\n    \"product_id\": \"PROqNlEDgGtXyiSkbRTi\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/stock",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"stock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "stock product success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('stock schema is valid', function() {",
+									"    const pt = getData();",
+									"    pm.expect(pt.id).to.be.a(\"number\");",
+									"    pm.expect(pt.stock_max).to.be.a(\"number\");",
+									"    pm.expect(pt.stock_min).to.be.a(\"number\");",
+									"    pm.expect(pt.stock).to.be.a(\"number\");",
+									"    pm.expect(pt.status).to.be.a(\"string\");",
+									"    pm.expect(pt.product).to.be.a(\"object\");",
+									"",
+									"});",
+									"",
+									"pm.test('stock response not empty dataº', function() {",
+									"    const pt = getData();",
+									"    pm.expect(pt).not.be.empty;",
+									"    pm.expect(pt.id).not.be.empty;",
+									"    pm.expect(pt.stock_max).not.be.null;",
+									"    pm.expect(pt.stock_min).not.be.null;",
+									"    pm.expect(pt.stock).not.be.null;",
+									"    pm.expect(pt.status).not.be.empty;",
+									"    pm.expect(pt.product).not.be.null;",
+									"});",
+									"",
+									"tests[\"Body has id\"] = responseBody.has(\"id\");",
+									"tests[\"Body has stock_max\"] = responseBody.has(\"stock_max\");",
+									"tests[\"Body has stock_min\"] = responseBody.has(\"stock_min\");",
+									"tests[\"Body has stock\"] = responseBody.has(\"stock\");",
+									"tests[\"Body has status\"] = responseBody.has(\"status\");",
+									"tests[\"Body has product\"] = responseBody.has(\"product\");",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"stock\": 2,\n    \"stock_min\": 1,\n    \"stock_max\": 100,\n    \"product_id\": \"PROqNlEDgGtXyiSkbRTi\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/products/stock/PROqNlEDgGtXyiSkbRTi",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"stock",
+								"PROqNlEDgGtXyiSkbRTi"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "inventario de productos"
+		},
+		{
+			"name": "payments",
+			"item": [
+				{
+					"name": "payment retrieve success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Debts customer schema is valid', function() {",
+									"    const debt = getData();",
+									"    pm.expect(debt[0].id_payment).to.be.a(\"string\");",
+									"    pm.expect(debt[0].payment_date).to.be.a(\"string\");",
+									"    pm.expect(debt[0].amount).to.be.a(\"number\");",
+									"    pm.expect(debt[0].debt).to.be.a(\"object\");",
+									"    pm.expect(debt[0].method_payment).to.be.a(\"object\");",
+									"});",
+									"",
+									"pm.test('debts customer response not empty dataº', function() {",
+									"    const debt = getData();",
+									"    pm.expect(debt).not.be.empty;",
+									"    pm.expect(debt[0].id_payment).not.be.empty;",
+									"    pm.expect(debt[0].payment_date).not.be.empty;",
+									"    pm.expect(debt[0].amount).not.be.null;;",
+									"    pm.expect(debt[0].debt).not.be.null;",
+									"    pm.expect(debt[0].method_payment).not.be.null;;",
+									"});",
+									"",
+									"tests[\"Body has id_debt\"] = responseBody.has(\"id_debt\");",
+									"tests[\"Body has debt_date\"] = responseBody.has(\"debt_date\");",
+									"tests[\"Body has total\"] = responseBody.has(\"total\");",
+									"tests[\"Body has status\"] = responseBody.has(\"status\");",
+									"tests[\"Body has customer\"] = responseBody.has(\"customer\");",
+									"tests[\"Body has method_payment\"] = responseBody.has(\"method_payment\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/payments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "payment save success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Debts customer schema is valid', function() {",
+									"    const debt = getData();",
+									"    pm.expect(debt.id_payment).to.be.a(\"string\");",
+									"    pm.expect(debt.payment_date).to.be.a(\"string\");",
+									"    pm.expect(debt.amount).to.be.a(\"number\");",
+									"    pm.expect(debt.debt).to.be.a(\"object\");",
+									"});",
+									"",
+									"pm.test('debts customer response not empty dataº', function() {",
+									"    const debt = getData();",
+									"    pm.expect(debt).not.be.empty;",
+									"    pm.expect(debt.id_payment).not.be.empty;",
+									"    pm.expect(debt.payment_date).not.be.empty;",
+									"    pm.expect(debt.amount).not.be.null;;",
+									"    pm.expect(debt.debt).not.be.null;",
+									"});",
+									"",
+									"",
+									"tests[\"Body has id_payment\"] = responseBody.has(\"id_payment\");",
+									"tests[\"Body has payment_date\"] = responseBody.has(\"payment_date\");",
+									"tests[\"Body has amount\"] = responseBody.has(\"amount\");",
+									"",
+									"tests[\"Body has id_debt\"] = responseBody.has(\"id_debt\");",
+									"tests[\"Body has debt_date\"] = responseBody.has(\"debt_date\");",
+									"tests[\"Body has total\"] = responseBody.has(\"total\");",
+									"tests[\"Body has status\"] = responseBody.has(\"status\");",
+									"tests[\"Body has customer\"] = responseBody.has(\"customer\");",
+									"tests[\"Body has payments\"] = responseBody.has(\"payments\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": \"100\",\n    \"debt_id\": \"DEBQWiNdC4iQX4P6jj2K\",\n    \"method_payment\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/payments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"payments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "sells",
+			"item": [
+				{
+					"name": "sell retrieve succes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Debts customer schema is valid', function() {",
+									"    const debt = getData();",
+									"    pm.expect(debt[0].id_payment).to.be.a(\"string\");",
+									"    pm.expect(debt[0].payment_date).to.be.a(\"string\");",
+									"    pm.expect(debt[0].amount).to.be.a(\"number\");",
+									"    pm.expect(debt[0].debt).to.be.a(\"object\");",
+									"    pm.expect(debt[0].method_payment).to.be.a(\"object\");",
+									"});",
+									"",
+									"pm.test('debts customer response not empty dataº', function() {",
+									"    const debt = getData();",
+									"    pm.expect(debt).not.be.empty;",
+									"    pm.expect(debt[0].id_payment).not.be.empty;",
+									"    pm.expect(debt[0].payment_date).not.be.empty;",
+									"    pm.expect(debt[0].amount).not.be.null;;",
+									"    pm.expect(debt[0].debt).not.be.null;",
+									"    pm.expect(debt[0].method_payment).not.be.null;;",
+									"});",
+									"",
+									"tests[\"Body has id_debt\"] = responseBody.has(\"id_debt\");",
+									"tests[\"Body has debt_date\"] = responseBody.has(\"debt_date\");",
+									"tests[\"Body has total\"] = responseBody.has(\"total\");",
+									"tests[\"Body has status\"] = responseBody.has(\"status\");",
+									"tests[\"Body has customer\"] = responseBody.has(\"customer\");",
+									"tests[\"Body has method_payment\"] = responseBody.has(\"method_payment\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/sells",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sells"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sell save succes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Debts customer schema is valid', function() {",
+									"    const debt = getData();",
+									"    pm.expect(debt.id_payment).to.be.a(\"string\");",
+									"    pm.expect(debt.payment_date).to.be.a(\"string\");",
+									"    pm.expect(debt.amount).to.be.a(\"number\");",
+									"    pm.expect(debt.debt).to.be.a(\"object\");",
+									"});",
+									"",
+									"pm.test('debts customer response not empty dataº', function() {",
+									"    const debt = getData();",
+									"    pm.expect(debt).not.be.empty;",
+									"    pm.expect(debt.id_payment).not.be.empty;",
+									"    pm.expect(debt.payment_date).not.be.empty;",
+									"    pm.expect(debt.amount).not.be.null;;",
+									"    pm.expect(debt.debt).not.be.null;",
+									"});",
+									"",
+									"",
+									"tests[\"Body has id_payment\"] = responseBody.has(\"id_payment\");",
+									"tests[\"Body has payment_date\"] = responseBody.has(\"payment_date\");",
+									"tests[\"Body has amount\"] = responseBody.has(\"amount\");",
+									"",
+									"tests[\"Body has id_debt\"] = responseBody.has(\"id_debt\");",
+									"tests[\"Body has debt_date\"] = responseBody.has(\"debt_date\");",
+									"tests[\"Body has total\"] = responseBody.has(\"total\");",
+									"tests[\"Body has status\"] = responseBody.has(\"status\");",
+									"tests[\"Body has customer\"] = responseBody.has(\"customer\");",
+									"tests[\"Body has payments\"] = responseBody.has(\"payments\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"total\": {{$randomPrice}},\n    \"customer_id\": \"CUSvdrZ9sIVtUWgzUnyd\",\n    \"method_payment_id\": 1,\n    \"point_sale_id\": \"POSLCwJDF7Uq2wY9HbI1\",\n    \"status\": \"PAYMENT\",\n    \"details\": [{\n            \"piece\": 2,\n            \"amount\": 58.89,\n            \"product_id\": \"PROqNlEDgGtXyiSkbRTi\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/sells",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"sells"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"let randomMobile = \"667\" + Math.random().toString().slice(3, 10);",
+					"pm.environment.set(\"phone\", randomMobile);",
+					"",
+					"var moment = require('moment');",
+					"pm.environment.set('currentdate', moment().format((\"yyyy-MM-DD HH:mm\")));",
+					"",
+					"let randomRfc = \"COP\" + Math.random().toString().slice(3, 9);",
+					"randomRfc = randomRfc + \"Q\" + Math.random().toString().slice(2, 4);",
+					"pm.environment.set(\"rfc\", randomRfc);",
+					"",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "rfc",
+			"value": "COP270166Q35",
+			"type": "string"
+		},
+		{
+			"key": "phone",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "currentdate",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
