@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.moontech.salesPoint.commons.enums.Status;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Set;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -46,5 +48,5 @@ public class SellResponse {
   private PointSaleResponse pointSale;
 
   /** Detalle de la venta. */
-  private SellDetailResponse detail;
+  private Set<SellDetailResponse> details;
 }

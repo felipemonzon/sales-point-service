@@ -1,5 +1,6 @@
 package com.moontech.salesPoint.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import lombok.Getter;
@@ -39,8 +40,9 @@ public class SellDetailEntity extends AuditableEntity {
   private ProductEntity product;
 
   /** Venta. */
-  @ManyToOne
+  @JsonIgnore
   @MapsId(value = "sellId")
+  @ManyToOne(cascade = CascadeType.MERGE)
   @JoinColumn(name = "id_sell", referencedColumnName = "id", nullable = false)
   private SellEntity sell;
 }

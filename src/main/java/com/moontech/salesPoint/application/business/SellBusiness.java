@@ -8,10 +8,7 @@ import com.moontech.salesPoint.commons.constant.ErrorConstant;
 import com.moontech.salesPoint.commons.enums.Identifier;
 import com.moontech.salesPoint.commons.enums.Status;
 import com.moontech.salesPoint.commons.utilities.Utilities;
-import com.moontech.salesPoint.domain.entity.MethodPaymentEntity;
-import com.moontech.salesPoint.domain.entity.SellDetailEntity;
-import com.moontech.salesPoint.domain.entity.SellDetailId;
-import com.moontech.salesPoint.domain.entity.SellEntity;
+import com.moontech.salesPoint.domain.entity.*;
 import com.moontech.salesPoint.domain.repository.MethodPaymentRepository;
 import com.moontech.salesPoint.domain.repository.SellDetailRepository;
 import com.moontech.salesPoint.domain.repository.SellRepository;
@@ -100,10 +97,11 @@ public class SellBusiness implements SellService {
     SellEntity sell = this.sellRepository.save(entity);
     entity.setDetails(
         request.getDetails().stream()
-            .map(detail -> this.mapping(detail, entity.getId()))
+            .map(detail -> this.mapping(detail, entity))
             .collect(Collectors.toSet()));
     this.validateStock(entity.getDetails());
     this.sellDetailRepository.saveAll(entity.getDetails());
+    sell.setDetails(entity.getDetails());
     return this.mapping(sell);
   }
 
@@ -129,6 +127,7 @@ public class SellBusiness implements SellService {
   private SellEntity mapping(SellRequest request) {
     SellEntity entity = new SellEntity();
     entity.setStatus(request.getStatus());
+    entity.setSellDate(LocalDateTime.now());
     entity.setIdSell(Utilities.generateRandomId(Identifier.TRANSACTIONS.getCode()));
     entity.setMethodPayment(this.methodPayment(request.getMethodPaymentId()));
     entity.setInvoice(request.getInvoice());
@@ -154,7 +153,7 @@ public class SellBusiness implements SellService {
    * @param request entidad de detalle de ventas
    * @return {@code SellDetailEntity}
    */
-  private SellDetailEntity mapping(SellDetailRequest request, Long idSell) {
+  private SellDetailEntity mapping(SellDetailRequest request, SellEntity sell) {
     SellDetailEntity detail = new SellDetailEntity();
     detail.setPiece(request.getPiece());
     detail.setProduct(this.productStockService.findByIdProduct(request.getProductId()));
@@ -162,7 +161,8 @@ public class SellBusiness implements SellService {
         BigDecimal.valueOf((request.getPiece() * detail.getProduct().getSellPrice().longValue())));
     detail.setSellDetailId(new SellDetailId());
     detail.getSellDetailId().setProductId(detail.getProduct().getId());
-    detail.getSellDetailId().setSellId(idSell);
+    detail.getSellDetailId().setSellId(sell.getId());
+    detail.setSell(sell);
     return detail;
   }
 

@@ -54,8 +54,7 @@ public class ProductStockBusiness implements ProductStockService {
   @Transactional
   public StockTakingResponse save(StockTakingRequest request) {
     ProductEntity product = this.findById(request.getProductId());
-    StockTakingEntity entity =
-        this.stockTakingRepository.findByProductIdProduct(request.getProductId());
+    StockTakingEntity entity = this.stockTakingRepository.findByIdProduct(request.getProductId());
     if (ObjectUtils.isEmpty(entity)) {
       StockTakingEntity stock = this.mapping(request);
       stock.setStatus(Status.ACTIVE);
@@ -121,7 +120,7 @@ public class ProductStockBusiness implements ProductStockService {
    * @return inventario encontrado
    */
   private StockTakingEntity searchStock(String idProduct) {
-    StockTakingEntity entity = this.stockTakingRepository.findByProductIdProduct(idProduct);
+    StockTakingEntity entity = this.stockTakingRepository.findByIdProduct(idProduct);
     if (!ObjectUtils.isEmpty(entity)) {
       log.info("consulta inventario del producto {}", idProduct);
       return entity;

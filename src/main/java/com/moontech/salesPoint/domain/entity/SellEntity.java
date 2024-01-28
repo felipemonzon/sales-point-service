@@ -1,6 +1,5 @@
 package com.moontech.salesPoint.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.moontech.salesPoint.commons.constant.DatabaseConstant;
 import com.moontech.salesPoint.commons.enums.Status;
 import jakarta.persistence.*;
@@ -81,7 +80,6 @@ public class SellEntity extends AuditableEntity {
 
   /** Detalle de venta. */
   @NotAudited
-  @JsonIgnore
   @ToString.Exclude
   @OneToMany(mappedBy = "sell", cascade = CascadeType.ALL)
   private Set<SellDetailEntity> details;

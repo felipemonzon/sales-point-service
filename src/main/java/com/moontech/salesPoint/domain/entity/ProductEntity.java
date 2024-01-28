@@ -70,6 +70,6 @@ public class ProductEntity extends AuditableEntity {
   private ProductTypeEntity productType;
 
   /** Inventario. */
-  @OneToOne(mappedBy = "product")
+  @OneToOne(mappedBy = "product", fetch = FetchType.LAZY, orphanRemoval = true)
   private StockTakingEntity stockTaking;
 }
