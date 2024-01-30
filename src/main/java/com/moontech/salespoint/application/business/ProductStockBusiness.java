@@ -9,7 +9,7 @@ import com.moontech.salespoint.domain.entity.StockTakingEntity;
 import com.moontech.salespoint.domain.repository.ProductRepository;
 import com.moontech.salespoint.domain.repository.StockTakingRepository;
 import com.moontech.salespoint.infrastructure.exception.custom.BusinessException;
-import com.moontech.salespoint.infrastructure.model.request.StockTakingRequest;
+import com.moontech.salespoint.infrastructure.model.request.StockRequest;
 import com.moontech.salespoint.infrastructure.model.response.StockTakingResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -52,7 +52,7 @@ public class ProductStockBusiness implements ProductStockService {
   /** {@inheritDoc}. */
   @Override
   @Transactional
-  public StockTakingResponse save(StockTakingRequest request) {
+  public StockTakingResponse save(StockRequest request) {
     ProductEntity product = this.findById(request.getProductId());
     StockTakingEntity entity = this.stockTakingRepository.findByIdProduct(request.getProductId());
     if (ObjectUtils.isEmpty(entity)) {
@@ -133,10 +133,10 @@ public class ProductStockBusiness implements ProductStockService {
   /**
    * Convierte una entidad {@code StockTakingRequest} a uno de tipo {@code StockTakingEntity}
    *
-   * @param request objeto de tipo {@link StockTakingRequest}
+   * @param request objeto de tipo {@link StockRequest}
    * @return entidad de inventario
    */
-  private StockTakingEntity mapping(StockTakingRequest request) {
+  private StockTakingEntity mapping(StockRequest request) {
     StockTakingEntity stock = new StockTakingEntity();
     stock.setStock(request.getStock());
     stock.setStockMax(request.getStockMax());

@@ -22,9 +22,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -41,13 +39,19 @@ import org.springframework.web.filter.OncePerRequestFilter;
  */
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
   /** Propiedades de seguridad {@code SecurityProperties} . */
-  @Autowired private SecurityProperties securityProperties;
+  private final SecurityProperties securityProperties;
 
   /** Servicio de usuarios. */
-  @Autowired private LoginBusiness loginBusiness;
+  private final LoginBusiness loginBusiness;
+
+  public JwtAuthorizationFilter(
+      SecurityProperties securityProperties, LoginBusiness loginBusiness) {
+    this.loginBusiness = loginBusiness;
+    this.securityProperties = securityProperties;
+  }
 
   /**
-   * Filtro que válida si la cabecera "Authorization" está presente y si el token provista esta
+   * Filtro que válida si la cabecera "Authorization" está presente y si el token provisto está
    * activo y es válido.
    *
    * @param httpServletRequest {@code HttpServletRequest}
@@ -121,7 +125,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         Arrays.stream(
                 claims.get(SecurityConstants.AUTHORITIES_KEY).toString().split(ApiConstant.COMMA))
             .map(SimpleGrantedAuthority::new)
-            .collect(Collectors.toList());
+            .toList();
     return new UsernamePasswordAuthenticationToken(userDetails, StringUtils.EMPTY, authorities);
   }
 

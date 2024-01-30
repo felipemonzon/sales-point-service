@@ -36,7 +36,7 @@ public class UserRequest {
   /** Contraseña del usuario. */
   @NotBlank
   @Size(max = 100)
-  @Pattern(regexp = FormatConstant.PWD_PATTERN)
+  @Pattern(regexp = FormatConstant.PAW_PATTERN)
   private String password;
 
   /** Correo del usuario. */

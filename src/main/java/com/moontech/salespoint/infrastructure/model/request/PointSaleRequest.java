@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.moontech.salespoint.commons.constant.FormatConstant;
 import com.moontech.salespoint.commons.enums.Status;
 import jakarta.validation.constraints.*;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -39,5 +38,6 @@ public class PointSaleRequest {
   @NotNull
   private Long enterpriseId;
 
-  @Builder.Default private Status status = Status.ACTIVE;
+  /** Estatus del punto de venta. */
+  private Status status = Status.ACTIVE;
 }

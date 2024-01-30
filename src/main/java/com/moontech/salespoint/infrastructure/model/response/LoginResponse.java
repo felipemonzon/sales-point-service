@@ -29,15 +29,6 @@ public class LoginResponse implements Serializable {
   /** Correo del usuario. */
   private String email;
 
-  /** Propiedad primer nombre. */
-  private String firstName;
-
-  /** Propiedad segundo nombre. */
-  private String lastName;
-
-  /** Propiedad para el celular. */
-  private String cel;
-
   /** Propiedad para el género. */
   private Genre genre;
 
@@ -52,4 +43,13 @@ public class LoginResponse implements Serializable {
 
   /** Estatus del empleado. */
   private Status status;
+
+  /** Propiedad primer nombre. */
+  private String firstName;
+
+  /** Propiedad segundo nombre. */
+  private String lastName;
+
+  /** Propiedad para el celular. */
+  private String cel;
 }

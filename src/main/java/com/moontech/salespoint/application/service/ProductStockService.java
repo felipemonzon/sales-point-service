@@ -1,7 +1,7 @@
 package com.moontech.salespoint.application.service;
 
 import com.moontech.salespoint.domain.entity.ProductEntity;
-import com.moontech.salespoint.infrastructure.model.request.StockTakingRequest;
+import com.moontech.salespoint.infrastructure.model.request.StockRequest;
 import com.moontech.salespoint.infrastructure.model.response.StockTakingResponse;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
@@ -21,7 +21,7 @@ public interface ProductStockService {
    * @param request datos del inventario
    * @return inventario registrado
    */
-  StockTakingResponse save(StockTakingRequest request);
+  StockTakingResponse save(StockRequest request);
 
   /**
    * Consulta el inventario de un producto.

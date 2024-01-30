@@ -3,7 +3,7 @@ package com.moontech.salespoint.infrastructure.apis;
 import com.moontech.salespoint.application.service.ProductStockService;
 import com.moontech.salespoint.commons.constant.FormatConstant;
 import com.moontech.salespoint.commons.constant.RoutesConstant;
-import com.moontech.salespoint.infrastructure.model.request.StockTakingRequest;
+import com.moontech.salespoint.infrastructure.model.request.StockRequest;
 import com.moontech.salespoint.infrastructure.model.response.StockTakingResponse;
 import com.moontech.salespoint.infrastructure.security.constant.SecurityConstants;
 import jakarta.validation.Valid;
@@ -53,7 +53,7 @@ public class ProductStockController {
   @PostMapping(
       produces = MediaType.APPLICATION_JSON_VALUE,
       consumes = MediaType.APPLICATION_JSON_VALUE)
-  ResponseEntity<StockTakingResponse> save(@RequestBody @Valid StockTakingRequest request) {
+  ResponseEntity<StockTakingResponse> save(@RequestBody @Valid StockRequest request) {
     return ResponseEntity.ok(this.productStockService.save(request));
   }
 

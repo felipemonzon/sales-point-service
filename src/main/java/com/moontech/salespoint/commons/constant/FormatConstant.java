@@ -22,7 +22,7 @@ public class FormatConstant {
   public static final String ONLY_NUMBERS_AND_LETTERS_PATTERN = "^[A-Za-z0-9\\s]+$";
 
   /** Formato para contraseñas. */
-  public static final String PWD_PATTERN = "^[A-Za-z0-9@#$%-&+=]+$";
+  public static final String PAW_PATTERN = "^[A-Za-z0-9@#$%-&+=]+$";
 
   /** Formato para solo números y letras */
   public static final String USERNAME_PATTERN = "^[A-Za-z0-9\\s\\.\\_\\-]+$";

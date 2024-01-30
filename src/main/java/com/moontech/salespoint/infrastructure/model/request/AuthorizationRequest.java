@@ -32,6 +32,6 @@ public class AuthorizationRequest implements Serializable {
 
   /** Contraseña. */
   @NotEmpty
-  @Pattern(regexp = FormatConstant.PWD_PATTERN)
+  @Pattern(regexp = FormatConstant.PAW_PATTERN)
   private String password;
 }

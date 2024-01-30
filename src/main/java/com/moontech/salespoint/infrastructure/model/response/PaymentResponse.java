@@ -2,6 +2,8 @@ package com.moontech.salespoint.infrastructure.model.response;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import lombok.Getter;
@@ -19,7 +21,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class PaymentResponse {
+public class PaymentResponse implements Serializable {
   /** Propiedad para el identificador generado por el sistema. */
   private String idPayment;
 

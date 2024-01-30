@@ -22,7 +22,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class StockTakingRequest {
+public class StockRequest {
   /** Identificador del inventario. */
   private Long id;
 
@@ -44,5 +44,5 @@ public class StockTakingRequest {
   /** Identificador del producto. */
   @NotEmpty
   @Pattern(regexp = FormatConstant.ONLY_NUMBERS_AND_LETTERS_PATTERN)
-  private String ProductId;
+  private String productId;
 }

@@ -55,15 +55,16 @@ public class ProductTypeBusiness implements ProductTypeService {
   @Override
   @Transactional
   public void update(ProductTypeRequest request, Long id) {
-    this.productTypeRepository
-        .findById(id)
-        .orElseThrow(
-            () ->
-                new BusinessException(
-                    ErrorConstant.RECORD_NOT_FOUND_CODE, ErrorConstant.PRODUCT_TYPE_NOT_EXIST));
-    request.setId(id);
-    log.info("Actualiza un tipo de producto {}", request);
-    this.productTypeRepository.save(this.mapping(request));
+    ProductTypeEntity entity =
+        this.productTypeRepository
+            .findById(id)
+            .orElseThrow(
+                () ->
+                    new BusinessException(
+                        ErrorConstant.RECORD_NOT_FOUND_CODE, ErrorConstant.PRODUCT_TYPE_NOT_EXIST));
+    log.info("Actualiza un tipo de producto {}", entity);
+    entity.setName(request.getName());
+    this.productTypeRepository.save(entity);
   }
 
   /**

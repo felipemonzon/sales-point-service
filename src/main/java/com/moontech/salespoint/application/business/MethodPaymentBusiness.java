@@ -60,19 +60,20 @@ public class MethodPaymentBusiness implements MethodPaymentService {
   /** {@inheritDoc}. */
   @Override
   public void update(Long id, MethodPaymentRequest request) {
-    this.validateMethodPayment(id);
-    request.setId(id);
-    log.debug("Datos del método de pago a actualizar {}", request);
-    this.methodPaymentRepository.save(this.mapping(request));
+    MethodPaymentEntity entity = this.validateMethodPayment(id);
+    log.debug("Datos del método de pago a actualizar {}", entity);
+    entity.setDescription(request.getDescription());
+    this.methodPaymentRepository.save(entity);
   }
 
   /**
    * Valida si el proveedor existe.
    *
    * @param id identificador de la sucursal
+   * @return entidad de métodos de pago
    */
-  private void validateMethodPayment(Long id) {
-    this.methodPaymentRepository
+  private MethodPaymentEntity validateMethodPayment(Long id) {
+    return this.methodPaymentRepository
         .findById(id)
         .orElseThrow(
             () -> new NotDataFoundException(ErrorConstant.METHOD_PAYMENT_NOT_FOUND_MESSAGE));

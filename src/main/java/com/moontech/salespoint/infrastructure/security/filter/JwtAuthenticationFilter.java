@@ -89,8 +89,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
           new ObjectMapper().readValue(request.getInputStream(), AuthorizationRequest.class);
 
       if (!userCredentials.getUsername().matches(FormatConstant.USERNAME_PATTERN)
-          || !userCredentials.getPassword().matches(FormatConstant.PWD_PATTERN)) {
-        log.error("Usuario o contraseña no cumplen con las caracteristicas.");
+          || !userCredentials.getPassword().matches(FormatConstant.PAW_PATTERN)) {
+        log.error("Usuario o contraseña no cumplen con las características.");
         throw new BadCredentialsException(ErrorConstant.INVALID_CREDENTIAL_USER_MESSAGE);
       }
       return this.authenticationManager.authenticate(

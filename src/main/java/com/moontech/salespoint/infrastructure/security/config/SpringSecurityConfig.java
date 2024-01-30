@@ -1,5 +1,6 @@
 package com.moontech.salespoint.infrastructure.security.config;
 
+import com.moontech.salespoint.application.business.LoginBusiness;
 import com.moontech.salespoint.infrastructure.property.SecurityProperties;
 import com.moontech.salespoint.infrastructure.security.filter.JwtAuthenticationFilter;
 import com.moontech.salespoint.infrastructure.security.filter.JwtAuthorizationFilter;
@@ -15,7 +16,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -40,8 +40,8 @@ public class SpringSecurityConfig {
   /** Propiedades de seguridad {@code SecurityProperties}. */
   private final SecurityProperties securityProperties;
 
-  /** {@code UserDetailsService} */
-  private final UserDetailsService userDetailsService;
+  /** Servicio de usuarios. */
+  private final LoginBusiness loginBusiness;
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -78,7 +78,7 @@ public class SpringSecurityConfig {
    */
   @Bean
   public JwtAuthorizationFilter jwtAuthorizationFilterBean() {
-    return new JwtAuthorizationFilter();
+    return new JwtAuthorizationFilter(this.securityProperties, this.loginBusiness);
   }
 
   /**
