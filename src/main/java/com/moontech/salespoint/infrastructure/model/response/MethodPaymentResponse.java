@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 /**
  * Respuesta de los métodos de pago.
  *
@@ -19,7 +21,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class MethodPaymentResponse {
+public class MethodPaymentResponse implements Serializable {
   /** Identificador del método. */
   private Long id;
 
