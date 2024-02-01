@@ -8,6 +8,7 @@ Para más detalle mira el archivo [CHANGELOG](CHANGELOG)
 
 # Quality Gate
 
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=felipemonzon_sales-point-service)](https://sonarcloud.io/summary/new_code?id=felipemonzon_sales-point-service)
 
 ### Pre-requisitos 📋
 Tener instalado
