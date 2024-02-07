@@ -32,9 +32,7 @@ public class Auditor implements AuditorAware<String> {
               .map(
                   SecurityContextHolder.getContext().getAuthentication().getPrincipal(),
                   SecurityResponse.class);
-      if (ObjectUtils.isEmpty(login.getUsername())) {
-        user = ApiConstant.USER_SYSTEM;
-      } else {
+      if (!ObjectUtils.isEmpty(login.getUsername())) {
         user = login.getUsername();
       }
     }

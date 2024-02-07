@@ -37,7 +37,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
- * *Autenticación para el usuario.
+ * Autenticación para el usuario.
  *
  * @author Felipe Monzón
  * @since May 31, 2023

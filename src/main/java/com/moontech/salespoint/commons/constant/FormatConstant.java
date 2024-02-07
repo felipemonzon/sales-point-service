@@ -1,6 +1,8 @@
 package com.moontech.salespoint.commons.constant;
 
 /**
+ * Clase con constantes para formatos.
+ *
  * @author Felipe Monzón
  * @enterprise moontech
  * @since 30 may., 2023
