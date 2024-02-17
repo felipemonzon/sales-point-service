@@ -5,44 +5,9 @@ package com.moontech.salespoint.commons.constant;
  *
  * @author Felipe Monzón
  * @enterprise moontech
- * @since 23 nov., 2022
+ * @since 23 nov., 2023
  */
 public class QueryConstant {
-  /**
-   * Consulta usuario por:
-   *
-   * <ul>
-   *   <li>Nombre
-   *   <li>E-mail
-   *   <li>teléfono
-   * </ul>
-   */
-  public static final String FIND_USER_BY =
-      "SELECT u.id, u.username, u.first_name, u.last_name, u.email, u.phone, u.id_office, u.created_by, "
-          + "u.created_date, u.updated_by, u.updated_date, u.password, u.genre, u.status "
-          + "FROM users u "
-          + "WHERE u.first_name LIKE %:search% "
-          + "OR u.last_name LIKE %:search% "
-          + "OR u.email LIKE %:search% "
-          + "OR u.phone LIKE %:search% ";
-
-  /**
-   * Consulta sucursal por:
-   *
-   * <ul>
-   *   <li>Nombre
-   *   <li>Teléfono
-   *   <li>Coordenadas
-   *   <li>Dirección
-   * </ul>
-   */
-  public static final String FIND_OFFICES_BY =
-      "SELECT b.id, b.name, b.phone, b.address, b.active, b.manager, created_by, created_date, updated_by, updated_date "
-          + "FROM offices b "
-          + "WHERE b.name LIKE %:search% "
-          + "OR b.phone LIKE %:search% "
-          + "OR b.address LIKE %:search%";
-
   /**
    * Consulta perfil por:
    *
@@ -67,7 +32,7 @@ public class QueryConstant {
    * </ul>
    */
   public static final String FIND_SUPPLIERS_BY =
-      "SELECT s.id, s.name, s.phone, s.address, s.enterprise, s.rfc, s.status, s.comments, s.created_user, s.created_date, s.last_modified_user, s.last_modified_date "
+      "SELECT s.id, s.id_supplier, s.name, s.phone, s.address, s.enterprise, s.rfc, s.status, s.comments, s.created_user, s.created_date, s.last_modified_user, s.last_modified_date "
           + "FROM suppliers s "
           + "WHERE s.name LIKE %:search% "
           + "OR s.phone LIKE %:search% "

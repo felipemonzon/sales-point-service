@@ -52,3 +52,19 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: mvn -B verify sonar:sonar -Pcoverage -Dsonar.projectKey=felipemonzon_sales-point-service -Djasypt.encryptor.password=felipemonzon
+    - name: Dependency Check
+      uses: dependency-check/Dependency-Check_Action@1.1.0
+      id: Dependency Check
+      with:
+        project: 'sales-point-service'
+        path: '.'
+        format: 'HTML'
+        out: 'reports' # this is the default, no need to specify unless you wish to override it
+        args: >
+          --failOnCVSS 7
+          --enableRetired
+    - name: Upload Test results
+      uses: actions/upload-artifact@master
+      with:
+        name: Depcheck report
+        path: ${{github.workspace}}/reports

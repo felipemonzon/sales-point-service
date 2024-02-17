@@ -1,9 +1,10 @@
 package com.moontech.salespoint.apis;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.moontech.salespoint.commons.enums.Status;
 import com.moontech.salespoint.configuration.MysqlBaseConfigurationTest;
 import com.moontech.salespoint.configuration.TestConstants;
-import com.moontech.salespoint.infrastructure.model.request.ProfileRequest;
+import com.moontech.salespoint.infrastructure.model.request.SupplierRequest;
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
@@ -13,12 +14,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 /**
- * test de las apis de perfiles.
+ * Test de las apis de proveedores.
  *
  * @author Felipe Monzón
  * @enterprise moontech
@@ -30,22 +32,22 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @ActiveProfiles("test")
 @WithMockUser(roles = TestConstants.ROLE_ADMIN)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class ProfileControllerTest extends MysqlBaseConfigurationTest {
+class SupplierControllerTest extends MysqlBaseConfigurationTest {
   @Autowired private MockMvc mockMvc;
 
   /** Mapper. */
   @Autowired private ObjectMapper objectMapper;
 
-  /** Ruta para perfiles. */
-  private static final String PROFILE_BASE_PATH = "/profiles";
+  /** Ruta para proveedores. */
+  private static final String SUPPLIER_BASE_PATH = "/suppliers";
 
   @Test
-  @DisplayName("GET /profiles success")
+  @DisplayName("GET /suppliers success")
   void retrieve_all() throws Exception {
     String response =
         this.mockMvc
             .perform(
-                MockMvcRequestBuilders.get(PROFILE_BASE_PATH)
+                MockMvcRequestBuilders.get(SUPPLIER_BASE_PATH)
                     .header(TestConstants.UUID_HEADER, String.valueOf(UUID.randomUUID())))
             .andExpect(MockMvcResultMatchers.status().isOk())
             .andExpect(
@@ -53,16 +55,16 @@ class ProfileControllerTest extends MysqlBaseConfigurationTest {
             .andReturn()
             .getResponse()
             .getContentAsString();
-    log.info("Perfiles encontrados en test {}", response);
+    log.info("Proveedores encontrados en test {}", response);
   }
 
   @Test
-  @DisplayName("GET /profiles/ADMIN success")
-  void search_profiles() throws Exception {
+  @DisplayName("GET /suppliers/unrfc20202028 success")
+  void search_suppliers() throws Exception {
     String response =
         this.mockMvc
             .perform(
-                MockMvcRequestBuilders.get(PROFILE_BASE_PATH + "/ADMIN")
+                MockMvcRequestBuilders.get(SUPPLIER_BASE_PATH + "/unrfc20202028")
                     .header(TestConstants.UUID_HEADER, String.valueOf(UUID.randomUUID())))
             .andExpect(MockMvcResultMatchers.status().isOk())
             .andExpect(
@@ -70,111 +72,137 @@ class ProfileControllerTest extends MysqlBaseConfigurationTest {
             .andReturn()
             .getResponse()
             .getContentAsString();
-    log.info("Perfiles buscados en test {}", response);
-  }
-
-  @Test
-  @Order(2)
-  @DisplayName("POST /profiles error")
-  void save_error(TestInfo testInfo) throws Exception {
-    log.info(TestConstants.TEST_RUNNING, testInfo.getDisplayName());
-    this.mockMvc
-        .perform(
-            MockMvcRequestBuilders.post(PROFILE_BASE_PATH)
-                .header(TestConstants.UUID_HEADER, String.valueOf(UUID.randomUUID()))
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(this.objectMapper.writeValueAsString(this.getProfileRequest())))
-        .andExpect(MockMvcResultMatchers.status().is4xxClientError());
+    log.info("Proveedores buscados en test {}", response);
   }
 
   @Test
   @Order(3)
-  @DisplayName("POST /profiles exists")
+  @DisplayName("POST /suppliers success")
   void save_success(TestInfo testInfo) throws Exception {
     log.info(TestConstants.TEST_RUNNING, testInfo.getDisplayName());
     this.mockMvc
         .perform(
-            MockMvcRequestBuilders.post(PROFILE_BASE_PATH)
+            MockMvcRequestBuilders.post(SUPPLIER_BASE_PATH)
                 .header(TestConstants.UUID_HEADER, String.valueOf(UUID.randomUUID()))
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(this.objectMapper.writeValueAsString(this.getProfileRequest())))
+                .content(
+                    this.objectMapper.writeValueAsString(
+                        this.getSupplierRequest("ASD462299Q21", "Juana lopes"))))
         .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
   }
 
   @Test
   @Order(3)
-  @DisplayName("POST /profiles exists")
+  @DisplayName("POST /suppliers exists")
   void save_exists(TestInfo testInfo) throws Exception {
     log.info(TestConstants.TEST_RUNNING, testInfo.getDisplayName());
     this.mockMvc
         .perform(
-            MockMvcRequestBuilders.post(PROFILE_BASE_PATH)
+            MockMvcRequestBuilders.post(SUPPLIER_BASE_PATH)
                 .header(TestConstants.UUID_HEADER, String.valueOf(UUID.randomUUID()))
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(this.objectMapper.writeValueAsString(this.getProfileRequest())))
+                .content(
+                    this.objectMapper.writeValueAsString(
+                        this.getSupplierRequest("ASD462299Q22", "Juan lopes"))))
         .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
   }
 
   @Test
-  @DisplayName("POST /profiles exists")
+  @DisplayName("POST /suppliers exists")
   void save_bad_request(TestInfo testInfo) throws Exception {
     log.info(TestConstants.TEST_RUNNING, testInfo.getDisplayName());
-    ProfileRequest request = new ProfileRequest();
     this.mockMvc
         .perform(
-            MockMvcRequestBuilders.post(PROFILE_BASE_PATH)
+            MockMvcRequestBuilders.post(SUPPLIER_BASE_PATH)
                 .header(TestConstants.UUID_HEADER, String.valueOf(UUID.randomUUID()))
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(this.objectMapper.writeValueAsString(request)))
+                .content(this.objectMapper.writeValueAsString(new SupplierRequest())))
         .andExpect(MockMvcResultMatchers.status().is4xxClientError());
   }
 
   @Test
   @Order(2)
-  @DisplayName("POST /profiles duplicate")
+  @DisplayName("POST /suppliers")
   void save_duplicate(TestInfo testInfo) throws Exception {
     log.info(TestConstants.TEST_RUNNING, testInfo.getDisplayName());
     this.mockMvc
         .perform(
-            MockMvcRequestBuilders.post(PROFILE_BASE_PATH)
+            MockMvcRequestBuilders.post(SUPPLIER_BASE_PATH)
                 .header(TestConstants.UUID_HEADER, String.valueOf(UUID.randomUUID()))
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(this.objectMapper.writeValueAsString(this.getProfileRequest())))
-        .andExpect(MockMvcResultMatchers.status().is4xxClientError());
+                .content(
+                    this.objectMapper.writeValueAsString(
+                        this.getSupplierRequest("ASD462299Q22", "Juan lopes"))))
+        .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
   }
 
   @Test
   @Order(5)
-  @DisplayName("PUT /profiles")
+  @DisplayName("PUT /suppliers error")
   void update_error(TestInfo testInfo) throws Exception {
     log.info(TestConstants.TEST_RUNNING, testInfo.getDisplayName());
     this.mockMvc
         .perform(
-            MockMvcRequestBuilders.put(PROFILE_BASE_PATH + "/6")
+            MockMvcRequestBuilders.put(SUPPLIER_BASE_PATH + "/SUP12345678902134573")
                 .header(TestConstants.UUID_HEADER, String.valueOf(UUID.randomUUID()))
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(this.objectMapper.writeValueAsString(this.getProfileRequest())))
-        .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
+                .content(
+                    this.objectMapper.writeValueAsString(
+                        this.getSupplierRequest("ASD462299Q22", "Juan lopes"))))
+        .andExpect(MockMvcResultMatchers.status().is4xxClientError());
   }
 
   @Test
   @Order(7)
-  @DisplayName("PUT /profiles")
+  @DisplayName("PUT /suppliers success")
   void update_success(TestInfo testInfo) throws Exception {
     log.info(TestConstants.TEST_RUNNING, testInfo.getDisplayName());
     this.mockMvc
         .perform(
-            MockMvcRequestBuilders.put(PROFILE_BASE_PATH + "/1")
+            MockMvcRequestBuilders.put(SUPPLIER_BASE_PATH + "/SUP12345678902134578")
                 .header(TestConstants.UUID_HEADER, String.valueOf(UUID.randomUUID()))
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(this.objectMapper.writeValueAsString(this.getProfileRequest())))
+                .content(
+                    this.objectMapper.writeValueAsString(
+                        this.getSupplierRequest("ASD462299Q52", "Juan perez"))))
         .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
   }
 
-  private ProfileRequest getProfileRequest() {
-    ProfileRequest request = new ProfileRequest();
-    request.setName("PROFILE");
-    request.setValue("PROFILE");
+  @Test
+  @Order(8)
+  @DisplayName("DELETE /suppliers not-found")
+  void delete_not_found(TestInfo testInfo) throws Exception {
+    log.info(TestConstants.TEST_RUNNING, testInfo.getDisplayName());
+    this.mockMvc
+        .perform(
+            MockMvcRequestBuilders.delete(SUPPLIER_BASE_PATH + "/SUP12345678902134578")
+                .header(TestConstants.UUID_HEADER, String.valueOf(UUID.randomUUID()))
+                .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(MockMvcResultMatchers.status().is4xxClientError());
+  }
+
+  @Test
+  @Sql(scripts = {"/test-script.sql"})
+  @DisplayName("DELETE /suppliers success")
+  void delete_success(TestInfo testInfo) throws Exception {
+    log.info(TestConstants.TEST_RUNNING, testInfo.getDisplayName());
+    this.mockMvc
+        .perform(
+            MockMvcRequestBuilders.delete(SUPPLIER_BASE_PATH + "/SUP12345678902134500")
+                .header(TestConstants.UUID_HEADER, String.valueOf(UUID.randomUUID()))
+                .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
+  }
+
+  private SupplierRequest getSupplierRequest(String rfc, String manager) {
+    SupplierRequest request = new SupplierRequest();
+    request.setStatus(Status.ACTIVE);
+    request.setPhone("6671568899");
+    request.setManager(manager);
+    request.setEnterprise("pepeleria");
+    request.setAddress("muy lejos");
+    request.setRfc(rfc);
+    request.setComments("entrega a tiempo");
     return request;
   }
 }

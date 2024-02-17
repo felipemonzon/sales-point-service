@@ -233,8 +233,8 @@
                         <configuration>
                             <excludes>
                                 <exclude>**/constant/**/*</exclude>
-                                <exclude>**/models/**/*</exclude>
-                                <exclude>**/exceptions/custom/**/*</exclude>
+                                <exclude>**/model/**/*</exclude>
+                                <exclude>**/exception/custom/**/*</exclude>
                                 <exclude>**/Application*</exclude>
                             </excludes>
                         </configuration>
@@ -326,7 +326,7 @@
             <plugin>
                 <groupId>com.github.ulisesbocchio</groupId>
                 <artifactId>jasypt-maven-plugin</artifactId>
-                <version>3.0.3</version>
+                <version>3.0.5</version>
             </plugin>
         </plugins>
     </build>

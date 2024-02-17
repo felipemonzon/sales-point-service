@@ -195,7 +195,7 @@ CREATE TABLE IF NOT EXISTS  `suppliers` (
 
 INSERT INTO suppliers
 (id_supplier, name, enterprise, rfc, address, phone, comments, status, created_user, created_date, last_modified_user, last_modified_date)
-VALUES('SUP12345678902134578', 'Costco', 'costco sa de cv', 'unrfc20202028', 'CALLE PRINCIPAL', '6671544056', 'Entrega puntal', 1, 'ADMIN', '2022-06-02 02:43:49', 'ADMIN', '2022-06-02 02:43:49');
+VALUES('SUP12345678902134578', 'Costco', 'costco sa de cv', 'unrfc20202028', 'CALLE PRINCIPAL', '6671544056', 'Entrega puntal', 'ACTIVE', 'ADMIN', '2022-06-02 02:43:49', 'ADMIN', '2022-06-02 02:43:49');
 
 -- salesPoint.suppliers_aud definition
 
