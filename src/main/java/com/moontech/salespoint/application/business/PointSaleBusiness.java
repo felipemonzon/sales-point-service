@@ -45,7 +45,7 @@ public class PointSaleBusiness implements PointSaleService {
   @Override
   @Transactional(readOnly = true)
   public List<PointSaleResponse> findBy(String search) {
-    log.debug("Consulta proveedores por {}", search);
+    log.debug("Consulta punto de venta por {}", search);
     return this.pointSaleRepository.findBy(search).stream().map(this::mapping).toList();
   }
 

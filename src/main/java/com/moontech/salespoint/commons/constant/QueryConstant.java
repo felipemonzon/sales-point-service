@@ -63,8 +63,8 @@ public class QueryConstant {
       "SELECT s.id, s.id_point_sale, s.name, s.status, s.id_enterprise, s.created_user, s.created_date, s.last_modified_user, s.last_modified_date "
           + "FROM point_sales s "
           + "WHERE s.name LIKE %:search% "
-          + "AND s.id_point_sale = :search"
-          + "AND s.status = :search";
+          + "OR s.id_point_sale = :search "
+          + "OR s.status = :search";
 
   /** Parámetro de búsqueda. */
   public static final String SEARCH_PARAMETER = "search";

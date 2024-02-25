@@ -143,7 +143,7 @@ class EnterpriseControllerTest extends MysqlBaseConfigurationTest {
     log.info(TestConstants.TEST_RUNNING, testInfo.getDisplayName());
     this.mockMvc
         .perform(
-            MockMvcRequestBuilders.put(ENTERPRISE_BASE_PATH + "/ENT6734htdge362xnhd3")
+            MockMvcRequestBuilders.put(ENTERPRISE_BASE_PATH + "/ENT6734htdge362xnhd4")
                 .header(TestConstants.UUID_HEADER, String.valueOf(UUID.randomUUID()))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(

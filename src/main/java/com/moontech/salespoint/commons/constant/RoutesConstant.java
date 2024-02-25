@@ -70,7 +70,7 @@ public abstract class RoutesConstant {
   public static final String DEBT_PAYMENTS_BASE_PATH = "${api.uri.domain.payments}";
 
   /** Ruta base para las compras. */
-  public static final String SHP_BASE_PATH = "${api.uri.domain.shops}";
+  public static final String SHOP_BASE_PATH = "${api.uri.domain.shops}";
 
   /** Ruta base para las ventas. */
   public static final String SELL_BASE_PATH = "${api.uri.domain.sells}";
