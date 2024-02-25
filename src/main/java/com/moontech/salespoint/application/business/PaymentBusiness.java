@@ -72,6 +72,7 @@ public class PaymentBusiness implements PaymentService {
   @Override
   @Transactional(readOnly = true)
   public PaymentResponse findById(String paymentId) {
+    log.info("Consulta el pago {}", paymentId);
     return this.mapping(this.paymentRepository.findByPaymentIdIdPayment(paymentId));
   }
 
