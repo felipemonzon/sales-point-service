@@ -1,12 +1,15 @@
 package com.moontech.salespoint.infrastructure.apis;
 
 import com.moontech.salespoint.application.service.EnterpriseService;
+import com.moontech.salespoint.commons.constant.FormatConstant;
 import com.moontech.salespoint.commons.constant.RoutesConstant;
 import com.moontech.salespoint.infrastructure.model.request.EnterpriseRequest;
 import com.moontech.salespoint.infrastructure.model.response.EnterpriseResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import java.util.List;
+
+import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -79,7 +82,11 @@ public class EnterpriseController {
    */
   @DeleteMapping(path = "{idEnterprise}", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Void> delete(
-      @PathVariable(name = "idEnterprise") @Valid @NotEmpty String id) {
+      @PathVariable(name = "idEnterprise")
+          @Valid
+          @NotEmpty
+          @Pattern(regexp = FormatConstant.ONLY_NUMBERS_AND_LETTERS_PATTERN)
+          String id) {
     this.enterpriseService.delete(id);
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }

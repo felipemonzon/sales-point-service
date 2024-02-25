@@ -241,6 +241,24 @@ class DebtControllerTest extends MysqlBaseConfigurationTest {
         .andExpect(MockMvcResultMatchers.status().is4xxClientError());
   }
 
+  @Test
+  @Order(5)
+  @DisplayName("GET /debts/payments success")
+  void retrieve_all_payments() throws Exception {
+    String response =
+        this.mockMvc
+            .perform(
+                MockMvcRequestBuilders.get(DEBT_BASE_PATH + "/DEBFbLLRo3N0SLOe8CIT/payments")
+                    .header(TestConstants.UUID_HEADER, String.valueOf(UUID.randomUUID())))
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(
+                MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andReturn()
+            .getResponse()
+            .getContentAsString();
+    log.info("Pagos encontrados en test {}", response);
+  }
+
   private DebtRequest getDebtRequest() {
     DebtRequest request = new DebtRequest();
     request.setDebtDate(LocalDateTime.now());
