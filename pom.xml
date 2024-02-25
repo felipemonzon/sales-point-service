@@ -21,6 +21,12 @@
         <java.version>17</java.version>
         <testcontainers.version>1.19.4</testcontainers.version>
         <git-code-format-maven-plugin.version>3.5</git-code-format-maven-plugin.version>
+        <sonar.coverage.exclusions>
+            **/constant/**/*,
+            **/model/**/*,
+            **/exception/custom/**/*,
+            **/Application*
+        </sonar.coverage.exclusions>
     </properties>
 
     <dependencyManagement>
