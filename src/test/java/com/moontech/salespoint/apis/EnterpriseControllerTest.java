@@ -1,11 +1,9 @@
 package com.moontech.salespoint.apis;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.moontech.salespoint.commons.enums.Status;
 import com.moontech.salespoint.configuration.MysqlBaseConfigurationTest;
 import com.moontech.salespoint.configuration.TestConstants;
 import com.moontech.salespoint.infrastructure.model.request.EnterpriseRequest;
-import com.moontech.salespoint.infrastructure.model.request.SupplierRequest;
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
@@ -138,6 +136,7 @@ class EnterpriseControllerTest extends MysqlBaseConfigurationTest {
 
   @Test
   @Order(7)
+  @Sql(scripts = {"/enterprise-script.sql"})
   @DisplayName("PUT /enterprises success")
   void update_success(TestInfo testInfo) throws Exception {
     log.info(TestConstants.TEST_RUNNING, testInfo.getDisplayName());
@@ -159,14 +158,14 @@ class EnterpriseControllerTest extends MysqlBaseConfigurationTest {
     log.info(TestConstants.TEST_RUNNING, testInfo.getDisplayName());
     this.mockMvc
         .perform(
-            MockMvcRequestBuilders.delete(ENTERPRISE_BASE_PATH + "/ENT6734htdge362xnhd4")
+            MockMvcRequestBuilders.delete(ENTERPRISE_BASE_PATH + "/ENT6734htdge362x1234")
                 .header(TestConstants.UUID_HEADER, String.valueOf(UUID.randomUUID()))
                 .contentType(MediaType.APPLICATION_JSON))
         .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
   }
 
   @Test
-  @Sql(scripts = {"/enterprise-script.sql"})
+  @Order(9)
   @DisplayName("DELETE /enterprises success")
   void delete_success(TestInfo testInfo) throws Exception {
     log.info(TestConstants.TEST_RUNNING, testInfo.getDisplayName());

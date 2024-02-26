@@ -3,3 +3,4 @@ INSERT INTO salesPoint.enterprises
  last_modified_date)
 VALUES ('ENT6734htdge362xnhd4', 'JUJI877654HSFH13', 1, 'muy lejos', 'empresa', '1234567898', 'Felipe Monzon', 'ADMIN',
         NOW(), 'ADMIN', NOW());
+
