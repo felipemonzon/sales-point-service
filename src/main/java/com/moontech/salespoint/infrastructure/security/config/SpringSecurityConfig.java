@@ -34,9 +34,6 @@ import org.springframework.web.filter.CorsFilter;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SpringSecurityConfig {
-  /** Constante para permitir multiples conexiones. */
-  private static final String ASTERISK = "*";
-
   /** Propiedades de seguridad {@code SecurityProperties}. */
   private final SecurityProperties securityProperties;
 
@@ -90,15 +87,15 @@ public class SpringSecurityConfig {
   public CorsFilter corsFilter() {
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     CorsConfiguration config = new CorsConfiguration();
-    config.addAllowedOrigin(ASTERISK);
-    config.addAllowedHeader(ASTERISK);
+    config.setAllowedOrigins(this.securityProperties.getCors());
+    config.addAllowedHeader(CorsConfiguration.ALL);
     config.setAllowedMethods(
         Arrays.asList(
             HttpMethod.POST.name(),
             HttpMethod.GET.name(),
             HttpMethod.PUT.name(),
             HttpMethod.DELETE.name()));
-    config.setExposedHeaders(Collections.singletonList(ASTERISK));
+    config.setExposedHeaders(Collections.singletonList(CorsConfiguration.ALL));
     source.registerCorsConfiguration("/**", config);
     return new CorsFilter(source);
   }

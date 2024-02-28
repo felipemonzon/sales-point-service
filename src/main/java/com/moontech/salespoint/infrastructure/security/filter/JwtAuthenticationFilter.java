@@ -12,14 +12,11 @@ import com.moontech.salespoint.infrastructure.model.request.AuthorizationRequest
 import com.moontech.salespoint.infrastructure.model.response.LoginResponse;
 import com.moontech.salespoint.infrastructure.security.constant.SecurityConstants;
 import com.moontech.salespoint.infrastructure.security.utility.SecurityUtilities;
-import io.jsonwebtoken.Jwts;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.Date;
-import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
@@ -32,7 +29,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -118,7 +114,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
       Authentication authResult)
       throws IOException {
 
-    String token = this.generateToken(authResult);
+    String token = SecurityUtilities.generateToken(authResult, signingKey, validity);
     LoginResponse login = new ModelMapper().map(authResult.getPrincipal(), LoginResponse.class);
     response.addHeader(
         HttpHeaders.AUTHORIZATION,
@@ -158,27 +154,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                           .uuid(request.getHeader(ApiConstant.HEADER_UUID))
                           .build()));
     }
-  }
-
-  /**
-   * Genera el token con roles, issuer, fecha, expiración (8 h).
-   *
-   * @param authentication {@code Authentication}
-   * @return token generado
-   */
-  private String generateToken(Authentication authentication) {
-    final String authorities =
-        authentication.getAuthorities().stream()
-            .map(GrantedAuthority::getAuthority)
-            .collect(Collectors.joining(","));
-    return Jwts.builder()
-        .subject(authentication.getName())
-        .claim(SecurityConstants.AUTHORITIES_KEY, authorities)
-        .signWith(SecurityUtilities.getSigningKey(this.signingKey), Jwts.SIG.HS512)
-        .issuedAt(new Date(System.currentTimeMillis()))
-        .issuer(SecurityConstants.ISSUER_TOKEN)
-        .expiration(new Date(System.currentTimeMillis() + this.validity * 1000))
-        .compact();
   }
 
   /**

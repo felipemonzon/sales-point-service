@@ -3,6 +3,8 @@
 # ===================================================================
 server:
   port: 8080
+  servlet:
+    context-path: /point-sale
   tomcat:
     max-http-form-post-size: 20MB
     max-swallow-size: 20MB
@@ -72,11 +74,12 @@ management:
 security:
   jwt:
     key: ENC(CuAcl76ySK/o/H4V03L9ruNaAcPfvTzvQsZkDNQjutdM6MnwaaWqwrq4mHDJc9shwCsVvlFlSPLXobk1+XarnMKwR9+NxOkzQBiphxzkrYchA+gz++yQtGzkwqLDxpxzO+XfYWHOBAJLbTdQMJrgwA==)
-    lifeTime: 10000
+    lifeTime: 631138000000
   cors:
     origins: >
       - http://127.0.0.1:4200,
       - http://127.0.0.1:5500
+
 # ===================================================================
 # LOG PROPERTIES
 # ===================================================================
@@ -129,3 +132,16 @@ api:
       productType: ${api.uri.domain.products}/type
       productStock: ${api.uri.domain.products}/stock
   interceptorPath: "/**"
+# ===================================================================
+# SWAGGER PROPERTIES
+# ===================================================================
+swagger:
+  basePackage: com.moontech
+  title: SERV-sales-point-service
+  descriptionApi: Punto de venta
+  version: 1.0.0
+  nameDeveloper: Felipe Monzón
+  contactUrl: https://felipemonzon.github.io/
+  emailDeveloper: felipemonzon2705@gmail.com
+  licenceType: MIT LICENCE
+  licenceUrl: https://github.com/felipemonzon/sales-point-service/blob/main/LICENSE

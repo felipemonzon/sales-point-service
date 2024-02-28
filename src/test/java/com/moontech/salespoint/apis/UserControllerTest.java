@@ -16,7 +16,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -49,7 +48,7 @@ class UserControllerTest extends MysqlBaseConfigurationTest {
   void retrieve_all(TestInfo testInfo) throws Exception {
     log.info(TestConstants.TEST_RUNNING, testInfo.getDisplayName());
     String token =
-        "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZWxpcGVtb256b24yNzA1IiwiQ0xBSU1fVE9LRU4iOiJST0xFX0FETUlOIiwiaWF0IjoxNzA5MTE2OTA5LCJpc3MiOiJJU1NVRVIiLCJleHAiOjE3MDkxMjY5MDl9.ZovkRbxroc6ripGAWoCsWxKJcXXIkemWKXTTKHA9fcyXP5BxaOSsXJ9CjlU9xN-PulmJ3UUtObBIChxcK5Vw3g";
+        "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJmZWxpcGVtb256b24yNzA1IiwiQ0xBSU1fVE9LRU4iOiJST0xFX0FETUlOIiwiaWF0IjoxNzA5MTUzNjAwLCJpc3MiOiJJU1NVRVIiLCJleHAiOjIzNDAyOTE2MDB9.2jWzCtqqbDjpyMJMIJk6BEDFffrj0PWNdD7YKMoYYUucBzBS9nTGGEtJu2Jv5ivL46i488jJY1pd8uylW_iPiA";
     String response =
         this.mockMvc
             .perform(

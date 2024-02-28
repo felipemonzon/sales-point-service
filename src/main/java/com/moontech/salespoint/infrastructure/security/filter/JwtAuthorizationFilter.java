@@ -10,24 +10,17 @@ import com.moontech.salespoint.infrastructure.exception.management.ExceptionMana
 import com.moontech.salespoint.infrastructure.property.SecurityProperties;
 import com.moontech.salespoint.infrastructure.security.constant.SecurityConstants;
 import com.moontech.salespoint.infrastructure.security.utility.SecurityUtilities;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.JwtParser;
-import io.jsonwebtoken.Jwts;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Objects;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -98,53 +91,14 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
       return;
     }
 
-    final String token =
-        authorizationHeader.replace(
-            SecurityConstants.TOKEN_BEARER_PREFIX + ApiConstant.WHITE_SPACE, StringUtils.EMPTY);
+    final String token = SecurityUtilities.getTokenByHeader(authorizationHeader);
 
-    String userName = this.getUserName(token);
+    String userName = SecurityUtilities.getUserName(token, this.securityProperties.getJwtKey());
     UserDetails user = this.loginBusiness.loadUserByUsername(userName);
 
-    UsernamePasswordAuthenticationToken authenticationToken = this.getAuthentication(token, user);
+    UsernamePasswordAuthenticationToken authenticationToken =
+        SecurityUtilities.getAuthentication(token, user, this.securityProperties.getJwtKey());
     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
     filterChain.doFilter(httpServletRequest, httpServletResponse);
-  }
-
-  /***
-   * Obtiene los datos de autenticación.
-   *
-   * @param token token recibido en la petición
-   * @param userDetails {@link UserDetails}
-   * @return {@link UsernamePasswordAuthenticationToken}
-   */
-  private UsernamePasswordAuthenticationToken getAuthentication(
-      final String token, final UserDetails userDetails) {
-    final JwtParser jwtParser =
-        Jwts.parser()
-            .verifyWith(SecurityUtilities.getSigningKey(this.securityProperties.getJwtKey()))
-            .build();
-    final Jws<Claims> claimsJws = jwtParser.parseSignedClaims(token);
-    final Claims claims = claimsJws.getPayload();
-    final Collection<SimpleGrantedAuthority> authorities =
-        Arrays.stream(
-                claims.get(SecurityConstants.AUTHORITIES_KEY).toString().split(ApiConstant.COMMA))
-            .map(SimpleGrantedAuthority::new)
-            .toList();
-    return new UsernamePasswordAuthenticationToken(userDetails, StringUtils.EMPTY, authorities);
-  }
-
-  /**
-   * Obtiene el usuario del token.
-   *
-   * @param token token recibido en la petición
-   * @return usuario
-   */
-  private String getUserName(final String token) {
-    final JwtParser jwtParser =
-        Jwts.parser()
-            .verifyWith(SecurityUtilities.getSigningKey(this.securityProperties.getJwtKey()))
-            .build();
-    final Jws<Claims> claimsJws = jwtParser.parseSignedClaims(token);
-    return claimsJws.getPayload().getSubject();
   }
 }
