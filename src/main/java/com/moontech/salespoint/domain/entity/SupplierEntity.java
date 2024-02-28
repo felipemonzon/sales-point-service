@@ -68,7 +68,7 @@ public class SupplierEntity extends AuditableEntity {
 
   /** Status del proveedor. */
   @Enumerated(EnumType.STRING)
-  @Column(name = "status", nullable = false)
+  @Column(name = "status", nullable = false, columnDefinition = "varchar")
   private Status status;
 
   /** Productos pertenecientes al proveedor. */

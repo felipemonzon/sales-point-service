@@ -70,7 +70,7 @@ public class UserEntity extends AuditableEntity {
 
   /** Propiedad para el status del usuario. */
   @Enumerated(EnumType.STRING)
-  @Column(name = DatabaseConstant.STATUS_PROPERTY, nullable = false)
+  @Column(name = DatabaseConstant.STATUS_PROPERTY, nullable = false, columnDefinition = "varchar")
   private Status status;
 
   /** Propiedad para el rol del usuario. */

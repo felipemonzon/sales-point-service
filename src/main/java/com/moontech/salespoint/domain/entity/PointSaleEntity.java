@@ -44,7 +44,7 @@ public class PointSaleEntity extends AuditableEntity {
 
   /** Status del punto de venta. */
   @Enumerated(EnumType.STRING)
-  @Column(name = "status", nullable = false)
+  @Column(name = "status", nullable = false, columnDefinition = "varchar")
   private Status status;
 
   /** sucursal de la caja. */

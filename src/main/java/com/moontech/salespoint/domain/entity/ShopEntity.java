@@ -55,7 +55,7 @@ public class ShopEntity extends AuditableEntity {
 
   /** Propiedad paras el status de la venta. */
   @Enumerated(EnumType.STRING)
-  @Column(name = DatabaseConstant.STATUS_PROPERTY, nullable = false)
+  @Column(name = DatabaseConstant.STATUS_PROPERTY, nullable = false, columnDefinition = "varchar")
   private Status status;
 
   /** Proveedor. */

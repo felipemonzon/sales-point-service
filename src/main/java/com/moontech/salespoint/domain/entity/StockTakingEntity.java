@@ -47,7 +47,7 @@ public class StockTakingEntity extends AuditableEntity {
 
   /** Propiedad para el status del inventario. */
   @Enumerated(EnumType.STRING)
-  @Column(name = DatabaseConstant.STATUS_PROPERTY, nullable = false)
+  @Column(name = DatabaseConstant.STATUS_PROPERTY, nullable = false, columnDefinition = "varchar")
   private Status status;
 
   /** Producto. */

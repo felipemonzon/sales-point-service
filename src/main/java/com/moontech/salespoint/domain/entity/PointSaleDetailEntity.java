@@ -69,6 +69,6 @@ public class PointSaleDetailEntity extends AuditableEntity {
 
   /** Propiedad para el status de la caja. */
   @Enumerated(EnumType.STRING)
-  @Column(name = DatabaseConstant.STATUS_PROPERTY, nullable = false)
+  @Column(name = DatabaseConstant.STATUS_PROPERTY, nullable = false, columnDefinition = "varchar")
   private Status status;
 }

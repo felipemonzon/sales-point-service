@@ -57,7 +57,7 @@ public class DebtEntity extends AuditableEntity {
 
   /** Propiedad paras el status de la deuda. */
   @Enumerated(EnumType.STRING)
-  @Column(name = DatabaseConstant.STATUS_PROPERTY, nullable = false)
+  @Column(name = DatabaseConstant.STATUS_PROPERTY, nullable = false, columnDefinition = "varchar")
   private Status status;
 
   /** Cliente. */
