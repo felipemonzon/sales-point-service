@@ -11,8 +11,8 @@ import com.moontech.salespoint.infrastructure.exception.management.ExceptionMana
 import com.moontech.salespoint.infrastructure.model.request.AuthorizationRequest;
 import com.moontech.salespoint.infrastructure.model.response.LoginResponse;
 import com.moontech.salespoint.infrastructure.security.constant.SecurityConstants;
+import com.moontech.salespoint.infrastructure.security.utility.SecurityUtilities;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -172,12 +172,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             .map(GrantedAuthority::getAuthority)
             .collect(Collectors.joining(","));
     return Jwts.builder()
-        .setSubject(authentication.getName())
+        .subject(authentication.getName())
         .claim(SecurityConstants.AUTHORITIES_KEY, authorities)
-        .signWith(SignatureAlgorithm.HS256, this.signingKey)
-        .setIssuedAt(new Date(System.currentTimeMillis()))
-        .setIssuer(SecurityConstants.ISSUER_TOKEN)
-        .setExpiration(new Date(System.currentTimeMillis() + this.validity * 1000))
+        .signWith(SecurityUtilities.getSigningKey(this.signingKey), Jwts.SIG.HS512)
+        .issuedAt(new Date(System.currentTimeMillis()))
+        .issuer(SecurityConstants.ISSUER_TOKEN)
+        .expiration(new Date(System.currentTimeMillis() + this.validity * 1000))
         .compact();
   }
 

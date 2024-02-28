@@ -9,6 +9,7 @@ import com.moontech.salespoint.infrastructure.exception.custom.ErrorResponse;
 import com.moontech.salespoint.infrastructure.exception.management.ExceptionManagement;
 import com.moontech.salespoint.infrastructure.property.SecurityProperties;
 import com.moontech.salespoint.infrastructure.security.constant.SecurityConstants;
+import com.moontech.salespoint.infrastructure.security.utility.SecurityUtilities;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtParser;
@@ -22,7 +23,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Objects;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -118,9 +119,12 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
    */
   private UsernamePasswordAuthenticationToken getAuthentication(
       final String token, final UserDetails userDetails) {
-    final JwtParser jwtParser = Jwts.parser().setSigningKey(this.securityProperties.getJwtKey());
-    final Jws<Claims> claimsJws = jwtParser.parseClaimsJws(token);
-    final Claims claims = claimsJws.getBody();
+    final JwtParser jwtParser =
+        Jwts.parser()
+            .verifyWith(SecurityUtilities.getSigningKey(this.securityProperties.getJwtKey()))
+            .build();
+    final Jws<Claims> claimsJws = jwtParser.parseSignedClaims(token);
+    final Claims claims = claimsJws.getPayload();
     final Collection<SimpleGrantedAuthority> authorities =
         Arrays.stream(
                 claims.get(SecurityConstants.AUTHORITIES_KEY).toString().split(ApiConstant.COMMA))
@@ -136,8 +140,11 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
    * @return usuario
    */
   private String getUserName(final String token) {
-    final JwtParser jwtParser = Jwts.parser().setSigningKey(this.securityProperties.getJwtKey());
-    final Jws<Claims> claimsJws = jwtParser.parseClaimsJws(token);
-    return claimsJws.getBody().getSubject();
+    final JwtParser jwtParser =
+        Jwts.parser()
+            .verifyWith(SecurityUtilities.getSigningKey(this.securityProperties.getJwtKey()))
+            .build();
+    final Jws<Claims> claimsJws = jwtParser.parseSignedClaims(token);
+    return claimsJws.getPayload().getSubject();
   }
 }

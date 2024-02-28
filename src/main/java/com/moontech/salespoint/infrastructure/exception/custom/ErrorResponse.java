@@ -6,7 +6,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.ZonedDateTimeSerializer;
 import com.moontech.salespoint.commons.constant.FormatConstant;
 import java.time.ZonedDateTime;
 import lombok.*;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Respuesta de error.

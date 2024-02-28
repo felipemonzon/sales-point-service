@@ -1,5 +1,8 @@
 package com.moontech.salespoint.infrastructure.security.utility;
 
+import io.jsonwebtoken.security.Keys;
+import java.nio.charset.StandardCharsets;
+import javax.crypto.SecretKey;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
@@ -17,6 +20,17 @@ public class SecurityUtilities {
    */
   public static String passwordEncoder(final String password) {
     return new BCryptPasswordEncoder().encode(password);
+  }
+
+  /**
+   * Obtiene la llave para el jwt.
+   *
+   * @param secretKey llave secreta
+   * @return llave usada en el jwt
+   */
+  public static SecretKey getSigningKey(String secretKey) {
+    byte[] keyBytes = secretKey.getBytes(StandardCharsets.UTF_8);
+    return Keys.hmacShaKeyFor(keyBytes);
   }
 
   /** Constructor privado. */

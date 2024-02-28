@@ -87,11 +87,11 @@ mvn git-code-format:validate-code-format -Dgcf.globPattern="**/*"
 
 ## Versionado 📌
 
-Usamos [GitHub](https://github.com/felipemonzon/spring-template) para el versionado.
+Usamos [GitHub](https://github.com/felipemonzon/sales-point-service) para el versionado.
 
 ## Autores ✒️
 
-* **Felipe Monzón** - *WEB AND JAVA DEVELOPER*
+* **[Felipe Monzón](https://felipemonzon.github.io/)** - *WEB AND JAVA DEVELOPER*
 
 ## Contribuyendo 🖇
 
