@@ -95,6 +95,24 @@ class AuthenticationTest extends MysqlBaseConfigurationTest {
     log.info("wrong credentials {}", response);
   }
 
+  @Test
+  @DisplayName("POST /login user bad format")
+  void login_with_bad_format_user() throws Exception {
+    String response =
+        this.mockMvc
+            .perform(
+                MockMvcRequestBuilders.post(AUTHENTICATION_BASE_PATH)
+                    .header(TestConstants.UUID_HEADER, String.valueOf(UUID.randomUUID()))
+                    .content(
+                        this.objectMapper.writeValueAsString(
+                            this.getAuthorizationRequest("juanhermosos_ 23", "format 12"))))
+            .andExpect(MockMvcResultMatchers.status().isUnauthorized())
+            .andReturn()
+            .getResponse()
+            .getContentAsString();
+    log.info("wrong credentials {}", response);
+  }
+
   private AuthorizationRequest getAuthorizationRequest(String username, String password) {
     AuthorizationRequest response = new AuthorizationRequest();
     response.setUsername(username);
