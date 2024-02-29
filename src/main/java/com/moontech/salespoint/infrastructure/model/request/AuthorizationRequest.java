@@ -9,7 +9,6 @@ import java.io.Serial;
 import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  * Objeto para autenticación de usuarios.
@@ -19,7 +18,6 @@ import lombok.ToString;
  */
 @Getter
 @Setter
-@ToString
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class AuthorizationRequest implements Serializable {
   /** Serial. */
