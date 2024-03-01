@@ -46,4 +46,12 @@ public interface ProductStockService {
    * @return datos del producto
    */
   ProductEntity findByIdProduct(String idProduct);
+
+  /**
+   * Suma el inventario por compras.
+   *
+   * @param idProduct identificador del producto
+   * @param pieces piezas compradas
+   */
+  void addStock(String idProduct, int pieces);
 }

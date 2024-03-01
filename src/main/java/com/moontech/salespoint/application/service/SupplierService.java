@@ -1,5 +1,6 @@
 package com.moontech.salespoint.application.service;
 
+import com.moontech.salespoint.domain.entity.SupplierEntity;
 import com.moontech.salespoint.infrastructure.model.request.SupplierRequest;
 import com.moontech.salespoint.infrastructure.model.response.SupplierResponse;
 import java.util.List;
@@ -56,4 +57,12 @@ public interface SupplierService {
    * @param id identificador del proveedor
    */
   void delete(String id);
+
+  /**
+   * Consulta un proveedor por su identificador.
+   *
+   * @param id identificador del proveedor
+   * @return datos del proveedor
+   */
+  SupplierEntity searchById(String id);
 }

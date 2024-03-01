@@ -1,12 +1,12 @@
 package com.moontech.salespoint.infrastructure.apis;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.moontech.salespoint.application.service.SellService;
+import com.moontech.salespoint.application.service.ShopService;
 import com.moontech.salespoint.commons.constant.FormatConstant;
 import com.moontech.salespoint.commons.constant.RoutesConstant;
 import com.moontech.salespoint.commons.enums.Status;
-import com.moontech.salespoint.infrastructure.model.request.SellRequest;
-import com.moontech.salespoint.infrastructure.model.response.SellResponse;
+import com.moontech.salespoint.infrastructure.model.request.ShopRequest;
+import com.moontech.salespoint.infrastructure.model.response.ShopResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -20,69 +20,69 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * APIS para ventas.
+ * APIS para compras.
  *
  * @author Felipe Monzón
  * @since 29 feb., 2024
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(RoutesConstant.SELL_BASE_PATH)
-public class SellController {
-  /** Servicio de ventas. */
-  private final SellService sellService;
+@RequestMapping(RoutesConstant.SHOP_BASE_PATH)
+public class ShopController {
+  /** Servicio de compras. */
+  private final ShopService shopService;
 
   /**
-   * API para consultar todas las ventas.
+   * API para consultar todas las compras.
    *
    * @param pageable paginación
-   * @return lista de ventas
+   * @return lista de compras
    */
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  ResponseEntity<List<SellResponse>> retrieve(@PageableDefault Pageable pageable) {
-    return ResponseEntity.ok(this.sellService.retrieve(pageable));
+  ResponseEntity<List<ShopResponse>> retrieve(@PageableDefault Pageable pageable) {
+    return ResponseEntity.ok(this.shopService.retrieve(pageable));
   }
 
   /**
-   * API para consultar venta por folio.
+   * API para consultar compra por folio.
    *
    * @param invoice folio a consultar
-   * @return datos de la venta
+   * @return datos de la compra
    */
   @GetMapping(path = "/{invoice}", produces = MediaType.APPLICATION_JSON_VALUE)
-  ResponseEntity<SellResponse> findById(
+  ResponseEntity<ShopResponse> findById(
       @PathVariable @Valid @Pattern(regexp = FormatConstant.ONLY_NUMBERS_AND_LETTERS_PATTERN)
           String invoice) {
-    return ResponseEntity.ok(this.sellService.findById(invoice));
+    return ResponseEntity.ok(this.shopService.findById(invoice));
   }
 
   /**
-   * API para guardar una venta.
+   * API para guardar una compra.
    *
-   * @param request datos de la venta
-   * @return datos de la venta guardados
+   * @param request datos de la compra
+   * @return datos de la compra guardados
    */
   @PostMapping(
       consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
-  ResponseEntity<SellResponse> save(@RequestBody @Valid SellRequest request) {
-    return ResponseEntity.ok(this.sellService.save(request));
+  ResponseEntity<ShopResponse> save(@RequestBody @Valid ShopRequest request) {
+    return ResponseEntity.ok(this.shopService.save(request));
   }
 
   /**
-   * API para consultar venta por folio.
+   * API para consultar compra por folio.
    *
    * @param pageable paginación
    * @param status status a consultar
-   * @param date fecha de la venta
-   * @return datos de la venta
+   * @param date fecha de la compra
+   * @return datos de la compra
    */
   @GetMapping(path = "/{status}/{date}", produces = MediaType.APPLICATION_JSON_VALUE)
-  ResponseEntity<List<SellResponse>> findByDateAndStatus(
+  ResponseEntity<List<ShopResponse>> findByDateAndStatus(
       @PageableDefault Pageable pageable,
       @PathVariable @Valid @NotNull @JsonFormat(pattern = FormatConstant.SELL_DATE_PATTERN)
           LocalDate date,
       @PathVariable @Valid @NotNull Status status) {
-    return ResponseEntity.ok(this.sellService.findByDateAndStatus(pageable, date, status));
+    return ResponseEntity.ok(this.shopService.findByDateAndStatus(pageable, date, status));
   }
 }

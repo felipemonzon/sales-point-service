@@ -26,7 +26,6 @@ import lombok.ToString;
  */
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class DebtResponse implements Serializable {

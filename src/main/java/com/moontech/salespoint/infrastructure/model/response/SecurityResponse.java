@@ -18,9 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
-@AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class SecurityResponse implements UserDetails {
   /** Identificador del usuario. */

@@ -13,7 +13,7 @@ import com.moontech.salespoint.domain.repository.MethodPaymentRepository;
 import com.moontech.salespoint.domain.repository.SellDetailRepository;
 import com.moontech.salespoint.domain.repository.SellRepository;
 import com.moontech.salespoint.infrastructure.exception.custom.BusinessException;
-import com.moontech.salespoint.infrastructure.model.request.SellDetailRequest;
+import com.moontech.salespoint.infrastructure.model.request.DetailRequest;
 import com.moontech.salespoint.infrastructure.model.request.SellRequest;
 import com.moontech.salespoint.infrastructure.model.response.SellResponse;
 import java.math.BigDecimal;
@@ -82,8 +82,7 @@ public class SellBusiness implements SellService {
   public List<SellResponse> findByDateAndStatus(Pageable pageable, LocalDate date, Status status) {
     int page = Utilities.getCurrentPage(pageable);
     return this.sellRepository
-        .findBySellDateAndStatus(
-            PageRequest.of(page, pageable.getPageSize()), date, status)
+        .findBySellDateAndStatus(PageRequest.of(page, pageable.getPageSize()), date, status)
         .stream()
         .map(this::mapping)
         .toList();
@@ -154,7 +153,7 @@ public class SellBusiness implements SellService {
    * @param request entidad de detalle de ventas
    * @return {@code SellDetailEntity}
    */
-  private SellDetailEntity mapping(SellDetailRequest request, SellEntity sell) {
+  private SellDetailEntity mapping(DetailRequest request, SellEntity sell) {
     SellDetailEntity detail = new SellDetailEntity();
     detail.setPiece(request.getPiece());
     detail.setProduct(this.productStockService.findByIdProduct(request.getProductId()));

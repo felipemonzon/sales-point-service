@@ -43,13 +43,13 @@ public class ShopEntity extends AuditableEntity {
 
   /** Propiedad para la fecha de la compra. */
   @Column(name = "shopping_date", nullable = false)
-  private LocalDateTime sellDate;
+  private LocalDateTime shopDate;
 
   /** Propiedad para el total de la compra. */
   @Column(name = "amount", nullable = false)
-  private BigDecimal amount;
+  private BigDecimal total;
 
-  /** Propiedad para el folio de la venta en linea (transferencia o tarjeta). */
+  /** Propiedad para el folio de la venta en línea (transferencia o tarjeta). */
   @Column(name = "invoice", length = 100)
   private String invoice;
 

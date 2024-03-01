@@ -113,6 +113,25 @@ public class ProductStockBusiness implements ProductStockService {
     this.stockTakingRepository.save(stockEntity);
   }
 
+  /** {@inheritDoc}. */
+  @Override
+  @Transactional(readOnly = true)
+  public void addStock(String idProduct, int pieces) {
+    StockTakingEntity stockEntity = this.searchStock(idProduct);
+    int stock = stockEntity.getStock() + pieces;
+    if (stock > stockEntity.getStockMax()) {
+      log.info(
+          "El inventario excede el stock máximo del producto {}, inventario {}", idProduct, stock);
+      stockEntity.setStatus(Status.OVER_STOCK);
+    } else if (stock > 0) {
+      log.info("Inventario existente del producto {}", idProduct);
+      stockEntity.setStatus(Status.ACTIVE);
+    }
+    stockEntity.setStock(stock);
+    log.info("Se actualiza inventario {}", stockEntity);
+    this.stockTakingRepository.save(stockEntity);
+  }
+
   /**
    * Consulta el inventario por el identificador del producto.
    *

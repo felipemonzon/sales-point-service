@@ -80,6 +80,12 @@ public class SupplierBusiness implements SupplierService {
     this.supplierRepository.save(entity);
   }
 
+  /** {@inheritDoc}. */
+  @Override
+  public SupplierEntity searchById(String id) {
+    return this.validateSupplier(id);
+  }
+
   /**
    * Valida si el proveedor existe.
    *

@@ -17,5 +17,6 @@ public enum Status {
   CLOSED,
   PAYMENT,
   BANK_ROLL,
-  OUT_OF_STOCK
+  OUT_OF_STOCK,
+  OVER_STOCK
 }

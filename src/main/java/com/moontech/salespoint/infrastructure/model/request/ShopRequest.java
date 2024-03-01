@@ -16,18 +16,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Entrada de la API de ventas.
+ * Entrada de la API de compras.
  *
  * @author Felipe Monzón
  * @enterprise moontech
- * @since 09 jan., 2024
+ * @since 29 feb., 2024
  */
 @Getter
 @Setter
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class SellRequest {
-  /** Propiedad para el total de la venta. */
+public class ShopRequest {
+  /** Propiedad para el total de la compra. */
   @NotNull
   @DecimalMin(value = "0.0", inclusive = false)
   private BigDecimal total;
@@ -35,10 +35,10 @@ public class SellRequest {
   /** Propiedad para el folio de la venta en línea (transferencia o tarjeta). */
   private String invoice;
 
-  /** Propiedad para el identificador del cliente. */
+  /** Propiedad para el identificador del proveedor. */
   @NotEmpty
   @Pattern(regexp = FormatConstant.ONLY_NUMBERS_AND_LETTERS_PATTERN)
-  private String customerId;
+  private String supplierId;
 
   /** Propiedad para el identificador del pago. */
   @NotNull private Long methodPaymentId;
@@ -51,6 +51,6 @@ public class SellRequest {
   /** Propiedad para el estatus de la venta. */
   @NotNull private Status status;
 
-  /** Propiedad para el detalle de la venta. */
+  /** Propiedad para el detalle de la compra. */
   @Valid @NotNull private List<DetailRequest> details;
 }

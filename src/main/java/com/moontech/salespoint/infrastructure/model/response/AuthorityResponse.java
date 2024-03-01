@@ -6,7 +6,6 @@ import java.io.Serializable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  * Respuesta para perfiles.
@@ -16,7 +15,6 @@ import lombok.ToString;
  */
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class AuthorityResponse implements Serializable {

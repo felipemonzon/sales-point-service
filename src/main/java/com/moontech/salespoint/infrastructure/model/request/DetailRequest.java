@@ -19,7 +19,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class SellDetailRequest {
+public class DetailRequest {
   /** Propiedad para las unidades vendidas. */
   @Min(1)
   @NotNull
