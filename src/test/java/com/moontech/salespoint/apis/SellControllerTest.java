@@ -84,23 +84,46 @@ class SellControllerTest extends MysqlBaseConfigurationTest {
     log.info("Ventas encontrado en test {}", response);
   }
 
+  @Test
+  @DisplayName("GET /sells search date and status success")
+  void search_by_date_and_status() throws Exception {
+    String response =
+        this.mockMvc
+            .perform(
+                MockMvcRequestBuilders.get(SELL_BASE_PATH + "/PAYMENT/2024-02-28")
+                    .header(TestConstants.UUID_HEADER, String.valueOf(UUID.randomUUID())))
+            .andExpect(MockMvcResultMatchers.status().isOk())
+            .andExpect(
+                MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andReturn()
+            .getResponse()
+            .getContentAsString();
+    log.info("Ventas encontrado en test {}", response);
+  }
+
   @Order(1)
   @ParameterizedTest
   @DisplayName("POST /sells success")
   @CsvSource(
-      value = {"PROfZWswkooMhZ5AL602, 1", "PROfZWswkooMhZ5AL601, 1", "PROfZWswkooMhZ5AL102, 10"})
-  void save_success(String product, long method) throws Exception {
+      value = {
+        "PROfZWswkooMhZ5AL602, 1, 1",
+        "PROfZWswkooMhZ5AL601, 1, 1",
+        "PROfZWswkooMhZ5AL601, 1, 10",
+        "PROfZWswkooMhZ5AL102, 10, 1"
+      })
+  void save_success(String product, long method, int piece) throws Exception {
     this.mockMvc
         .perform(
             MockMvcRequestBuilders.post(SELL_BASE_PATH)
                 .header(TestConstants.UUID_HEADER, String.valueOf(UUID.randomUUID()))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(
-                    this.objectMapper.writeValueAsString(this.getSellRequest(product, method))))
+                    this.objectMapper.writeValueAsString(
+                        this.getSellRequest(product, method, piece))))
         .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
   }
 
-  private SellRequest getSellRequest(String product, long method) {
+  private SellRequest getSellRequest(String product, long method, int piece) {
     SellRequest request = new SellRequest();
     request.setStatus(Status.BANK_ROLL);
     request.setTotal(new BigDecimal("100"));
@@ -108,13 +131,13 @@ class SellControllerTest extends MysqlBaseConfigurationTest {
     request.setPointSaleId("POSLCwJDF7Uq2wY9H600");
     request.setMethodPaymentId(method);
     request.setCustomerId("CUSXXXXXXXXXXXXXXXX1");
-    request.setDetails(Collections.singletonList(this.getSellDetailRequest(product)));
+    request.setDetails(Collections.singletonList(this.getSellDetailRequest(product, piece)));
     return request;
   }
 
-  private SellDetailRequest getSellDetailRequest(String product) {
+  private SellDetailRequest getSellDetailRequest(String product, int piece) {
     SellDetailRequest request = new SellDetailRequest();
-    request.setPiece(1);
+    request.setPiece(piece);
     request.setProductId(product);
     return request;
   }

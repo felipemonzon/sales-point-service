@@ -2,10 +2,12 @@ package com.moontech.salespoint.domain.repository;
 
 import com.moontech.salespoint.commons.enums.Status;
 import com.moontech.salespoint.domain.entity.SellEntity;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  * Repositorio para la venta.
@@ -31,6 +33,9 @@ public interface SellRepository extends JpaRepository<SellEntity, Long> {
    * @param status estatus de la venta
    * @return lista de ventas encontrada
    */
+  @Query(value = "SELECT s FROM sells s WHERE s.status = :status AND DATe(s.sellDate) = :date")
   List<SellEntity> findBySellDateAndStatus(
-      PageRequest pageRequest, LocalDateTime date, Status status);
+      PageRequest pageRequest,
+      @Param(value = "date") LocalDate date,
+      @Param(value = "status") Status status);
 }

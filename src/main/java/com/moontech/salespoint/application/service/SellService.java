@@ -3,7 +3,7 @@ package com.moontech.salespoint.application.service;
 import com.moontech.salespoint.commons.enums.Status;
 import com.moontech.salespoint.infrastructure.model.request.SellRequest;
 import com.moontech.salespoint.infrastructure.model.response.SellResponse;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
 
@@ -36,7 +36,7 @@ public interface SellService {
    * @param status estatus de la venta
    * @return lista de ventas
    */
-  List<SellResponse> findByDateAndStatus(Pageable pageable, LocalDateTime date, Status status);
+  List<SellResponse> findByDateAndStatus(Pageable pageable, LocalDate date, Status status);
 
   /**
    * Guarda una venta.

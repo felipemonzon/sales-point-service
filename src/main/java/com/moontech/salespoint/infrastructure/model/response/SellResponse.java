@@ -11,6 +11,7 @@ import java.util.Set;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Respuesta de salida para la API de ventas.
@@ -35,7 +36,7 @@ public class SellResponse {
   private BigDecimal total;
 
   /** Propiedad para el folio de la venta en línea (transferencia o tarjeta). */
-  private String invoice;
+  private String invoice = StringUtils.EMPTY;
 
   /** Propiedad paras el status de la venta. */
   private Status status;

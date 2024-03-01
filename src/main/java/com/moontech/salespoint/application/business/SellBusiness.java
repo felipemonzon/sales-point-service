@@ -17,6 +17,7 @@ import com.moontech.salespoint.infrastructure.model.request.SellDetailRequest;
 import com.moontech.salespoint.infrastructure.model.request.SellRequest;
 import com.moontech.salespoint.infrastructure.model.response.SellResponse;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
@@ -78,11 +79,11 @@ public class SellBusiness implements SellService {
   /** {@inheritDoc}. */
   @Override
   @Transactional(readOnly = true)
-  public List<SellResponse> findByDateAndStatus(
-      Pageable pageable, LocalDateTime date, Status status) {
+  public List<SellResponse> findByDateAndStatus(Pageable pageable, LocalDate date, Status status) {
     int page = Utilities.getCurrentPage(pageable);
     return this.sellRepository
-        .findBySellDateAndStatus(PageRequest.of(page, pageable.getPageSize()), date, status)
+        .findBySellDateAndStatus(
+            PageRequest.of(page, pageable.getPageSize()), date, status)
         .stream()
         .map(this::mapping)
         .toList();

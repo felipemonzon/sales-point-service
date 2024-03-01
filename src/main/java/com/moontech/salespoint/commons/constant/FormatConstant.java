@@ -5,7 +5,7 @@ package com.moontech.salespoint.commons.constant;
  *
  * @author Felipe Monzón
  * @enterprise moontech
- * @since 30 may., 2023
+ * @since 30 nov., 2024
  */
 public class FormatConstant {
   /** Formato de salida de la respuesta de error. */
@@ -13,6 +13,9 @@ public class FormatConstant {
 
   /** Formato de fecha para deudas. */
   public static final String DEBT_DATE_PATTERN = "yyyy-MM-dd HH:mm";
+
+  /** Formato de fecha para ventas. */
+  public static final String SELL_DATE_PATTERN = "yyyy-MM-dd";
 
   /** Formato para solo letras */
   public static final String ONLY_LETTERS_PATTERN = "^[A-Za-z\\s]+$";

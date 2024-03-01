@@ -1,12 +1,18 @@
 package com.moontech.salespoint.infrastructure.apis;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.moontech.salespoint.application.service.SellService;
 import com.moontech.salespoint.commons.constant.FormatConstant;
 import com.moontech.salespoint.commons.constant.RoutesConstant;
+import com.moontech.salespoint.commons.enums.Status;
 import com.moontech.salespoint.infrastructure.model.request.SellRequest;
 import com.moontech.salespoint.infrastructure.model.response.SellResponse;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -57,5 +63,22 @@ public class SellController {
       produces = MediaType.APPLICATION_JSON_VALUE)
   ResponseEntity<SellResponse> save(@RequestBody @Valid SellRequest request) {
     return ResponseEntity.ok(this.sellService.save(request));
+  }
+
+  /**
+   * API para consultar venta por folio.
+   *
+   * @param pageable paginación
+   * @param status status a consultar
+   * @param date fecha de la venta
+   * @return datos de la venta
+   */
+  @GetMapping(path = "/{status}/{date}", produces = MediaType.APPLICATION_JSON_VALUE)
+  ResponseEntity<List<SellResponse>> findByDateAndStatus(
+      @PageableDefault Pageable pageable,
+      @PathVariable @Valid @NotNull @JsonFormat(pattern = FormatConstant.SELL_DATE_PATTERN)
+          LocalDate date,
+      @PathVariable @Valid @NotNull Status status) {
+    return ResponseEntity.ok(this.sellService.findByDateAndStatus(pageable, date, status));
   }
 }
