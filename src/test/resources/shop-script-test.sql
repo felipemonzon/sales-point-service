@@ -47,6 +47,6 @@ VALUES (700, 'POSLCwJDF7Uq2wY9H700', 'Caja venta', 700, 'felipemonzon2705', '202
         'felipemonzon2705', '2023-12-12 20:21:50', 'ACTIVE');
 
 
-INSERT INTO salesPoint.shopping (id, id_shopping, id_point_sale, shopping_date, amount, status, id_method_payment, invoice, id_supplier, created_user, created_date, last_modified_user, last_modified_date) VALUES (700, 'TXNB6MH1F5zFzzx9HD4d', 700, '2024-02-29 21:59:49', 979.15, 'PAYMENT', 1, null, 2, 'felipemonzon2705', '2024-02-29 21:59:49', 'felipemonzon2705', '2024-02-29 21:59:50');
+INSERT INTO salesPoint.shopping (id, id_shopping, id_point_sale, shopping_date, amount, status, id_method_payment, invoice, id_supplier, created_user, created_date, last_modified_user, last_modified_date) VALUES (700, 'TXNB6MH1F5zFzzx9HD4d', 700, '2024-02-29 21:59:49', 979.15, 'PAYMENT', 1, null, 700, 'felipemonzon2705', '2024-02-29 21:59:49', 'felipemonzon2705', '2024-02-29 21:59:50');
 
 INSERT INTO salesPoint.shopping_details (id_shopping, id_product, piece, subtotal, created_user, created_date, last_modified_user, last_modified_date) VALUES (700, 700, 2, 778.00, 'felipemonzon2705', '2024-02-29 21:57:04', 'felipemonzon2705', '2024-02-29 21:57:04');
