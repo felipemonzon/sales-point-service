@@ -26,7 +26,7 @@
             **/model/**/*,
             **/property/**/*,
             **/exception/custom/**/*,
-            **/Application*
+            **/PosApplication*
         </sonar.coverage.exclusions>
     </properties>
 

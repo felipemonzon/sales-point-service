@@ -40,6 +40,9 @@ public class ShopRequest {
   @Pattern(regexp = FormatConstant.ONLY_NUMBERS_AND_LETTERS_PATTERN)
   private String supplierId;
 
+  /** Propiedad para el estatus de la venta. */
+  @NotNull private Status status;
+
   /** Propiedad para el identificador del pago. */
   @NotNull private Long methodPaymentId;
 
@@ -47,9 +50,6 @@ public class ShopRequest {
   @NotEmpty
   @Pattern(regexp = FormatConstant.ONLY_NUMBERS_AND_LETTERS_PATTERN)
   private String pointSaleId;
-
-  /** Propiedad para el estatus de la venta. */
-  @NotNull private Status status;
 
   /** Propiedad para el detalle de la compra. */
   @Valid @NotNull private List<DetailRequest> details;

@@ -62,7 +62,7 @@ Las pruebas se realizaron con mockito y junit
 
 ## Construido con 🛠️
 
-* Spring boot 3.1.5
+* Spring boot 3.2.3
 * Spring Cloud
 * Java 17
 * Maven

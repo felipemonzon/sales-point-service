@@ -4,7 +4,6 @@ import com.moontech.salespoint.commons.constant.ApiConstant;
 import com.moontech.salespoint.commons.constant.ErrorConstant;
 import com.moontech.salespoint.infrastructure.exception.custom.BusinessException;
 import com.moontech.salespoint.infrastructure.exception.custom.ErrorResponse;
-import com.moontech.salespoint.infrastructure.exception.custom.ForbiddenException;
 import com.moontech.salespoint.infrastructure.exception.custom.NotDataFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import java.time.ZonedDateTime;
@@ -201,28 +200,6 @@ public class ExceptionManagement {
   @ExceptionHandler(BusinessException.class)
   @ResponseStatus(value = HttpStatus.OK)
   public ErrorResponse resolveBusinessException(WebRequest request, BusinessException ex) {
-    ErrorResponse apiError =
-        ErrorResponse.builder()
-            .type(ErrorType.WARN.name())
-            .code(ex.getCode())
-            .message(ex.getMessage())
-            .uuid(request.getHeader(ApiConstant.HEADER_UUID))
-            .build();
-    log.debug(apiError.toString());
-    return apiError;
-  }
-
-  /**
-   * Método para manejar una excepción de tipo {@link ForbiddenException}.
-   *
-   * @param request Objeto Http Servlet de petición.
-   * @param ex Excepción recibida {@link ForbiddenException}
-   * @return errorResponse {@link ErrorResponse} respuesta específica para {@link
-   *     ForbiddenException}.
-   */
-  @ExceptionHandler(ForbiddenException.class)
-  @ResponseStatus(value = HttpStatus.FORBIDDEN)
-  public ErrorResponse resolveForbiddenException(WebRequest request, ForbiddenException ex) {
     ErrorResponse apiError =
         ErrorResponse.builder()
             .type(ErrorType.WARN.name())
