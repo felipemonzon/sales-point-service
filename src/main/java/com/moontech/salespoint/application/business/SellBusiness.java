@@ -99,23 +99,42 @@ public class SellBusiness implements SellService {
         request.getDetails().stream()
             .map(detail -> this.mapping(detail, entity))
             .collect(Collectors.toSet()));
-    this.validateStock(entity.getDetails());
+    this.updateStock(entity.getDetails(), false);
     this.sellDetailRepository.saveAll(entity.getDetails());
     sell.setDetails(entity.getDetails());
     return this.mapping(sell);
+  }
+
+  /** {@inheritDoc}. */
+  @Override
+  @Transactional
+  public void cancel(String idSell) {
+    log.info("Venta a cancelar {}", idSell);
+    SellEntity shop = this.sellRepository.findByIdSell(idSell);
+    shop.setStatus(Status.CANCELED);
+    this.sellRepository.save(shop);
+    this.updateStock(shop.getDetails(), true);
   }
 
   /**
    * Valida el inventario disponible.
    *
    * @param sellDetail detalles de la venta
+   * @param cancel verdadero si es para cancelar
    */
-  private void validateStock(Set<SellDetailEntity> sellDetail) {
+  private void updateStock(Set<SellDetailEntity> sellDetail, boolean cancel) {
     log.info("Valida el inventario de los productos a vender");
+    log.info("Venta cancelada {}", cancel);
     sellDetail.forEach(
-        detail ->
-            this.productStockService.validateStock(
-                detail.getProduct().getIdProduct(), detail.getPiece()));
+        detail -> {
+          if (cancel) {
+            this.productStockService.addStock(
+                detail.getProduct().getIdProduct(), detail.getPiece());
+          } else {
+            this.productStockService.minusStock(
+                detail.getProduct().getIdProduct(), detail.getPiece());
+          }
+        });
   }
 
   /**

@@ -45,4 +45,11 @@ public interface SellService {
    * @return datos de la venta guardada
    */
   SellResponse save(SellRequest request);
+
+  /**
+   * Cancela una venta.
+   *
+   * @param idSell identificador de la venta.
+   */
+  void cancel(String idSell);
 }

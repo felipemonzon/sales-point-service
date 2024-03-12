@@ -94,10 +94,21 @@ public class ShopBusiness implements ShopService {
         request.getDetails().stream()
             .map(detail -> this.mapping(detail, entity))
             .collect(Collectors.toSet()));
-    this.updateStock(entity.getDetails());
+    this.updateStock(entity.getDetails(), false);
     this.shoppingDetailRepository.saveAll(entity.getDetails());
     shop.setDetails(entity.getDetails());
     return this.mapping(shop);
+  }
+
+  /** {@inheritDoc}. */
+  @Override
+  @Transactional
+  public void cancel(String idShop) {
+    log.info("Cancela la compra {}", idShop);
+    ShopEntity shop = this.shopRepository.findByIdShop(idShop);
+    shop.setStatus(Status.CANCELED);
+    this.shopRepository.save(shop);
+    this.updateStock(shop.getDetails(), true);
   }
 
   /**
@@ -105,12 +116,19 @@ public class ShopBusiness implements ShopService {
    *
    * @param shopDetail detalles de la compra
    */
-  private void updateStock(Set<ShoppingDetailEntity> shopDetail) {
+  private void updateStock(Set<ShoppingDetailEntity> shopDetail, boolean cancel) {
     log.info("Actualiza el inventario de los productos comprados");
+    log.info("Compra cancelada {}", cancel);
     shopDetail.forEach(
-        detail ->
+        detail -> {
+          if (cancel) {
+            this.productStockService.minusStock(
+                detail.getProduct().getIdProduct(), detail.getPiece());
+          } else {
             this.productStockService.addStock(
-                detail.getProduct().getIdProduct(), detail.getPiece()));
+                detail.getProduct().getIdProduct(), detail.getPiece());
+          }
+        });
   }
 
   /**

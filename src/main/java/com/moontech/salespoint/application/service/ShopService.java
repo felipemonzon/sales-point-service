@@ -47,4 +47,11 @@ public interface ShopService {
    * @return datos de la compra guardada
    */
   ShopResponse save(ShopRequest request);
+
+  /**
+   * Cancela una compra.
+   *
+   * @param idShop identificador de la compra
+   */
+  void cancel(String idShop);
 }

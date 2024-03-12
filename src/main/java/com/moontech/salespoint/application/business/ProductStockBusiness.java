@@ -98,7 +98,7 @@ public class ProductStockBusiness implements ProductStockService {
   /** {@inheritDoc}. */
   @Override
   @Transactional(readOnly = true)
-  public void validateStock(String idProduct, int pieces) {
+  public void minusStock(String idProduct, int pieces) {
     StockTakingEntity stockEntity = this.searchStock(idProduct);
     int stock = stockEntity.getStock() - pieces;
     if (stock == 0) {

@@ -32,12 +32,12 @@ public interface ProductStockService {
   StockTakingResponse findStockByProduct(String idProduct);
 
   /**
-   * Válida el inventario del producto
+   * Resta el inventario del producto
    *
    * @param idProduct identificador del producto
    * @param pieces piezas a comparar
    */
-  void validateStock(String idProduct, int pieces);
+  void minusStock(String idProduct, int pieces);
 
   /**
    * Válida si el producto existe y trae sus datos.

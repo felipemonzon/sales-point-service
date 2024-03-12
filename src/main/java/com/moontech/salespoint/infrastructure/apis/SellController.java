@@ -15,6 +15,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -84,5 +85,22 @@ public class SellController {
           LocalDate date,
       @PathVariable @Valid @NotNull Status status) {
     return ResponseEntity.ok(this.sellService.findByDateAndStatus(pageable, date, status));
+  }
+
+  /**
+   * Cancela una venta.
+   *
+   * @param idSell identificador de la venta
+   * @return 204 si se cancelo correctamente
+   */
+  @DeleteMapping(path = "/{idSell}", produces = MediaType.APPLICATION_JSON_VALUE)
+  ResponseEntity<Void> cancel(
+      @PathVariable
+          @Valid
+          @NotNull
+          @Pattern(regexp = FormatConstant.ONLY_NUMBERS_AND_LETTERS_PATTERN)
+          String idSell) {
+    this.sellService.cancel(idSell);
+    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
 }
