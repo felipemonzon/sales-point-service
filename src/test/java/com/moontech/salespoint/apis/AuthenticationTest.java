@@ -15,6 +15,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -43,6 +44,7 @@ class AuthenticationTest extends MysqlBaseConfigurationTest {
 
   @Test
   @DisplayName("POST /login success")
+  @Sql(scripts = {"/login-script-test.sql"})
   void login_success() throws Exception {
     String response =
         this.mockMvc
@@ -51,7 +53,7 @@ class AuthenticationTest extends MysqlBaseConfigurationTest {
                     .header(TestConstants.UUID_HEADER, String.valueOf(UUID.randomUUID()))
                     .content(
                         this.objectMapper.writeValueAsString(
-                            this.getAuthorizationRequest("felipemonzon2705", "123456"))))
+                            this.getAuthorizationRequest("felipemonzon2805", "123456"))))
             .andExpect(MockMvcResultMatchers.status().isOk())
             .andReturn()
             .getResponse()
