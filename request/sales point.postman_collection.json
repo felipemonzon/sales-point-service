@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "379a6a58-6d7d-4ebd-ae99-a7cdeef241fa",
 		"name": "sales point",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "8384281"
 	},
 	"item": [
@@ -92,13 +92,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/users/authentication",
+							"raw": "http://localhost:8080/point-sale/users/authentication",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
+								"point-sale",
 								"users",
 								"authentication"
 							],
@@ -445,9 +446,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [
@@ -457,7 +462,18 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8080/users"
+						"url": {
+							"raw": "http://localhost:8080/point-sale/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"point-sale",
+								"users"
+							]
+						}
 					},
 					"response": []
 				},
@@ -535,9 +551,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -556,7 +576,17 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/users"
+						"url": {
+							"raw": "http://localhost:8080/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
 					},
 					"response": []
 				},
@@ -590,9 +620,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [
@@ -611,7 +645,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/users/USRScRxIgmINwH4es3pQ"
+						"url": {
+							"raw": "http://localhost:8080/users/USRScRxIgmINwH4es3pQ",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"USRScRxIgmINwH4es3pQ"
+							]
+						}
 					},
 					"response": []
 				},
@@ -645,9 +690,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -666,7 +715,17 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/users"
+						"url": {
+							"raw": "http://localhost:8080/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
 					},
 					"response": []
 				},
@@ -736,9 +795,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [
@@ -748,7 +811,18 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8080/users/active"
+						"url": {
+							"raw": "http://localhost:8080/users/active",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"active"
+							]
+						}
 					},
 					"response": []
 				}
@@ -775,9 +849,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "DELETE",
 						"header": [
@@ -787,7 +865,18 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8080/enterprises/ENTearfMBDrVabSCAb7u"
+						"url": {
+							"raw": "http://localhost:8080/enterprises/ENTearfMBDrVabSCAb7u",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"enterprises",
+								"ENTearfMBDrVabSCAb7u"
+							]
+						}
 					},
 					"response": []
 				},
@@ -821,9 +910,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "DELETE",
 						"header": [
@@ -833,7 +926,18 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8080/enterprises/ENTearfMBDrVabSCAb7"
+						"url": {
+							"raw": "http://localhost:8080/enterprises/ENTearfMBDrVabSCAb7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"enterprises",
+								"ENTearfMBDrVabSCAb7"
+							]
+						}
 					},
 					"response": []
 				},
@@ -866,9 +970,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [
@@ -887,7 +995,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/enterprises/ENT6734htdge362xnhd3"
+						"url": {
+							"raw": "http://localhost:8080/enterprises/ENT6734htdge362xnhd3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"enterprises",
+								"ENT6734htdge362xnhd3"
+							]
+						}
 					},
 					"response": []
 				},
@@ -950,9 +1069,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -971,7 +1094,17 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/enterprises"
+						"url": {
+							"raw": "http://localhost:8080/enterprises",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"enterprises"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1024,9 +1157,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [
@@ -1036,7 +1173,17 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8080/enterprises"
+						"url": {
+							"raw": "http://localhost:8080/enterprises",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"enterprises"
+							]
+						}
 					},
 					"response": []
 				}
@@ -1080,9 +1227,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [
@@ -1092,7 +1243,18 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8080/method/payment"
+						"url": {
+							"raw": "http://localhost:8080/method/payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"method",
+								"payment"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1128,9 +1290,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -1149,7 +1315,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/method/payment"
+						"url": {
+							"raw": "http://localhost:8080/method/payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"method",
+								"payment"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1186,9 +1363,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -1207,7 +1388,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/method/payment"
+						"url": {
+							"raw": "http://localhost:8080/method/payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"method",
+								"payment"
+							]
+						}
 					},
 					"response": []
 				}
@@ -1255,9 +1447,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [
@@ -1267,7 +1463,17 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8080/pointSales"
+						"url": {
+							"raw": "http://localhost:8080/pointSales",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pointSales"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1308,9 +1514,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -1329,7 +1539,17 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/pointSales"
+						"url": {
+							"raw": "http://localhost:8080/pointSales",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pointSales"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1363,9 +1583,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -1384,7 +1608,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/pointSales/withdrawal"
+						"url": {
+							"raw": "http://localhost:8080/pointSales/withdrawal",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pointSales",
+								"withdrawal"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1418,9 +1653,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -1439,7 +1678,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/pointSales/close"
+						"url": {
+							"raw": "http://localhost:8080/pointSales/close",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pointSales",
+								"close"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1487,9 +1737,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -1508,7 +1762,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/pointSales/open"
+						"url": {
+							"raw": "http://localhost:8080/pointSales/open",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pointSales",
+								"open"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1542,9 +1807,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -1563,7 +1832,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/pointSales/open"
+						"url": {
+							"raw": "http://localhost:8080/pointSales/open",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pointSales",
+								"open"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1612,9 +1892,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -1633,7 +1917,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/pointSales/close"
+						"url": {
+							"raw": "http://localhost:8080/pointSales/close",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pointSales",
+								"close"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1655,9 +1950,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [
@@ -1676,7 +1975,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/pointSales/POSUeyeXxp4KG7qBWcLG"
+						"url": {
+							"raw": "http://localhost:8080/pointSales/POSUeyeXxp4KG7qBWcLG",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pointSales",
+								"POSUeyeXxp4KG7qBWcLG"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1698,9 +2008,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "DELETE",
 						"header": [
@@ -1710,7 +2024,18 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8080/pointSales/POSUeyeXxp4KG7qBWcLG"
+						"url": {
+							"raw": "http://localhost:8080/pointSales/POSUeyeXxp4KG7qBWcLG",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pointSales",
+								"POSUeyeXxp4KG7qBWcLG"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1744,9 +2069,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -1765,7 +2094,17 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/pointSales"
+						"url": {
+							"raw": "http://localhost:8080/pointSales",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pointSales"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1813,9 +2152,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -1834,7 +2177,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/pointSales/withdrawal"
+						"url": {
+							"raw": "http://localhost:8080/pointSales/withdrawal",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pointSales",
+								"withdrawal"
+							]
+						}
 					},
 					"response": []
 				},
@@ -1882,9 +2236,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [
@@ -1903,7 +2261,19 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/pointSales/withdrawal/WIDPW5igOEKWT1LXK1Ml"
+						"url": {
+							"raw": "http://localhost:8080/pointSales/withdrawal/WIDPW5igOEKWT1LXK1Ml",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pointSales",
+								"withdrawal",
+								"WIDPW5igOEKWT1LXK1Ml"
+							]
+						}
 					},
 					"response": []
 				}
@@ -1952,9 +2322,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [
@@ -1970,7 +2344,17 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8080/profiles"
+						"url": {
+							"raw": "http://localhost:8080/profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profiles"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2014,9 +2398,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [
@@ -2032,7 +2420,18 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8080/profiles/ADMIN"
+						"url": {
+							"raw": "http://localhost:8080/profiles/ADMIN",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profiles",
+								"ADMIN"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2075,9 +2474,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -2102,7 +2505,17 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/profiles"
+						"url": {
+							"raw": "http://localhost:8080/profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profiles"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2125,9 +2538,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [
@@ -2152,7 +2569,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/profiles/52"
+						"url": {
+							"raw": "http://localhost:8080/profiles/52",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profiles",
+								"52"
+							]
+						}
 					},
 					"response": []
 				}
@@ -2192,9 +2620,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -2219,7 +2651,17 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/customers"
+						"url": {
+							"raw": "http://localhost:8080/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2271,9 +2713,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -2298,7 +2744,17 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/customers"
+						"url": {
+							"raw": "http://localhost:8080/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2321,9 +2777,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [
@@ -2348,7 +2808,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/customers/CUShhYdaTwUbZAK2kWDQ"
+						"url": {
+							"raw": "http://localhost:8080/customers/CUShhYdaTwUbZAK2kWDQ",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								"CUShhYdaTwUbZAK2kWDQ"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2382,9 +2853,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [
@@ -2409,7 +2884,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/customers/CUShhYdaTwUbZAK2kWD"
+						"url": {
+							"raw": "http://localhost:8080/customers/CUShhYdaTwUbZAK2kWD",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								"CUShhYdaTwUbZAK2kWD"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2461,9 +2947,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [
@@ -2479,7 +2969,17 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8080/customers"
+						"url": {
+							"raw": "http://localhost:8080/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers"
+							]
+						}
 					},
 					"response": []
 				}
@@ -2543,9 +3043,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [
@@ -2561,7 +3065,18 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8080/suppliers"
+						"url": {
+							"raw": "http://localhost:8080/point-sale/suppliers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"point-sale",
+								"suppliers"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2636,9 +3151,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -2663,7 +3182,17 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/suppliers"
+						"url": {
+							"raw": "http://localhost:8080/suppliers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"suppliers"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2702,9 +3231,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [
@@ -2729,7 +3262,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/suppliers/SUP12345678902134578"
+						"url": {
+							"raw": "http://localhost:8080/suppliers/SUP12345678902134578",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"suppliers",
+								"SUP12345678902134578"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2768,9 +3312,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "DELETE",
 						"header": [
@@ -2786,7 +3334,18 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8080/suppliers/1"
+						"url": {
+							"raw": "http://localhost:8080/suppliers/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"suppliers",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2838,9 +3397,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "DELETE",
 						"header": [
@@ -2856,7 +3419,18 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8080/suppliers/0"
+						"url": {
+							"raw": "http://localhost:8080/suppliers/0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"suppliers",
+								"0"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2908,9 +3482,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [
@@ -2935,7 +3513,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/suppliers/SUP1234567890213457"
+						"url": {
+							"raw": "http://localhost:8080/suppliers/SUP1234567890213457",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"suppliers",
+								"SUP1234567890213457"
+							]
+						}
 					},
 					"response": []
 				},
@@ -2985,9 +3574,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -3012,7 +3605,17 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/suppliers"
+						"url": {
+							"raw": "http://localhost:8080/suppliers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"suppliers"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3062,9 +3665,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -3089,7 +3696,17 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/suppliers"
+						"url": {
+							"raw": "http://localhost:8080/suppliers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"suppliers"
+							]
+						}
 					},
 					"response": []
 				}
@@ -3156,9 +3773,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -3183,7 +3804,17 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/debts"
+						"url": {
+							"raw": "http://localhost:8080/debts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"debts"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3208,9 +3839,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "DELETE",
 						"header": [
@@ -3226,7 +3861,18 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8080/debts/DEBLRAHdYd2chxGAFMRX"
+						"url": {
+							"raw": "http://localhost:8080/debts/DEBLRAHdYd2chxGAFMRX",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"debts",
+								"DEBLRAHdYd2chxGAFMRX"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3287,9 +3933,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [
@@ -3314,7 +3964,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/debts/DEBLsKVpkafz97V3jBno"
+						"url": {
+							"raw": "http://localhost:8080/debts/DEBLsKVpkafz97V3jBno",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"debts",
+								"DEBLsKVpkafz97V3jBno"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3366,9 +4027,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [
@@ -3378,7 +4043,17 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8080/debts"
+						"url": {
+							"raw": "http://localhost:8080/debts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"debts"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3430,9 +4105,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [
@@ -3442,7 +4121,19 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8080/debts/customer/CUSXXXXXXXXXXXXXXXX1"
+						"url": {
+							"raw": "http://localhost:8080/debts/customer/CUSXXXXXXXXXXXXXXXX1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"debts",
+								"customer",
+								"CUSXXXXXXXXXXXXXXXX1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3494,9 +4185,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [
@@ -3506,7 +4201,19 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8080/debts/DEBQWiNdC4iQX4P6jj2K/payments"
+						"url": {
+							"raw": "http://localhost:8080/debts/DEBQWiNdC4iQX4P6jj2K/payments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"debts",
+								"DEBQWiNdC4iQX4P6jj2K",
+								"payments"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3558,9 +4265,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [
@@ -3570,7 +4281,20 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8080/debts/customer/CUSXXXXXXXXXXXXXXXX1/ACTIVE"
+						"url": {
+							"raw": "http://localhost:8080/debts/customer/CUSXXXXXXXXXXXXXXXX1/ACTIVE",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"debts",
+								"customer",
+								"CUSXXXXXXXXXXXXXXXX1",
+								"ACTIVE"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3620,9 +4344,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [
@@ -3632,7 +4360,20 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8080/debts/customer/CUSXXXXXXXXXXXXXXXX1/CANCELED"
+						"url": {
+							"raw": "http://localhost:8080/debts/customer/CUSXXXXXXXXXXXXXXXX1/CANCELED",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"debts",
+								"customer",
+								"CUSXXXXXXXXXXXXXXXX1",
+								"CANCELED"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3677,9 +4418,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -3704,7 +4449,17 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/debts"
+						"url": {
+							"raw": "http://localhost:8080/debts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"debts"
+							]
+						}
 					},
 					"response": []
 				}
@@ -3751,9 +4506,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [
@@ -3769,7 +4528,18 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8080/products/type"
+						"url": {
+							"raw": "http://localhost:8080/products/type",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"type"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3794,9 +4564,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [
@@ -3821,7 +4595,19 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/products/type/1"
+						"url": {
+							"raw": "http://localhost:8080/products/type/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"type",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3875,9 +4661,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [
@@ -3893,7 +4683,17 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8080/products"
+						"url": {
+							"raw": "http://localhost:8080/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products"
+							]
+						}
 					},
 					"response": []
 				},
@@ -3946,9 +4746,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -3999,7 +4803,17 @@
 								}
 							]
 						},
-						"url": "http://localhost:8080/products"
+						"url": {
+							"raw": "http://localhost:8080/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products"
+							]
+						}
 					},
 					"response": []
 				},
@@ -4023,9 +4837,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PUT",
 						"header": [
@@ -4076,7 +4894,18 @@
 								}
 							]
 						},
-						"url": "http://localhost:8080/products/PROqNlEDgGtXyiSkbRTi"
+						"url": {
+							"raw": "http://localhost:8080/products/PROqNlEDgGtXyiSkbRTi",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"PROqNlEDgGtXyiSkbRTi"
+							]
+						}
 					},
 					"response": []
 				}
@@ -4136,9 +4965,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [
@@ -4154,7 +4987,18 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8080/products/stock"
+						"url": {
+							"raw": "http://localhost:8080/products/stock",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"stock"
+							]
+						}
 					},
 					"response": []
 				},
@@ -4208,9 +5052,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -4235,7 +5083,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/products/stock"
+						"url": {
+							"raw": "http://localhost:8080/products/stock",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"stock"
+							]
+						}
 					},
 					"response": []
 				},
@@ -4292,9 +5151,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [
@@ -4319,7 +5182,19 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/products/stock/PROqNlEDgGtXyiSkbRTi"
+						"url": {
+							"raw": "http://localhost:8080/products/stock/PROqNlEDgGtXyiSkbRTi",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"stock",
+								"PROqNlEDgGtXyiSkbRTi"
+							]
+						}
 					},
 					"response": []
 				}
@@ -4375,9 +5250,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [
@@ -4387,7 +5266,17 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8080/payments"
+						"url": {
+							"raw": "http://localhost:8080/payments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"payments"
+							]
+						}
 					},
 					"response": []
 				},
@@ -4437,9 +5326,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [
@@ -4449,7 +5342,18 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8080/payments/PAYaBbLTbo0W2xAZWNMP"
+						"url": {
+							"raw": "http://localhost:8080/payments/PAYaBbLTbo0W2xAZWNMP",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"payments",
+								"PAYaBbLTbo0W2xAZWNMP"
+							]
+						}
 					},
 					"response": []
 				},
@@ -4502,9 +5406,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -4523,7 +5431,17 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/payments"
+						"url": {
+							"raw": "http://localhost:8080/payments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"payments"
+							]
+						}
 					},
 					"response": []
 				}
@@ -4578,9 +5496,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [
@@ -4590,7 +5512,97 @@
 								"type": "text"
 							}
 						],
-						"url": "http://localhost:8080/sells"
+						"url": {
+							"raw": "http://localhost:8080/point-sale/sells",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"point-sale",
+								"sells"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sell date and status succes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('sell schema is valid', function() {",
+									"    const debt = getData();",
+									"    pm.expect(debt[0].id_sell).to.be.a(\"string\");",
+									"    pm.expect(debt[0].sell_date).to.be.a(\"string\");",
+									"    pm.expect(debt[0].total).to.be.a(\"number\");",
+									"    pm.expect(debt[0].customer).to.be.a(\"object\");",
+									"    pm.expect(debt[0].method_payment).to.be.a(\"object\");",
+									"});",
+									"",
+									"pm.test('sell response not empty dataº', function() {",
+									"    const debt = getData();",
+									"    pm.expect(debt).not.be.empty;",
+									"    pm.expect(debt[0].id_sell).not.be.empty;",
+									"    pm.expect(debt[0].sell_date).not.be.empty;",
+									"    pm.expect(debt[0].total).not.be.null;;",
+									"    pm.expect(debt[0].customer).not.be.null;",
+									"    pm.expect(debt[0].method_payment).not.be.null;;",
+									"});",
+									"",
+									"tests[\"Body has id_sell\"] = responseBody.has(\"id_sell\");",
+									"tests[\"Body has sell_date\"] = responseBody.has(\"sell_date\");",
+									"tests[\"Body has total\"] = responseBody.has(\"total\");",
+									"tests[\"Body has status\"] = responseBody.has(\"status\");",
+									"tests[\"Body has customer\"] = responseBody.has(\"customer\");",
+									"tests[\"Body has method_payment\"] = responseBody.has(\"method_payment\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/point-sale/sells/PAYMENT/2024-01-25",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"point-sale",
+								"sells",
+								"PAYMENT",
+								"2024-01-25"
+							]
+						}
 					},
 					"response": []
 				},
@@ -4643,9 +5655,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": {
-								"token": "{{token}}"
-							}
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -4664,7 +5680,368 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/sells"
+						"url": {
+							"raw": "http://localhost:8080/point-sale/sells",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"point-sale",
+								"sells"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sell cancel succes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/point-sale/sells/TXNcc5D3U1fQhKJA8KLX",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"point-sale",
+								"sells",
+								"TXNcc5D3U1fQhKJA8KLX"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "shops",
+			"item": [
+				{
+					"name": "shop retrieve succes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('shop schema is valid', function() {",
+									"    const shop = getData();",
+									"    pm.expect(shop[0].id_shop).to.be.a(\"string\");",
+									"    pm.expect(shop[0].shop_date).to.be.a(\"string\");",
+									"    pm.expect(shop[0].total).to.be.a(\"number\");",
+									"    pm.expect(shop[0].supplier).to.be.a(\"object\");",
+									"    pm.expect(shop[0].method_payment).to.be.a(\"object\");",
+									"});",
+									"",
+									"pm.test('shop response not empty dataº', function() {",
+									"    const shop = getData();",
+									"    pm.expect(shop).not.be.empty;",
+									"    pm.expect(shop[0].id_shop).not.be.empty;",
+									"    pm.expect(shop[0].shop_date).not.be.empty;",
+									"    pm.expect(shop[0].total).not.be.null;;",
+									"    pm.expect(shop[0].supplier).not.be.null;",
+									"    pm.expect(shop[0].method_payment).not.be.null;;",
+									"});",
+									"",
+									"tests[\"Body has id_shop\"] = responseBody.has(\"id_shop\");",
+									"tests[\"Body has shop_date\"] = responseBody.has(\"shop_date\");",
+									"tests[\"Body has total\"] = responseBody.has(\"total\");",
+									"tests[\"Body has status\"] = responseBody.has(\"status\");",
+									"tests[\"Body has supplier\"] = responseBody.has(\"supplier\");",
+									"tests[\"Body has method_payment\"] = responseBody.has(\"method_payment\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/point-sale/shops",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"point-sale",
+								"shops"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "shop date and status succes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('shop schema is valid', function() {",
+									"    const shop = getData();",
+									"    pm.expect(shop[0].id_shop).to.be.a(\"string\");",
+									"    pm.expect(shop[0].shop_date).to.be.a(\"string\");",
+									"    pm.expect(shop[0].total).to.be.a(\"number\");",
+									"    pm.expect(shop[0].supplier).to.be.a(\"object\");",
+									"    pm.expect(shop[0].method_payment).to.be.a(\"object\");",
+									"});",
+									"",
+									"pm.test('shop response not empty dataº', function() {",
+									"    const shop = getData();",
+									"    pm.expect(shop).not.be.empty;",
+									"    pm.expect(shop[0].id_shop).not.be.empty;",
+									"    pm.expect(shop[0].shop_date).not.be.empty;",
+									"    pm.expect(shop[0].total).not.be.null;;",
+									"    pm.expect(shop[0].supplier).not.be.null;",
+									"    pm.expect(shop[0].method_payment).not.be.null;;",
+									"});",
+									"",
+									"tests[\"Body has id_shop\"] = responseBody.has(\"id_shop\");",
+									"tests[\"Body has shop_date\"] = responseBody.has(\"shop_date\");",
+									"tests[\"Body has total\"] = responseBody.has(\"total\");",
+									"tests[\"Body has status\"] = responseBody.has(\"status\");",
+									"tests[\"Body has supplier\"] = responseBody.has(\"supplier\");",
+									"tests[\"Body has method_payment\"] = responseBody.has(\"method_payment\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/point-sale/shops/PAYMENT/2024-02-29",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"point-sale",
+								"shops",
+								"PAYMENT",
+								"2024-02-29"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "shop save succes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const getData = () => pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test('Shop supplier schema is valid', function() {",
+									"    const shop = getData();",
+									"    pm.expect(shop.id_shop).to.be.a(\"string\");",
+									"    pm.expect(shop.shop_date).to.be.a(\"string\");",
+									"    pm.expect(shop.total).to.be.a(\"number\");",
+									"    pm.expect(shop.supplier).to.be.a(\"object\");",
+									"});",
+									"",
+									"pm.test('shop supplier response not empty dataº', function() {",
+									"    const shop = getData();",
+									"    pm.expect(shop).not.be.empty;",
+									"    pm.expect(shop.id_shop).not.be.empty;",
+									"    pm.expect(shop.shop_date).not.be.empty;",
+									"    pm.expect(shop.total).not.be.null;;",
+									"    pm.expect(shop.supplier).not.be.null;",
+									"});",
+									"",
+									"",
+									"tests[\"Body has id_shop\"] = responseBody.has(\"id_shop\");",
+									"tests[\"Body has shop_date\"] = responseBody.has(\"shop_date\");",
+									"tests[\"Body has total\"] = responseBody.has(\"total\");",
+									"tests[\"Body has status\"] = responseBody.has(\"status\");",
+									"tests[\"Body has point_sale\"] = responseBody.has(\"point_sale\");",
+									"tests[\"Body has details\"] = responseBody.has(\"details\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"total\": {{$randomPrice}},\n    \"supplier_id\": \"SUPu4Rth7wWQT3CI07HJ\",\n    \"method_payment_id\": 1,\n    \"point_sale_id\": \"POSLCwJDF7Uq2wY9HbI1\",\n    \"status\": \"PAYMENT\",\n    \"details\": [{\n            \"piece\": 2,\n            \"amount\": 58.89,\n            \"product_id\": \"PROqNlEDgGtXyiSkbRTi\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/point-sale/shops",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"point-sale",
+								"shops"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "shop cancel succes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "uuid",
+								"value": "{{$randomUUID}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/point-sale/shops/TXNQi8qTdM43G0UdV9Pg",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"point-sale",
+								"shops",
+								"TXNQi8qTdM43G0UdV9Pg"
+							]
+						}
 					},
 					"response": []
 				}
@@ -4673,9 +6050,13 @@
 	],
 	"auth": {
 		"type": "bearer",
-		"bearer": {
-			"token": "{{token}}"
-		}
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
 	},
 	"event": [
 		{

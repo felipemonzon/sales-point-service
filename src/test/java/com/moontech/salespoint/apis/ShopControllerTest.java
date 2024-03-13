@@ -5,12 +5,10 @@ import com.moontech.salespoint.commons.enums.Status;
 import com.moontech.salespoint.configuration.MysqlBaseConfigurationTest;
 import com.moontech.salespoint.configuration.TestConstants;
 import com.moontech.salespoint.infrastructure.model.request.DetailRequest;
-import com.moontech.salespoint.infrastructure.model.request.SellRequest;
+import com.moontech.salespoint.infrastructure.model.request.ShopRequest;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.UUID;
-
-import com.moontech.salespoint.infrastructure.model.request.ShopRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -123,6 +121,19 @@ class ShopControllerTest extends MysqlBaseConfigurationTest {
                     this.objectMapper.writeValueAsString(
                         this.getShopRequest(product, method, piece))))
         .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
+  }
+
+  @Test
+  @DisplayName("GET /shops cancel success")
+  void cancel() throws Exception {
+    this.mockMvc
+        .perform(
+            MockMvcRequestBuilders.delete(SHOP_BASE_PATH + "/TXNB6MH1F5zFzzx9HD4d")
+                .header(TestConstants.UUID_HEADER, String.valueOf(UUID.randomUUID())))
+        .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+        .andReturn()
+        .getResponse()
+        .getContentAsString();
   }
 
   private ShopRequest getShopRequest(String product, long method, int piece) {

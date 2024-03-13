@@ -123,6 +123,19 @@ class SellControllerTest extends MysqlBaseConfigurationTest {
         .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
   }
 
+  @Test
+  @DisplayName("GET /sells cancel success")
+  void cancel() throws Exception {
+    this.mockMvc
+        .perform(
+            MockMvcRequestBuilders.delete(SELL_BASE_PATH + "/TXNpKLGQL6JyUOXlQIIH")
+                .header(TestConstants.UUID_HEADER, String.valueOf(UUID.randomUUID())))
+        .andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+        .andReturn()
+        .getResponse()
+        .getContentAsString();
+  }
+
   private SellRequest getSellRequest(String product, long method, int piece) {
     SellRequest request = new SellRequest();
     request.setStatus(Status.BANK_ROLL);

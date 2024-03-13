@@ -101,12 +101,9 @@ public class ProductStockBusiness implements ProductStockService {
   public void minusStock(String idProduct, int pieces) {
     StockTakingEntity stockEntity = this.searchStock(idProduct);
     int stock = stockEntity.getStock() - pieces;
-    if (stock == 0) {
+    if (stock <= 0) {
       log.info("Se agoto el inventario del producto {}", idProduct);
       stockEntity.setStatus(Status.OUT_OF_STOCK);
-    } else if (stock < 0) {
-      log.info("Inventario insuficiente del producto {}, inventario {}", idProduct, stock);
-      throw new BusinessException(ErrorConstant.DATA_NOT_EXIST, ErrorConstant.PRODUCT_OUT_STOCK);
     }
     stockEntity.setStock(stock);
     log.info("Se actualiza inventario {}", stockEntity);
