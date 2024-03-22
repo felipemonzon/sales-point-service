@@ -15,7 +15,6 @@ import java.util.Set;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  * Respuesta de las deudas del cliente.

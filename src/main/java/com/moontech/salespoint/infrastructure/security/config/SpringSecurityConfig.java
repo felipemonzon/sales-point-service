@@ -52,7 +52,8 @@ public class SpringSecurityConfig {
                         xss ->
                             xss.headerValue(
                                 XXssProtectionHeaderWriter.HeaderValue.ENABLED_MODE_BLOCK))
-                    .contentSecurityPolicy(cps -> cps.policyDirectives("default-src 'self' https://*")))
+                    .contentSecurityPolicy(
+                        cps -> cps.policyDirectives("default-src 'self' https://*")))
         .authorizeHttpRequests(
             authorize ->
                 authorize.requestMatchers(WHITELIST).permitAll().anyRequest().authenticated())

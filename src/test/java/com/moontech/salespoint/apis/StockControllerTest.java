@@ -52,7 +52,7 @@ class StockControllerTest extends MysqlBaseConfigurationTest {
     String response =
         this.mockMvc
             .perform(
-                MockMvcRequestBuilders.get(STOCK_BASE_PATH+ "?page=1")
+                MockMvcRequestBuilders.get(STOCK_BASE_PATH + "?page=1")
                     .header(TestConstants.UUID_HEADER, String.valueOf(UUID.randomUUID())))
             .andExpect(MockMvcResultMatchers.status().isOk())
             .andExpect(
