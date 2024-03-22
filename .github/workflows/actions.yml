@@ -37,7 +37,7 @@ jobs:
       - name: Maven Build
         run: mvn -B -DskipTests package -Djasypt.encryptor.password=felipemonzon -Dspring.profiles.active=develop --file pom.xml
       - name: Test
-        run: mvn -B -Djasypt.encryptor.password=felipemonzon -Dmaven.test.failure.ignore=true -Dspring.profiles.active=develop test
+        run: mvn -B -Djasypt.encryptor.password=felipemonzon -Dspring.profiles.active=test test
       - name: Cache SonarCloud packages
         uses: actions/cache@v4.0.0
         with:
