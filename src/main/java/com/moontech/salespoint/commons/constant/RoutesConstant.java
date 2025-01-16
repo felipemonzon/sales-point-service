@@ -75,6 +75,9 @@ public abstract class RoutesConstant {
   /** Ruta base para las ventas. */
   public static final String SELL_BASE_PATH = "${api.uri.domain.sells}";
 
+  /** Ruta base para el menú de la aplicación. */
+  public static final String MENU_BASE_PATH = "${api.uri.domain.menu}";
+
   /** Constructor de la class. */
   private RoutesConstant() {}
 }

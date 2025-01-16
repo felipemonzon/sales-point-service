@@ -132,8 +132,8 @@ public class ErrorConstant {
   public static final String PRODUCT_STOCK_NOT_EXIST =
       "El producto no ha sido registrado en el inventario";
 
-  /** Mensaje para producto agotado en el inventario. */
-  public static final String PRODUCT_OUT_STOCK = "El producto esta agotado";
+  /** Mensaje para folio requerido. */
+  public static final String INVOICE_IS_REQUIRED = "El folio es requerido";
 
   /** Constructor privado. */
   private ErrorConstant() {}

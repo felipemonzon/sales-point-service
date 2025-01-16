@@ -6,6 +6,7 @@ import com.moontech.salespoint.application.service.ProductStockService;
 import com.moontech.salespoint.application.service.SellService;
 import com.moontech.salespoint.commons.constant.ErrorConstant;
 import com.moontech.salespoint.commons.enums.Identifier;
+import com.moontech.salespoint.commons.enums.MethodPaymentEnum;
 import com.moontech.salespoint.commons.enums.Status;
 import com.moontech.salespoint.commons.utilities.Utilities;
 import com.moontech.salespoint.domain.entity.*;
@@ -145,11 +146,12 @@ public class SellBusiness implements SellService {
    */
   private SellEntity mapping(SellRequest request) {
     SellEntity entity = new SellEntity();
+    entity.setMethodPayment(this.methodPayment(request.getMethodPaymentId()));
+    this.validateInvoice(entity.getMethodPayment());
+    entity.setInvoice(request.getInvoice());
     entity.setStatus(request.getStatus());
     entity.setSellDate(LocalDateTime.now());
     entity.setIdSell(Utilities.generateRandomId(Identifier.TRANSACTIONS.getCode()));
-    entity.setMethodPayment(this.methodPayment(request.getMethodPaymentId()));
-    entity.setInvoice(request.getInvoice());
     entity.setTotal(request.getTotal());
     entity.setCustomer(this.customerService.searchById(request.getCustomerId()));
     entity.setPointSale(this.pointSaleService.findById(request.getPointSaleId()));
@@ -198,5 +200,17 @@ public class SellBusiness implements SellService {
             () ->
                 new BusinessException(
                     ErrorConstant.DATA_NOT_EXIST, ErrorConstant.METHOD_PAYMENT_NOT_FOUND_MESSAGE));
+  }
+
+  /**
+   * Válida si el método de pago es pago con tarjeta.
+   *
+   * @param methodPayment método de pago
+   */
+  private void validateInvoice(MethodPaymentEntity methodPayment) {
+    if (!methodPayment.getDescription().equalsIgnoreCase(MethodPaymentEnum.CASH.getDescription())) {
+      throw new BusinessException(
+          ErrorConstant.BAD_REQUEST_CODE, ErrorConstant.INVOICE_IS_REQUIRED);
+    }
   }
 }

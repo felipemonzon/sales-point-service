@@ -21,8 +21,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.header.writers.XXssProtectionHeaderWriter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
 /**
  * Configuración para spring security.
@@ -45,6 +43,23 @@ public class SpringSecurityConfig {
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     return http.cors(AbstractHttpConfigurer::disable)
         .csrf(AbstractHttpConfigurer::disable)
+        .cors(
+            cors ->
+                cors.configurationSource(
+                    request -> {
+                      CorsConfiguration config = new CorsConfiguration();
+                      config.setAllowedOrigins(this.securityProperties.getCors());
+                      config.addAllowedHeader(CorsConfiguration.ALL);
+                      config.setAllowedMethods(
+                          Arrays.asList(
+                              HttpMethod.POST.name(),
+                              HttpMethod.GET.name(),
+                              HttpMethod.PUT.name(),
+                              HttpMethod.DELETE.name(),
+                              HttpMethod.OPTIONS.name()));
+                      config.setExposedHeaders(Collections.singletonList(CorsConfiguration.ALL));
+                      return config;
+                    }))
         .headers(
             headers ->
                 headers
@@ -52,8 +67,9 @@ public class SpringSecurityConfig {
                         xss ->
                             xss.headerValue(
                                 XXssProtectionHeaderWriter.HeaderValue.ENABLED_MODE_BLOCK))
-                    .contentSecurityPolicy(
-                        cps -> cps.policyDirectives("default-src 'self' https://*")))
+                    .contentSecurityPolicy(cps -> cps.policyDirectives("default-src 'self'"))
+                    .httpStrictTransportSecurity(
+                        sts -> sts.includeSubDomains(Boolean.TRUE).maxAgeInSeconds(36L)))
         .authorizeHttpRequests(
             authorize ->
                 authorize.requestMatchers(WHITELIST).permitAll().anyRequest().authenticated())
@@ -86,28 +102,6 @@ public class SpringSecurityConfig {
   @Bean
   public JwtAuthorizationFilter jwtAuthorizationFilterBean() {
     return new JwtAuthorizationFilter(this.securityProperties, this.loginBusiness);
-  }
-
-  /**
-   * Used by spring security if CORS is enabled.
-   *
-   * @return {@code CorsFilter}
-   */
-  @Bean
-  public CorsFilter corsFilter() {
-    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    CorsConfiguration config = new CorsConfiguration();
-    config.setAllowedOrigins(this.securityProperties.getCors());
-    config.addAllowedHeader(CorsConfiguration.ALL);
-    config.setAllowedMethods(
-        Arrays.asList(
-            HttpMethod.POST.name(),
-            HttpMethod.GET.name(),
-            HttpMethod.PUT.name(),
-            HttpMethod.DELETE.name()));
-    config.setExposedHeaders(Collections.singletonList(CorsConfiguration.ALL));
-    source.registerCorsConfiguration("/**", config);
-    return new CorsFilter(source);
   }
 
   /** Lista blanca de end points. */

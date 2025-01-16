@@ -111,6 +111,7 @@ api:
       payments: /payments
       shops: /shops
       sells: /sells
+      menu: /menu
     data:
       modified: /{id}
       search: /{search}

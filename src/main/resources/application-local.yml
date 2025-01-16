@@ -76,10 +76,9 @@ security:
     key: ENC(CuAcl76ySK/o/H4V03L9ruNaAcPfvTzvQsZkDNQjutdM6MnwaaWqwrq4mHDJc9shwCsVvlFlSPLXobk1+XarnMKwR9+NxOkzQBiphxzkrYchA+gz++yQtGzkwqLDxpxzO+XfYWHOBAJLbTdQMJrgwA==)
     lifeTime: 631138000000
   cors:
-    origins: >
-      - http://127.0.0.1:4200,
-      - http://127.0.0.1:5500
-
+    origins:
+      http://127.0.0.1:4200,
+      http://localhost:4200
 # ===================================================================
 # LOG PROPERTIES
 # ===================================================================
@@ -100,7 +99,6 @@ logging:
 # ===================================================================
 api:
   uri:
-    basePath: /api
     domain:
       users: /users
       offices: /enterprises
@@ -114,6 +112,7 @@ api:
       payments: /payments
       shops: /shops
       sells: /sells
+      menu: /menu
     data:
       modified: /{id}
       search: /{search}
