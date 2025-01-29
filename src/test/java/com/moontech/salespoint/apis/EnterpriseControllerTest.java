@@ -90,7 +90,8 @@ class EnterpriseControllerTest extends MysqlBaseConfigurationTest {
   }
 
   @Test
-  @DisplayName("POST /enterprises exists")
+  @Order(4)
+  @DisplayName("POST /enterprises bad request")
   void save_bad_request(TestInfo testInfo) throws Exception {
     log.info(TestConstants.TEST_RUNNING, testInfo.getDisplayName());
     this.mockMvc
@@ -103,8 +104,8 @@ class EnterpriseControllerTest extends MysqlBaseConfigurationTest {
   }
 
   @Test
-  @Order(2)
-  @DisplayName("POST /enterprises")
+  @Order(3)
+  @DisplayName("POST /enterprises duplicate")
   void save_duplicate(TestInfo testInfo) throws Exception {
     log.info(TestConstants.TEST_RUNNING, testInfo.getDisplayName());
     this.mockMvc

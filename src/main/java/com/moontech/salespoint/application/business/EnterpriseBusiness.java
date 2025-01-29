@@ -17,6 +17,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
@@ -46,7 +47,7 @@ public class EnterpriseBusiness implements EnterpriseService {
 
   /** {@inheritDoc}. */
   @Override
-  @Transactional
+  @Transactional(propagation = Propagation.REQUIRED)
   public EnterpriseResponse save(EnterpriseRequest request) {
     EnterpriseEntity enterprise = this.enterpriseRepository.findByName(request.getName());
     if (ObjectUtils.isEmpty(enterprise)) {

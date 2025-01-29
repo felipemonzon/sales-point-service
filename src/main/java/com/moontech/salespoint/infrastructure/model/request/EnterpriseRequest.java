@@ -22,7 +22,7 @@ import lombok.ToString;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class EnterpriseRequest {
   /** Identificador de la empresa. */
-  private long id;
+  private Long id;
 
   /** Identificador de la empresa. */
   private String idEnterprise;
